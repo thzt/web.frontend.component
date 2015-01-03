@@ -1,0 +1,67 @@
+.thzt_pagebutton{
+	background:black;
+}
+
+.thzt_pagebutton::after{
+	content:"";
+	display:block;
+	margin:0;
+	padding:0;
+	clear:left;
+}
+
+.thzt_pagebutton>span{
+	background:url("pagebutton.png") no-repeat;
+	width:34px;
+	height:34px;
+	float:left;
+	margin:5px;
+	color:transparent;
+}
+
+.thzt_pagebutton>span:nth-child(1){
+	background-position:0 0;
+}
+.thzt_pagebutton>span:nth-child(1):hover{
+	background-position:0 -40px;
+}
+
+.thzt_pagebutton>span:nth-child(2){
+	background-position:-50px 0;
+}
+.thzt_pagebutton>span:nth-child(2):hover{
+	background-position:-50px -40px;
+}
+
+.thzt_pagebutton>span:nth-child(4){
+	background-position:-100px 0;
+}
+.thzt_pagebutton>span:nth-child(4):hover{
+	background-position:-100px -40px;
+}
+
+.thzt_pagebutton>span:nth-child(5){
+	background-position:-150px 0;
+}
+.thzt_pagebutton>span:nth-child(5):hover{
+	background-position:-150px -40px;
+}
+
+/* start button */
+.thzt_pagebutton>span:nth-child(3){
+	background-position:-300px 0;
+	width:44px;
+	height:44px;
+	margin:0 5px;
+}
+.thzt_pagebutton>span:nth-child(3):hover{
+	background-position:-300px -50px;
+}
+
+.thzt_pagebutton_pause{
+	background-position:-251px 0px !important;
+}
+.thzt_pagebutton_pause:hover{
+	background-position:-251px -50px !important;
+}
+

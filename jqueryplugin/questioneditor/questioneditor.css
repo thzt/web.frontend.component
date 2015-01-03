@@ -1,0 +1,18 @@
+.thzt_questioneditor>div>div>span,
+.thzt_questioneditor>div>div>input
+{
+	display:inline-block;
+}
+
+.thzt_questioneditor>div>div>span{
+	width:50px;
+}
+
+.thzt_questioneditor>div>div>input[type=text]
+{
+	width:300px;
+}
+
+.thzt_questioneditor>div:nth-child(3){
+	display:none;
+}

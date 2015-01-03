@@ -1,0 +1,16 @@
+/* scroll */
+.thzt_recordlist>table>thead,
+.thzt_recordlist>table>tbody
+{
+	display:block;
+}
+
+.thzt_recordlist>table>thead>tr>td,
+.thzt_recordlist>table>tbody>tr>td
+{
+	display:inline-block;
+}
+
+.thzt_recordlist>table>tbody{
+	overflow:auto;
+}

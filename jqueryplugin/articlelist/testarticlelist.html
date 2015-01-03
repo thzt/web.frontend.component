@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset=utf-8>
+		<title>test article list</title>
+		
+		<link href=articlelist.css rel=stylesheet />
+		
+		<script src=../../underscore/underscore-1.6.0.js></script>
+		<script src=../../jquery/jquery-1.11.1.js></script>
+		<script src=../../library/pluginmanager/pluginmanager.js></script>
+		<script src=articlelist.js></script>
+		
+		<style>
+			body{
+				margin:0;
+				padding:0;
+			}
+		</style>
+	</head>
+	<body>
+		<div id=articleList>
+			<div>
+				<div>美国公布首个小儿肺炎诊断和治疗指南美国公布首个小儿肺炎诊断和治疗指南美国公布首个小儿肺炎诊断和治疗指南美国公布首个小儿肺炎诊断和治疗指南美国公布首个小儿肺炎诊断和治疗指南美国公布首个小儿肺炎诊断和治疗指南美国公布首个小儿肺炎诊断和治疗指南美国公布首个小儿肺炎诊断和治疗指南美国公布首个小儿肺炎诊断和治疗指南美国公布首个小儿肺炎诊断和治疗指南美国公布首个小儿肺炎诊断和治疗指南美国公布首个小儿肺炎诊断和治疗指南美国公布首个小儿肺炎诊断和治疗指南美国公布首个小儿肺炎诊断和治疗指南美国公布首个小儿肺炎诊断和治疗指南
+				</div>
+				<div>
+					<img />
+				</div>
+			</div>
+			<div>
+				<div>美国公布首个小儿肺炎诊断和治疗指南
+				</div>
+				<div>
+					<img />
+				</div>
+			</div>
+		</div>
+		
+		<input id=addDataList type=button value=addDataList />
+	
+		<script>
+			$('#articleList')
+				.articleList('init');
+				
+			$('#addDataList').click(function(){
+				$('#articleList')
+					.articleList('addDataList',[
+						{text:+new Date(),imgUrl:''}
+					]);
+			});
+		</script>
+	</body>
+</html>

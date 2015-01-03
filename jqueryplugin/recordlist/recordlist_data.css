@@ -1,0 +1,17 @@
+/* data */
+.thzt_recordlist>table>tbody>tr{
+	color:#4F6B72;
+	border-bottom:1px solid #ddd;
+}
+
+.thzt_recordlist>table>tbody>tr:hover{
+	background-color:#F1FCEA;
+}
+
+.thzt_recordlist>table>tbody>tr>td{
+	padding:8px 0;
+}
+
+.thzt_recordlist>table>tbody>tr>td:not(:last-child){
+	border-right:1px solid #ddd;
+}

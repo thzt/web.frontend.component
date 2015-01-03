@@ -1,0 +1,88 @@
+.thzt_treeview{
+	font-size:16px;
+	cursor:default;
+}
+
+/* selection */
+.thzt_treeview_select{
+	background:#69B310;
+	color:white;
+}
+
+/* root */
+.thzt_treeview>div>span{
+	width:18px;
+	height:18px;
+	display:block;
+	float:left;
+}
+.thzt_treeview>div>span:last-child{
+	width:auto;
+}
+.thzt_treeview>div::after{
+	content:"";
+	display:block;
+	clear:left;
+}
+
+/* child */
+.thzt_treeview ul{
+	list-style:none;
+	padding:0;
+	margin:0;
+}
+.thzt_treeview li>div{
+	height:18px;
+}
+.thzt_treeview li>div::after{
+	content:"";
+	display:block;
+	clear:left;
+}
+.thzt_treeview li>div>span{
+	display:block;
+	float:left;
+	width:18px;
+	height:18px;
+}
+.thzt_treeview li>div>span:last-child{
+	width:auto;
+}
+
+/* icon */
+.thzt_treeview_globe{
+	background:url("img/globe.gif");
+}
+.thzt_treeview_join{
+	background:url("img/join.gif");
+}
+.thzt_treeview_joinbottom{
+	background:url("img/joinbottom.gif");
+}
+.thzt_treeview_line{
+	background:url("img/line.gif");
+}
+.thzt_treeview_empty{
+	background:url("img/empty.gif");
+}
+.thzt_treeview_folder{
+	background:url("img/folder.gif");
+}
+.thzt_treeview_folderopen{
+	background:url("img/folderopen.gif");
+}
+.thzt_treeview_page{
+	background:url("img/page.gif");
+}
+.thzt_treeview_minus{
+	background:url("img/minus.gif");
+}
+.thzt_treeview_minusbottom{
+	background:url("img/minusbottom.gif");
+}
+.thzt_treeview_plus{
+	background:url("img/plus.gif");
+}
+.thzt_treeview_plusbottom{
+	background:url("img/plusbottom.gif");
+}

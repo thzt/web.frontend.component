@@ -1,0 +1,62 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset=utf-8>
+		<title>test question editor</title>
+		
+		<link href=questioneditor.css rel=stylesheet />
+		
+		<script src=../../underscore/underscore-1.6.0.js></script>
+		<script src=../../jquery/jquery-1.11.1.js></script>
+		<script src=../../library/pluginmanager/pluginmanager.js></script>
+		<script src=questioneditor.js></script>
+	</head>
+	<body>
+		<div id=questionEditor>
+			<div>
+				<div>
+					<span>标题</span><input type=text />
+				</div>
+			</div>
+			
+			<div>
+				<div>
+					<span>类型</span><input id=singleChoice type=radio name=question_type /><label for=singleChoice>多选题</label>
+				</div>
+				<div>
+					<span></span><input id=multipleChoice type=radio name=question_type /><label for=multipleChoice>单选题</label>
+				</div>
+				<div>
+					<span></span><input id=essayQuestion type=radio name=question_type checked /><label for=essayQuestion>问答题</label>
+				</div>
+			</div>
+			
+			<div>
+				<div>
+					<span>选项</span><input type=button value=添加 />
+				</div>
+			</div>
+		</div>
+		
+		<input id=get type=button value=get />
+		<input id=set type=button value=set />
+		
+		<script>
+			$('#questionEditor').questionEditor('init');
+			
+			$('#get').click(function(){
+				alert(JSON.stringify($('#questionEditor').questionEditor('get')));
+			});
+			
+			$('#set').click(function(){
+				$('#questionEditor').questionEditor('set',{
+					title:'testTitle',
+					type:2,
+					option:[
+						{value:1,text:'test1'}
+					]
+				});
+			});
+		</script>
+	</body>
+</html>

@@ -1,0 +1,27 @@
+/* container */
+.thzt_recordlist{
+}
+
+/* table */
+.thzt_recordlist>table{
+	width:100%;
+	text-align:center;
+	border-collapse:collapse;
+}
+
+/* title */
+.thzt_recordlist>table>thead>tr{
+	background-color:#F1F1F1;
+	height:2em;
+	line-height:2em;
+	font-weight:bold;
+	border-bottom:1px solid #ddd;
+}
+
+.thzt_recordlist>table>thead>tr>td{
+	padding:8px 0;
+}
+
+.thzt_recordlist>table>thead>tr>td:not(:last-child){
+	border-right:1px solid #ddd;
+}

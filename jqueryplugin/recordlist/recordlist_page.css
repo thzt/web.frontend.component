@@ -1,0 +1,31 @@
+/* page */
+.thzt_recordlist>div{
+	width:100%;
+	margin-top:1em;
+	font:normal 12px auto "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
+}
+
+.thzt_recordlist>div>div{
+	display:inline-block;
+	float:right;
+}
+
+.thzt_recordlist>div::after{
+	content:"";
+	display:block;
+	clear:both;
+}
+
+.thzt_recordlist>div>div>span{
+	margin-left:1em;
+	cursor:pointer;
+}
+
+.thzt_recordlist_page_disabled{
+	color:rgba(0,0,0,.2);
+}
+
+.thzt_recordlist>div>span{
+	display:inline-block;
+	float:right;
+}

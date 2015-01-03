@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset=utf-8>
+		<title>test record list dynamic</title>
+		
+		<link href=recordlist_init.css rel=stylesheet />
+		<link href=recordlist_data.css rel=stylesheet />
+		<link href=recordlist_operation.css rel=stylesheet />
+		<link href=recordlist_scroll.css rel=stylesheet />
+		
+		<script src=../../underscore/underscore-1.6.0.js></script>
+		<script src=../../jquery/jquery-1.11.1.js></script>
+		<script src=../../library/pluginmanager/pluginmanager.js></script>
+		<script src=recordlist_init.js></script>
+		<script src=recordlist_dynamic_add.js></script>
+		<script src=recordlist_dynamic_scroll.js></script>
+	</head>
+	<body>
+		<div id=recordList>
+		</div>
+		
+		<script>
+			$('#recordList')
+				.recordList('init',[
+					'titile1','titile2','titile3','titile4',
+				])
+				.recordList('initOperation')
+				.recordList('addDataList',[
+					{title1:'11',title2:'12',title3:'13',title4:'14'},
+					{title1:'21',title2:'22',title3:'23',title4:'24'},
+					{title1:'31',title2:'32',title3:'33',title4:'34'},
+					{title1:'41',title2:'42',title3:'43',title4:'44'},
+					{title1:'51',title2:'52',title3:'53',title4:'54'},
+					{title1:'61',title2:'62',title3:'63',title4:'64'},
+					{title1:'71',title2:'72',title3:'73',title4:'74'},
+					{title1:'81',title2:'82',title3:'83',title4:'84'},
+					{title1:'91',title2:'92',title3:'93',title4:'94'}
+				])
+				.recordList('fillOperation',function(){
+					var tr=$(this);
+					
+					if(tr.index()%2==1){
+						return null;
+					}
+				
+					return {
+						'上墙':function(){
+							alert(1);
+						},
+						'取消':function(){
+							alert(2);
+						}
+					};
+				}).recordList('scroll',{
+					cellWidthList:['100px','130px','160px','190px','220px'],
+					height:'200px'
+				});
+		</script>
+	</body>
+</html>

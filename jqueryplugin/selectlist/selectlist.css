@@ -1,0 +1,25 @@
+.thzt_selectlist{
+	
+}
+
+.thzt_selectlist>div:first-child>input[type=text]{
+	width:288px;
+}
+
+.thzt_selectlist>div:last-child::after{
+	content:"";
+	display:block;
+	clear:both;
+}
+
+.thzt_selectlist>div:last-child>select,.thzt_selectlist>div:last-child>div{
+	float:left;
+}
+
+.thzt_selectlist>div:last-child>div>input{
+	display:block;
+}
+
+.thzt_selectlist>div:last-child>select{
+	width:300px;
+}

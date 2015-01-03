@@ -1,0 +1,65 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset=utf-8>
+		<title>test scroll table</title>
+		
+		<link href=scrolltable.css rel=stylesheet />
+		
+		<script src=../../underscore/underscore-1.6.0.js></script>
+		<script src=../../jquery/jquery-1.11.1.js></script>
+		<script src=../../library/pluginmanager/pluginmanager.js></script>
+		<script src=scrolltable.js></script>
+	</head>
+	<body>
+	
+		<div id=buttonPanel>
+			<input id=first type=button value=first />
+			<input id=prev type=button value=prev />
+			<input id=next type=button value=next />
+			<input id=last type=button value=last />
+		</div>
+		
+		<div id=scrollTable>
+		</div>
+		
+		<script>
+			$('#scrollTable')
+				.scrollTable('init')
+				.scrollTable('addData',[
+					{
+						nick_name:'nickname1',
+						avatar:'avatar1.png',
+						message:'message1'
+					},
+					{
+						nick_name:'nickname2',
+						avatar:'avatar2.png',
+						message:'一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十'
+					},
+					{
+						nick_name:'nickname3',
+						avatar:'avatar3.png',
+						message:'message3'
+					},
+					{
+						nick_name:'nickname4',
+						avatar:'avatar4.png',
+						message:'message4'
+					}]);
+					
+			$('#first').click(function(){
+				$('#scrollTable').scrollTable('page','first');
+			});
+			$('#prev').click(function(){
+				$('#scrollTable').scrollTable('page','prev');
+			});
+			$('#next').click(function(){
+				$('#scrollTable').scrollTable('page','next');
+			});
+			$('#last').click(function(){
+				$('#scrollTable').scrollTable('page','last');
+			});
+		</script>
+	</body>
+</html>

@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset=utf-8>
+		<title>test touch slide</title>
+		
+		<link href=../../jquerymobile/jquery.mobile-1.4.3.min.css rel=stylesheet />
+		<link href=touchslide.css rel=stylesheet />
+		
+		<script src=../../jquery/jquery-1.11.1.js></script>
+		<script src=../../jquerymobile/jquery.mobile-1.4.3.min.js></script>
+		<script src=../../library/pluginmanager/pluginmanager.js></script>
+		<script src=touchslide.js></script>
+	</head>
+	<body>
+		<div id=touchSlide>
+			<div>
+				<div>
+					松开加载更多的文章
+				</div>
+			</div>
+		</div>
+	
+		<script>
+			$('#touchSlide')
+				.touchSlide('init',{
+					slideUp:function(){
+						console.log(1);
+					}
+				});
+		</script>
+	</body>
+</html>

@@ -1,0 +1,35 @@
+.thzt_articlelist{
+	width:100%;
+	display:table;
+}
+.thzt_articlelist>div{
+	display:table-row;
+}
+.thzt_articlelist>div>div{
+	display:table-cell;
+	vertical-align:middle;
+	margin:0;
+	padding:0;
+}
+
+.thzt_articlelist>div>div:first-child{
+	padding:5px 10px;
+}
+.thzt_articlelist>div>div:last-child{
+	text-align:right;
+	width:60px;
+	padding:5px 10px;
+}
+
+.thzt_articlelist>div>div:last-child>img{
+	width:60px;
+	height:60px;
+	position:relative;top:2px;/* fixed vertical-align not middle bug */
+}
+
+.thzt_articlelist>div>div{
+	border-bottom:1px solid;
+}
+.thzt_articlelist>div:first-child>div{
+	border-top:1px solid;
+}

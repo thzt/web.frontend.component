@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset=utf-8>
+		<title>test watermark</title>
+		
+		<link href=../../jquerymobile/jquery.mobile-1.4.3.min.css rel=stylesheet />
+		<link href=watermark.css rel=stylesheet />
+		
+		<script src=../../jquery/jquery-1.11.1.js></script>
+		<script src=../../jquerymobile/jquery.mobile-1.4.3.min.js></script>
+		<script src=../../library/pluginmanager/pluginmanager.js></script>
+		<script src=watermark.js></script>
+	</head>
+	<body>
+		<textarea id=watermark>我还有话说...</textarea>
+		<input id=getValue type=button value=getValue />
+	
+		<script>
+			$('#watermark').watermark('init');
+				
+			$('#getValue').click(function(){
+				alert($('#watermark').watermark('getValue'));
+			});
+		</script>
+	</body>
+</html>

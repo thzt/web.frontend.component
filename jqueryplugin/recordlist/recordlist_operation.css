@@ -1,0 +1,13 @@
+/* operation */
+.thzt_recordlist>table>tbody>tr>td>span{
+	display:inline-block;
+}
+
+.thzt_recordlist>table>tbody>tr>td>span:hover{
+	color:#090;
+	cursor:pointer;
+}
+
+.thzt_recordlist>table>tbody>tr>td>span:not(:first-child){
+	margin-left:1em;
+}

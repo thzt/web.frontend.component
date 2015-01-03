@@ -1,0 +1,29 @@
+.thzt_menu{
+	
+}
+
+.thzt_menu>ul{
+	list-style:none;
+	width:100%;
+	margin:0;
+	padding-left:0;
+	background-color:#FCFCFC;
+}
+
+.thzt_menu>ul>li{
+	height:2em;
+	line-height:2em;
+	text-indent:2em;
+}
+
+.thzt_menu>ul>li:active{
+	background-color:#E3E0D5;
+}
+
+.thzt_menu>ul>li:not(:first-child){
+	border-top:1px solid #F1F1F1;
+}
+
+.thzt_menu>ul>li:last-child{
+	border-bottom:1px solid #F1F1F1;
+}

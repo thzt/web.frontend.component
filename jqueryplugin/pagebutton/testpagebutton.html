@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset=utf-8>
+		<title>test page button</title>
+		
+		<link href=pagebutton.css rel=stylesheet />
+		
+		<script src=../../jquery/jquery-1.11.1.js></script>
+		<script src=../../library/pluginmanager/pluginmanager.js></script>
+		<script src=pagebutton.js></script>
+	</head>
+	<body>
+		<div id=pageButton>
+			<span title=first></span>
+			<span title=prev></span>
+			<span title=start></span>
+			<span title=next></span>
+			<span title=last></span>
+		</div>
+		
+		<script>
+			$('#pageButton')
+				.pageButton('init')
+				.pageButton('bindEvent',{
+					first:function(){
+						alert('first');
+					},
+					prev:function(){
+						alert('prev');
+					},
+					start:function(isStart){
+						alert(isStart?'on':'off');
+					},
+					next:function(){
+						alert('next');
+					},
+					last:function(){
+						alert('last');
+					}
+				});
+		</script>
+	</body>
+</html>

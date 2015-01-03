@@ -1,0 +1,81 @@
+
+/*
+	<div classs=thzt_modaldialog>        <!-- background -->
+		<div>                             <!-- vertical middle -->
+			<div>                         <!-- horizental center -->
+				<div></div>               <!-- title -->
+				<div>                     <!-- content -->
+					<iframe></iframe>
+				</div>
+			</div>
+		</div>
+	</div>
+*/
+
+/* background */
+.thzt_modaldialog{
+	position:fixed;
+	left:0;
+	top:0;
+	width:100%;
+	height:100%;
+	background:rgba(0,0,0,.5);
+	z-index:100;
+	display:table;
+}
+
+/* vertical middle */
+.thzt_modaldialog>div{
+	display:table-cell;
+	vertical-align:middle;
+}
+
+/* horizontal center */
+.thzt_modaldialog>div>div{
+	margin:0 auto;
+	width:61.8%;
+	height:61.8%;
+}
+
+/* title */
+.thzt_modaldialog>div>div>div:first-child{
+	background-color:#4D910C;
+	font-size:16px;
+	height:32px;
+	line-height:32px;
+	text-align:center;
+	border-top-left-radius:6px;
+	border-top-right-radius:6px;
+	color:white;
+	position:relative;
+	cursor:default;
+	margin-top:-37px;    /*title.line-height+content.padding-bottom*/
+}
+
+/* close button */
+.thzt_modaldialog>div>div>div:first-child>span{
+	display:block;
+	position:absolute;
+	width:32px;
+	height:32px;
+	top:0;
+	right:0;
+	border-top-right-radius:6px;
+	cursor:pointer;
+}
+
+/* content */
+.thzt_modaldialog>div>div>div:last-child{
+	background:white;
+	border-bottom-left-radius:6px;
+	border-bottom-right-radius:6px;
+	height:100%;
+	padding-bottom:5px;
+}
+
+/* iframe */
+.thzt_modaldialog>div>div>div:last-child>iframe{
+	border:0;
+	width:100%;
+	height:100%;
+}

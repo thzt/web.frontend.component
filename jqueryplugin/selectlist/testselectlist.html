@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset=utf-8>
+		<title>test select list</title>
+		
+		<link href=selectlist.css rel=stylesheet />
+		
+		<script src=../../underscore/underscore-1.6.0.js></script>
+		<script src=../../jquery/jquery-1.11.1.js></script>
+		<script src=../../library/pluginmanager/pluginmanager.js></script>
+		<script src=selectlist.js></script>
+		<script src=selectlist_filter.js></script>
+		<script src=selectlist_order.js></script>
+	</head>
+	<body>
+		<div id=selectList>
+			<div>
+				<input type=text /><input type=button value=filter />
+			</div>
+			
+			<div>
+				<select size=8 multiple></select>
+				<div>
+					<input type=button value=">>" />
+					<input type=button value="<<" />
+				</div>
+				<select size=8 multiple></select>
+				<div>
+					<input type=button value=向上 />
+					<input type=button value=向下 />
+				</div>
+			</div>
+		</div>
+		<input id=get type=button value=get />
+		
+		<script>
+			$('#selectList')
+				.selectList('init')
+				.selectList('set',[
+					{value:1,text:'1.1'},
+					{value:2,text:'1.2'},
+					{value:3,text:'2.1'},
+					{value:4,text:'2.2'}
+				])
+				.selectList('filter')
+				.selectList('order');
+				
+			$('#get').click(function(){
+				alert(JSON.stringify($('#selectList').selectList('get')));
+			});
+		</script>
+	</body>
+</html>
