@@ -4,7 +4,8 @@
 	});
 	
 	function sort(){
-		var container=this.eq(0);
+		var container=this.eq(0),
+			afterSort=arguments[0]&&arguments[0].afterSort;
 		
 		container.find('>table>thead>tr>td').each(function(){
 			var td=$(this),
@@ -45,6 +46,7 @@
 					.removeClass()
 					.addClass('thzt_recordlist_sort_init');
 				
+				afterSort&&afterSort();
 				return;
 			}
 			
@@ -64,6 +66,8 @@
 				})
 				.removeClass()
 				.addClass('thzt_recordlist_sort_init');
+				
+			afterSort&&afterSort();
 		});
 		
 		return this;
