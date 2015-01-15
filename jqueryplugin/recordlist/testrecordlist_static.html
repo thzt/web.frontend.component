@@ -8,13 +8,16 @@
 		<link href=recordlist_data.css rel=stylesheet />
 		<link href=recordlist_operation.css rel=stylesheet />
 		<link href=recordlist_page.css rel=stylesheet />
+		<link href=recordlist_sort.css rel=stylesheet />
 		
 		<script src=../../underscore/underscore-1.6.0.js></script>
 		<script src=../../jquery/jquery-1.11.1.js></script>
 		<script src=../../library/pluginmanager/pluginmanager.js></script>
 		<script src=recordlist_init.js></script>
 		<script src=recordlist_static_set.js></script>
+		<script src=recordlist_static_get.js></script>
 		<script src=recordlist_static_page.js></script>
+		<script src=recordlist_sort.js></script>
 	</head>
 	<body>
 		<div id=recordList>
@@ -26,10 +29,10 @@
 					'titile1','titile2','titile3','titile4',
 				])
 				.recordList('setDataList',[
-					{title1:'11',title2:'12',title3:'13',title4:'14'},
 					{title1:'21',title2:'22',title3:'23',title4:'24'},
-					{title1:'31',title2:'32',title3:'33',title4:'34'},
+					{title1:'11',title2:'12',title3:'13',title4:'14'},
 					{title1:'41',title2:'42',title3:'43',title4:'44'},
+					{title1:'31',title2:'32',title3:'33',title4:'34'},
 					{title1:'51',title2:'52',title3:'53',title4:'54'},
 					{title1:'61',title2:'62',title3:'63',title4:'64'},
 					{title1:'71',title2:'72',title3:'73',title4:'74'},
@@ -38,13 +41,16 @@
 				])
 				.recordList('setOperation',{
 					'显示':function(){
-						alert(1);
+						var tr=$(this);
+						
+						alert(tr.html());
 					},
 					'编辑':function(){
 						alert(2);
 					}
 				})
-				.recordList('page',8);
+				.recordList('page',8)
+				.recordList('sort');
 		</script>
 	</body>
 </html>

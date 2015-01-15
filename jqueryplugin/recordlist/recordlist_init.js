@@ -1,7 +1,8 @@
 (function($,_){
 	$.pluginManager.extend('recordList',{
 		init:init,
-		clear:clear
+		clear:clear,
+		clearDataList:clearDataList
 	});
 	
 	function init(){
@@ -33,6 +34,15 @@
 		container.children().remove();
 		container.removeClass('thzt_recordlist');
 		container.undelegate();
+		
+		return this;
+	}
+	
+	function clearDataList(){
+		var container=this.eq(0);
+		
+		container.undelegate('>div>div>span','click');
+		container.find('>table>tbody>tr,>div').remove();
 		
 		return this;
 	}

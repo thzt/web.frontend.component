@@ -1,0 +1,14 @@
+/* sort */
+
+.thzt_recordlist_sort_init{
+	background:url('img/sort_both.png') no-repeat center right;
+}
+
+.thzt_recordlist_sort_ascend{
+	background:url('img/sort_asc.png') no-repeat center right;
+}
+
+.thzt_recordlist_sort_descend{
+	background:url('img/sort_desc.png') no-repeat center right;
+}
+

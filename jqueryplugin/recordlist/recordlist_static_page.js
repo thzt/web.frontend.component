@@ -2,7 +2,8 @@
 	$.pluginManager.extend('recordList',{
 		page:pageSetting,
 		setPageIndex:setPageIndex,
-		getPageIndex:getPageIndex
+		getPageIndex:getPageIndex,
+		getPageSize:getPageSize
 	});
 
 	var pageSize,
@@ -47,6 +48,10 @@
 		}
 		
 		return +match[1];
+	}
+	
+	function getPageSize(){
+		return pageSize;
 	}
 	
 	function fillEmptyRow(){
