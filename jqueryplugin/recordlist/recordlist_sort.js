@@ -15,7 +15,7 @@
                 return true;
             }
 
-            td.addClass('lilly_recordlist_sort_init');
+            td.addClass('thzt_recordlist_sort_init');
         });
 
         container.delegate('>table>thead>tr>td', 'click', function (e) {
@@ -29,13 +29,13 @@
                 return;
             }
 
-            if (!td.hasClass('lilly_recordlist_sort_ascend')) {
+            if (!td.hasClass('thzt_recordlist_sort_ascend')) {
                 sortColumn.call(container, {
                     columnIndex: columnIndex
                 });
 
                 td.removeClass()
-                    .addClass('lilly_recordlist_sort_ascend')
+                    .addClass('thzt_recordlist_sort_ascend')
                     .siblings('td')
                     .filter(function () {
                         var td = $(this),
@@ -44,7 +44,7 @@
                         return canSortThisColumn;
                     })
                     .removeClass()
-                    .addClass('lilly_recordlist_sort_init');
+                    .addClass('thzt_recordlist_sort_init');
 
                 afterSort && afterSort();
                 return;
@@ -56,7 +56,7 @@
             });
 
             td.removeClass()
-                .addClass('lilly_recordlist_sort_descend')
+                .addClass('thzt_recordlist_sort_descend')
                 .siblings('td')
                 .filter(function () {
                     var td = $(this),
@@ -65,7 +65,7 @@
                     return canSortThisColumn;
                 })
                 .removeClass()
-                .addClass('lilly_recordlist_sort_init');
+                .addClass('thzt_recordlist_sort_init');
 
             afterSort && afterSort();
         });
@@ -85,26 +85,34 @@
 
                 return key != null;
             }),
+
             sortedTrs = _.sortBy(notEmptyTrs, function (v) {
                 var tr = $(v),
-                    value = tr.find('>td').eq(columnIndex).html().trim();
+                value = tr.find('>td').eq(columnIndex).html().trim();
 
                 return value;
-            }),
-            sortedTbodyHtml = (descend ? _.reduceRight : _.reduce)
-                (sortedTrs, function (m, v) {
-                    var tr = $(v),
-                        trHtml = tr[0].outerHTML;
+            });
 
-                    return m + trHtml;
-                }, ''),
+        //if all column have same value
+        if ($(sortedTrs).eq(0).find('>td').eq(columnIndex).html().trim() === $(sortedTrs).eq(-1).find('>td').eq(columnIndex).html().trim()) {
+            return this;
+        }
+
+        var sortedTbodyHtml = (descend ? _.reduceRight : _.reduce)
+            (sortedTrs, function (m, v) {
+                var tr = $(v),
+                    trHtml = tr[0].outerHTML;
+
+                return m + trHtml;
+            }, ''),
 
             pageSize = container.recordList('getPageSize');
 
         container.recordList('clearDataList');
         container.find('>table>tbody').html(sortedTbodyHtml);
-        container.recordList('page', pageSize);
+        pageSize && container.recordList('page', pageSize);
 
         return this;
     }
 } (jQuery, _));
+    
