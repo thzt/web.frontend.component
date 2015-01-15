@@ -4,40 +4,47 @@
 	});
 	
 	function sort(){
-		var container=this.eq(0),
-			hasOperation=container.find('>table>tbody>tr:first-child>td:last-child').attr('data-key')==null,
-			allTheadTds=container.find('>table>thead>tr>td'),
-			
-			allNotOperationTheadTds=allTheadTds.filter(function(i){
-				if(hasOperation&&i===allTheadTds.length-1){
-					return false;
-				}
+		var container=this.eq(0);
+		
+		container.find('>table>thead>tr>td').each(function(){
+			var td=$(this),
+				canSortThisColumn=td.attr('data-sort')!=null;
 				
+			if(!canSortThisColumn){
 				return true;
-			});
+			}
 			
-		allNotOperationTheadTds.each(function(){
-			var td=$(this);
 			td.addClass('thzt_recordlist_sort_init');
 		});
 			
 		container.delegate('>table>thead>tr>td','click',function(e){
 			e.stopPropagation();
 			
-			var theadTd=$(this),
-				columnIndex=theadTd.index();
+			var td=$(this),
+				columnIndex=td.index(),
+				canSortThisColumn=td.attr('data-sort')!=null;
 				
-			if(hasOperation&&columnIndex===allTheadTds.length-1){
+			if(!canSortThisColumn){
 				return;
 			}
 				
-			if(!theadTd.hasClass('thzt_recordlist_sort_ascend')){
+			if(!td.hasClass('thzt_recordlist_sort_ascend')){
 				sortColumn.call(container,{
 					columnIndex:columnIndex
 				});
 				
-				allNotOperationTheadTds.removeClass().addClass('thzt_recordlist_sort_init');
-				theadTd.removeClass().addClass('thzt_recordlist_sort_ascend');
+				td.removeClass()
+					.addClass('thzt_recordlist_sort_ascend')
+					.siblings('td')
+					.filter(function(){
+						var td=$(this),
+							canSortThisColumn=td.attr('data-sort')!=null;
+						
+						return canSortThisColumn;
+					})
+					.removeClass()
+					.addClass('thzt_recordlist_sort_init');
+				
 				return;
 			}
 			
@@ -46,8 +53,17 @@
 				descend:true
 			});
 			
-			allNotOperationTheadTds.removeClass().addClass('thzt_recordlist_sort_init');
-			theadTd.removeClass().addClass('thzt_recordlist_sort_descend');
+			td.removeClass()
+				.addClass('thzt_recordlist_sort_descend')
+				.siblings('td')
+				.filter(function(){
+					var td=$(this),
+						canSortThisColumn=td.attr('data-sort')!=null;
+					
+					return canSortThisColumn;
+				})
+				.removeClass()
+				.addClass('thzt_recordlist_sort_init');
 		});
 		
 		return this;

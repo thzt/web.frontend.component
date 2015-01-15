@@ -49,8 +49,10 @@
 						alert(2);
 					}
 				})
-				.recordList('page',8)
-				.recordList('sort');
+				.recordList('page',8);
+				
+			$('#recordList>table>thead>tr>td:nth-child(2n)').attr('data-sort',true);
+			$('#recordList').recordList('sort');
 		</script>
 	</body>
 </html>
