@@ -1,0 +1,72 @@
+﻿
+/*
+	<div classs=thzt_messagebox>          <!-- background -->
+		<div>                             <!-- vertical middle -->
+			<div>                         <!-- horizental center -->
+				<div></div>               <!-- title -->
+				<div></div>               <!-- content -->
+				<div><span></span></div>  <!-- button -->
+			</div>
+		</div>
+	</div>
+*/
+
+/* background */
+.thzt_messagebox
+{
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    display: table;
+    background: rgba(0,0,0,.3);
+}
+
+/* vertical middle */
+.thzt_messagebox > div
+{
+    display: table-cell;
+    vertical-align: middle;
+}
+
+/* horizontal center */
+.thzt_messagebox > div > div
+{
+    margin: 0 auto;
+    border-radius: 5px;
+    width: 90%;
+    text-align: center;
+}
+
+.thzt_messagebox > div > div > div:nth-child(1)
+{
+    background: #587eac;
+    color: white;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    line-height: 35px;
+	height:35px;
+}
+
+.thzt_messagebox > div > div > div:nth-child(2)
+{
+    padding: 20px 0;
+    background: white;
+}
+
+.thzt_messagebox > div > div > div:nth-child(3)
+{
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    line-height: 35px;
+    background: white;
+}
+
+.thzt_messagebox > div > div > div:nth-child(3) > span
+{
+    border: 1px solid gray;
+    padding: 5px 50px;
+    border-radius: 5px;
+}
