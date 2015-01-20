@@ -62,6 +62,7 @@
     border-bottom-right-radius: 5px;
     line-height: 35px;
     background: white;
+	padding: 10px 0;
 }
 
 .thzt_messagebox > div > div > div:nth-child(3) > span
