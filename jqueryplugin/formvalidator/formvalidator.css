@@ -1,0 +1,11 @@
+.thzt_formvalidator{
+	position:absolute;
+	border:1px solid gray;
+	border-radius:5px;
+	padding:5px;
+	margin-top:25px;
+	margin-left:-150px;
+    font-size: 20px;
+    z-index: 9999;
+    color: red;
+}

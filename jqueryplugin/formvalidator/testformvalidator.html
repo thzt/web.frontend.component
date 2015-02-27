@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset=utf-8>
+		<title>test plugin manager</title>
+		
+		<link href=formvalidator.css rel=stylesheet />
+		
+		<script src=../../jquery/jquery-1.11.1.js></script>
+		<script src=../../library/pluginmanager/pluginmanager.js></script>
+		<script src=formvalidator.js></script>
+	</head>
+
+	<body>
+		<form>
+			<div>
+				<input type=text data-regexp="^.+$" data-warning="This value can't be empty." />
+				<input type=text data-regexp="^.+$" data-warning="This value can't be empty." />
+				<input id=submit type=submit value=test />
+			</div>
+		</form>
+		<script>
+			$(function(){
+				$('form').formValidator('init');
+			});
+		</script>
+	</body>
+</html>
