@@ -4,8 +4,9 @@
 	border-radius:5px;
 	padding:5px;
 	margin-top:25px;
-	margin-left:-150px;
+	margin-left:25px;
     font-size: 20px;
     z-index: 9999;
     color: red;
+	background:white;
 }

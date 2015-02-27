@@ -21,7 +21,12 @@
 		</form>
 		<script>
 			$(function(){
-				$('form').formValidator('init');
+				$('#submit').click(function(){
+					if ($('form').formValidator('isIllegal')) {
+						$('form').formValidator('showFirstWarning');
+						return false;
+					}
+				});
 			});
 		</script>
 	</body>
