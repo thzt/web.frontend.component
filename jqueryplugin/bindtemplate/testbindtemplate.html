@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>test bind template</title>
+    <script src="../../jquery/jquery-1.11.1.js" type="text/javascript"></script>
+    <script src="../../underscore/underscore-1.6.0.js" type="text/javascript"></script>
+    <script src="../../library/pluginmanager/pluginmanager.js" type="text/javascript"></script>
+    <script src="bindtemplate.js" type="text/javascript"></script>
+</head>
+<body>
+    <div id="container">
+        <input type="text" data-thzt-test="A" />
+        <table>
+            <tr>
+                <td>
+                    <input type="text" data-thzt-test="B.B1" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span data-thzt-test="B.B2"></span>
+                </td>
+            </tr>
+        </table>
+        <div>
+            <div>
+                <input type="text" data-thzt-test="C.C1" />
+            </div>
+        </div>
+        <div>
+            <input type="text" data-thzt-test="C.C2.C21" />
+        </div>
+    </div>
+    <input id="button1" type="button" value="getData" />
+    <script>
+        $(function () {
+            var json = {
+                A: 1,
+                B: {
+                    B1: 2,
+                    B2: 3
+                },
+                C: {
+                    C1: 4,
+                    C2: {
+                        C21: 5
+                    }
+                }
+            };
+
+            $('#container')
+                .bindTemplate('init', 'data-thzt-test')
+                .bindTemplate('fill', json);
+
+            $('#button1').click(function () {
+                var data = $('#container').bindTemplate('getData');
+
+                alert(JSON.stringify(data, null, 10));
+            });
+        });
+    </script>
+</body>
+</html>
