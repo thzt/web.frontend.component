@@ -1,0 +1,32 @@
+.thzt_selectitem
+{
+    border: 1px solid #e7e7e7;
+    background: #f8f8f8;
+    margin: 10px;
+    border-radius: 5px;
+}
+
+.thzt_selectitem > table
+{
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.thzt_selectitem > table > tbody > tr > td
+{
+    display: inline-block;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding: 20px 20px;
+    margin-right: 2px;
+}
+
+.thzt_selectitem > table > tbody > tr > td:not(:first-child):hover
+{
+    background: #e7e7e7;
+}
+
+.thzt_selectitem_selected
+{
+    background: #e7e7e7;
+}
