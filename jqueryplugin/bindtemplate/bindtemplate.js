@@ -1,22 +1,13 @@
 (function ($) {
     $.pluginManager.extend('bindTemplate', {
-        init: init,
-        fill: fill,
+        setData: setData,
         getData: getData
     });
 
-    function init() {
-        var container = this.eq(0),
-            attr = arguments[0];
-
-        container.attr('data-thzt-bindtemplate-attr', attr);
-        return this;
-    }
-
-    function fill() {
+    function setData() {
         var $container = this.eq(0),
-            data = arguments[0],
-            attr = $container.attr('data-thzt-bindtemplate-attr'),
+            attr = arguments[0].attr,
+            data = arguments[0].data,
 
             properties = getProperties(data);
 
@@ -40,7 +31,7 @@
 
     function getData() {
         var $container = this.eq(0),
-            attr = $container.attr('data-thzt-bindtemplate-attr'),
+            attr = arguments[0].attr,
 
             $views = $container.find('[{0}]'.replace('{0}', attr)),
 

@@ -50,11 +50,15 @@
             };
 
             $('#container')
-                .bindTemplate('init', 'data-thzt-test')
-                .bindTemplate('fill', json);
+                .bindTemplate('setData', {
+                    attr: 'data-thzt-test',
+                    data: json
+                });
 
             $('#button1').click(function () {
-                var data = $('#container').bindTemplate('getData');
+                var data = $('#container').bindTemplate('getData', {
+                    attr: 'data-thzt-test'
+                });
 
                 alert(JSON.stringify(data, null, 10));
             });
