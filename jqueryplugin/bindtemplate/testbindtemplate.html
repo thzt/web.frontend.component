@@ -31,6 +31,12 @@
         <div>
             <input type="text" data-thzt-test="C.C2.C21" />
         </div>
+        <input type="text" data-thzt-test="D[0]" />
+        <input type="text" data-thzt-test="D[1].E" />
+        <input type="text" data-thzt-test="D[1].F[0]" />
+        <div>
+            <span data-thzt-test="D[1].F[1]"></span>
+        </div>
     </div>
     <input id="button1" type="button" value="getData" />
     <script>
@@ -46,7 +52,14 @@
                     C2: {
                         C21: 5
                     }
-                }
+                },
+                D: [
+                    6,
+                    {
+                        E: 7,
+                        F: [8, 9]
+                    }
+                ]
             };
 
             $('#container')

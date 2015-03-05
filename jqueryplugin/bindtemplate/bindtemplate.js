@@ -9,21 +9,23 @@
             attr = arguments[0].attr,
             data = arguments[0].data,
 
-            properties = getProperties(data);
+            dotProperties = getDotProperties(data);
 
-        _.each(properties, function (v) {
-            var selector = '[{0}="{1}"]'.replace('{0}', attr).replace('{1}', v),
-                value = getValue(data, v),
-                $view = $container.find(selector);
+        _.each(dotProperties, function (dotProperty) {
+            var value = getDotPropertyValue(data, dotProperty),
+
+                bracketProperty = dotProperty.replace(/[.](\d+)/g, '[$1]'),
+                selector = '[{0}="{1}"]'.replace('{0}', attr).replace('{1}', bracketProperty),
+                $field = $container.find(selector);
 
             switch (true) {
-                case $view.is('input'):
-                case $view.is('select'):
-                    $view.val(value);
+                case $field.is('input'):
+                case $field.is('select'):
+                    $field.val(value);
                     break;
 
-                case $view.is('span'):
-                    $view.html(value);
+                case $field.is('span'):
+                    $field.html(value);
                     break;
             }
         });
@@ -33,81 +35,94 @@
         var $container = this.eq(0),
             attr = arguments[0].attr,
 
-            $views = $container.find('[{0}]'.replace('{0}', attr)),
+            $fields = $container.find('[{0}]'.replace('{0}', attr)),
 
-            propertyAndValues = _.reduce($views, function (m, v) {
-                var $view = $(v),
-                property = $view.attr(attr),
+            dotPropertiesAndValues = _.reduce($fields, function (m, v) {
+                var $field = $(v),
+
+                bracketProperty = $field.attr(attr),
+                dotProperty = bracketProperty.replace(/\[(\d+)\]/g, '.$1'),
+
                 value = (function () {
                     switch (true) {
-                        case $view.is('input'):
-                        case $view.is('select'):
-                            return $view.val();
+                        case $field.is('input'):
+                        case $field.is('select'):
+                            return $field.val();
 
-                        case $view.is('span'):
-                            return $view.html();
+                        case $field.is('span'):
+                            return $field.html();
                     }
                 } ());
 
                 m.push({
-                    property: property,
+                    dotProperty: dotProperty,
                     value: value
                 });
 
                 return m;
             }, []);
 
-        return createObject(propertyAndValues);
+        return createObject(dotPropertiesAndValues);
     }
 
-    function getProperties(obj) {
-        return (function (obj, pos) {
+    function getDotProperties(obj) {
+        return (function (currentObj, currentPos) {
             var thisFunc = arguments.callee,
-                keys = _.keys(obj);
+                keys = _.keys(currentObj);
 
             if (keys.length === 0) {
-                return pos.join('.');
+                return currentPos.join('.');
             }
 
             return _.reduce(keys, function (m, v) {
-                return m.concat(thisFunc(obj[v], pos.concat(v)));
+                return m.concat(thisFunc(currentObj[v], currentPos.concat(v)));
             }, []);
         } (obj, []));
     }
 
-    function getValue(obj, property) {
-        return _.reduce(property.split('.'), function (m, v) {
+    function getDotPropertyValue(obj, dotProperty) {
+        return _.reduce(dotProperty.split('.'), function (m, v) {
             return m[v];
         }, obj);
     }
 
-    function createObject(propertyAndValues) {
+    function createObject(dotPropertiesAndValues) {
         var obj = {};
 
-        _.each(propertyAndValues, function (v) {
-            var property = v.property,
+        _.each(dotPropertiesAndValues, function (v) {
+            var dotProperty = v.dotProperty,
                 value = v.value,
-                pos = property.split('.'),
+                propertyList = dotProperty.split('.'),
 
                 current = obj;
 
-            _.each(pos, function (v, i) {
-                if (i === pos.length - 1) {
+            _.each(propertyList, function (v, i) {
+                if (i === propertyList.length - 1) {
                     current[v] = value;
                     return;
                 }
 
-                if (current[v] == null) {
-                    current[v] = {};
+                if (current[v] != null) {
                     current = current[v];
                     return;
                 }
 
+                if (isNumber(propertyList[i + 1])) {
+                    current[v] = [];
+                    current = current[v];
+                    return;
+                }
+
+                current[v] = {};
                 current = current[v];
             }, {});
         });
 
         return obj;
+    }
+
+    function isNumber(v) {
+        return +v + '' === v;
     }
 
 } (jQuery));
