@@ -8,6 +8,7 @@
 		<link href=recordlist_data.css rel=stylesheet />
 		<link href=recordlist_operation.css rel=stylesheet />
 		<link href=recordlist_scroll.css rel=stylesheet />
+		<link href=recordlist_sort.css rel=stylesheet />
 		
 		<script src=../../underscore/underscore-1.6.0.js></script>
 		<script src=../../jquery/jquery-1.11.1.js></script>
@@ -15,8 +16,12 @@
 		<script src=recordlist_init.js></script>
 		<script src=recordlist_dynamic_add.js></script>
 		<script src=recordlist_dynamic_scroll.js></script>
+		<script src=recordlist_static_page.js></script>
+		<script src=recordlist_sort.js></script>
+		<script src=recordlist_filter.js></script>
 	</head>
 	<body>
+		<input type=text id=textbox1 />
 		<div id=recordList>
 		</div>
 		
@@ -56,6 +61,16 @@
 					cellWidthList:['100px','130px','160px','190px','220px'],
 					height:'200px'
 				});
+				
+			$('#recordList>table>thead>tr>td:nth-child(2n)').attr('data-sort',true);
+			$('#recordList').recordList('sort');
+				
+			$('#textbox1').keyup(function(){
+				var textbox=$(this),
+					text=textbox.val();
+					
+				$('#recordList').recordList('filter',text);
+			});
 		</script>
 	</body>
 </html>

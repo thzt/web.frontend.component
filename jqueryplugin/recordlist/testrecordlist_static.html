@@ -21,7 +21,6 @@
 		<script src=recordlist_filter.js></script>
 	</head>
 	<body>
-		<input type=text id=textbox1 />
 		<div id=recordList>
 		</div>
 		
@@ -55,13 +54,6 @@
 				
 			$('#recordList>table>thead>tr>td:nth-child(2n)').attr('data-sort',true);
 			$('#recordList').recordList('sort');
-			
-			$('#textbox1').keyup(function(){
-				var textbox=$(this),
-					text=textbox.val();
-					
-				$('#recordList').recordList('filter',text);
-			});
 		</script>
 	</body>
 </html>
