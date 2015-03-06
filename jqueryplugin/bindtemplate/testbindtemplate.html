@@ -10,70 +10,75 @@
 </head>
 <body>
     <div id="container">
-        <input type="text" data-thzt-test="A" />
-        <table>
-            <tr>
-                <td>
-                    <input type="text" data-thzt-test="B.B1" />
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span data-thzt-test="B.B2"></span>
-                </td>
-            </tr>
-        </table>
         <div>
             <div>
-                <input type="text" data-thzt-test="C.C1" />
+                <input type="text" data-test1="[2].D[0]" />
+                <input type="text" data-test1="[2].D[1]" />
+            </div>
+            <div>
+                <input type="text" data-test1="[0].A" />
+                <input type="text" data-test1="[0].B" />
+                <input type="text" data-test1="[1].C" />
             </div>
         </div>
         <div>
-            <input type="text" data-thzt-test="C.C2.C21" />
-        </div>
-        <input type="text" data-thzt-test="D[0]" />
-        <input type="text" data-thzt-test="D[1].E" />
-        <input type="text" data-thzt-test="D[1].F[0]" />
-        <div>
-            <span data-thzt-test="D[1].F[1]"></span>
+            <div>
+                <input type="text" data-test2="F[1]" />
+                <input type="text" data-test2="G.H" />
+            </div>
+            <div>
+                <input type="text" data-test2="E" />
+                <input type="text" data-test2="F[0]" />
+            </div>
         </div>
     </div>
     <input id="button1" type="button" value="getData" />
     <script>
         $(function () {
-            var json = {
-                A: 1,
-                B: {
-                    B1: 2,
-                    B2: 3
-                },
-                C: {
-                    C1: 4,
-                    C2: {
-                        C21: 5
-                    }
-                },
-                D: [
-                    6,
+            var testJson1 = [
                     {
-                        E: 7,
-                        F: [8, 9]
+                        A: 1,
+                        B: 2
+                    },
+                    {
+                        C: 3
+                    },
+                    {
+                        D: [
+                            4,
+                            5
+                        ]
                     }
-                ]
-            };
+                ],
+                testJson2 = {
+                    E: 6,
+                    F: [
+                        7,
+                        8
+                    ],
+                    G: {
+                        H: 9
+                    }
+                };
 
             $('#container')
                 .bindTemplate('setData', {
-                    attr: 'data-thzt-test',
-                    data: json
+                    attr: 'data-test1',
+                    data: testJson1
+                })
+                .bindTemplate('setData', {
+                    attr: 'data-test2',
+                    data: testJson2
                 });
 
             $('#button1').click(function () {
-                var data = $('#container').bindTemplate('getData', {
-                    attr: 'data-thzt-test'
-                });
+                alert(JSON.stringify($('#container').bindTemplate('getData', {
+                    attr: 'data-test1'
+                }), null, 10));
 
-                alert(JSON.stringify(data, null, 10));
+                alert(JSON.stringify($('#container').bindTemplate('getData', {
+                    attr: 'data-test2'
+                }), null, 10));
             });
         });
     </script>

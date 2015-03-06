@@ -14,7 +14,7 @@
         _.each(dotProperties, function (dotProperty) {
             var value = getDotPropertyValue(data, dotProperty),
 
-                bracketProperty = dotProperty.replace(/[.](\d+)/g, '[$1]'),
+                bracketProperty = dotProperty.replace(/[.](\d+)/g, '[$1]').replace(/^(\d+)/, '[$1]'),
                 selector = '[{0}="{1}"]'.replace('{0}', attr).replace('{1}', bracketProperty),
                 $field = $container.find(selector);
 
@@ -29,6 +29,8 @@
                     break;
             }
         });
+
+        return this;
     }
 
     function getData() {
@@ -41,7 +43,7 @@
                 var $field = $(v),
 
                 bracketProperty = $field.attr(attr),
-                dotProperty = bracketProperty.replace(/\[(\d+)\]/g, '.$1'),
+                dotProperty = bracketProperty.replace(/\[(\d+)\]/g, '.$1').replace(/^([.])/, ''),
 
                 value = (function () {
                     switch (true) {
@@ -87,7 +89,9 @@
     }
 
     function createObject(dotPropertiesAndValues) {
-        var obj = {};
+        var obj = isNumber(dotPropertiesAndValues[0].dotProperty.split('.')[0])
+            ? []
+            : {};
 
         _.each(dotPropertiesAndValues, function (v) {
             var dotProperty = v.dotProperty,
@@ -97,6 +101,7 @@
                 current = obj;
 
             _.each(propertyList, function (v, i) {
+
                 if (i === propertyList.length - 1) {
                     current[v] = value;
                     return;
