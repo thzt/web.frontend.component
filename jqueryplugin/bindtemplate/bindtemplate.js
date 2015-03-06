@@ -24,7 +24,7 @@
                     $field.val(value);
                     break;
 
-                case $field.is('span'):
+                default:
                     $field.html(value);
                     break;
             }
@@ -37,10 +37,14 @@
         var $container = this.eq(0),
             attr = arguments[0].attr,
 
-            $fields = $container.find('[{0}]'.replace('{0}', attr)),
+            $fields = $container.find('[{0}]'.replace('{0}', attr));
 
-            dotPropertiesAndValues = _.reduce($fields, function (m, v) {
-                var $field = $(v),
+        if ($fields.length === 0) {
+            return null;
+        }
+
+        var dotPropertiesAndValues = _.reduce($fields, function (m, v) {
+            var $field = $(v),
 
                 bracketProperty = $field.attr(attr),
                 dotProperty = bracketProperty.replace(/\[(\d+)\]/g, '.$1').replace(/^([.])/, ''),
@@ -51,18 +55,18 @@
                         case $field.is('select'):
                             return $field.val();
 
-                        case $field.is('span'):
+                        default:
                             return $field.html();
                     }
                 } ());
 
-                m.push({
-                    dotProperty: dotProperty,
-                    value: value
-                });
+            m.push({
+                dotProperty: dotProperty,
+                value: value
+            });
 
-                return m;
-            }, []);
+            return m;
+        }, []);
 
         return createObject(dotPropertiesAndValues);
     }
