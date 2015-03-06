@@ -64,26 +64,59 @@
             $('#container')
                 .bindTemplate('setData', {
                     attr: 'data-test1',
-                    data: testJson1
+                    data: testJson1,
+                    set: setfieldValue
                 })
                 .bindTemplate('setData', {
                     attr: 'data-test2',
-                    data: testJson2
+                    data: testJson2,
+                    set: setfieldValue
                 });
 
             $('#button1').click(function () {
                 alert(JSON.stringify($('#container').bindTemplate('getData', {
-                    attr: 'data-test1'
+                    attr: 'data-test1',
+                    get: getfieldValue
                 }), null, 10));
 
                 alert(JSON.stringify($('#container').bindTemplate('getData', {
-                    attr: 'data-test2'
+                    attr: 'data-test2',
+                    get: getfieldValue
                 }), null, 10));
 
                 alert(JSON.stringify($('#container').bindTemplate('getData', {
-                    attr: 'data-test3'
+                    attr: 'data-test3',
+                    get: getfieldValue
                 }), null, 10));
             });
+            
+            function setfieldValue(value) {
+                var $field = this;
+
+                switch (true) {
+                    case $field.is('input'):
+                    case $field.is('select'):
+                        $field.val(value);
+                        break;
+
+                    default:
+                        $field.html(value);
+                        break;
+                }
+            }
+
+            function getfieldValue() {
+                var $field = this;
+
+                switch (true) {
+                    case $field.is('input'):
+                    case $field.is('select'):
+                        return $field.val();
+
+                    default:
+                        return $field.html();
+                }
+            }
         });
     </script>
 </body>

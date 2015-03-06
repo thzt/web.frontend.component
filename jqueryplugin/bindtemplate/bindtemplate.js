@@ -6,8 +6,10 @@
 
     function setData() {
         var $container = this.eq(0),
+
             attr = arguments[0].attr,
             data = arguments[0].data,
+            set = arguments[0].set,
 
             dotProperties = getDotProperties(data);
 
@@ -18,16 +20,7 @@
                 selector = '[{0}="{1}"]'.replace('{0}', attr).replace('{1}', bracketProperty),
                 $field = $container.find(selector);
 
-            switch (true) {
-                case $field.is('input'):
-                case $field.is('select'):
-                    $field.val(value);
-                    break;
-
-                default:
-                    $field.html(value);
-                    break;
-            }
+            set.call($field, value);
         });
 
         return this;
@@ -35,7 +28,9 @@
 
     function getData() {
         var $container = this.eq(0),
+
             attr = arguments[0].attr,
+            get = arguments[0].get,
 
             $fields = $container.find('[{0}]'.replace('{0}', attr));
 
@@ -49,16 +44,7 @@
                 bracketProperty = $field.attr(attr),
                 dotProperty = bracketProperty.replace(/\[(\d+)\]/g, '.$1').replace(/^([.])/, ''),
 
-                value = (function () {
-                    switch (true) {
-                        case $field.is('input'):
-                        case $field.is('select'):
-                            return $field.val();
-
-                        default:
-                            return $field.html();
-                    }
-                } ());
+                value = get.call($field);
 
             m.push({
                 dotProperty: dotProperty,
