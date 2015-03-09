@@ -9,7 +9,7 @@
     <script src="bindtemplate.js" type="text/javascript"></script>
 </head>
 <body>
-    <div id="container">
+    <div id="container" data-test0="[0]" data-value0="0">
         <div>
             <div>
                 <input type="text" data-test1="[2].D[0]" />
@@ -75,6 +75,11 @@
 
             $('#button1').click(function () {
                 alert(JSON.stringify($('#container').bindTemplate('getData', {
+                    attr: 'data-test0',
+                    get: getfieldValue
+                }), null, 10));
+
+                alert(JSON.stringify($('#container').bindTemplate('getData', {
                     attr: 'data-test1',
                     get: getfieldValue
                 }), null, 10));
@@ -89,7 +94,7 @@
                     get: getfieldValue
                 }), null, 10));
             });
-            
+
             function setfieldValue(value) {
                 var $field = this;
 
@@ -97,6 +102,10 @@
                     case $field.is('input'):
                     case $field.is('select'):
                         $field.val(value);
+                        break;
+
+                    case $field.is('div'):
+                        $field.attr('data-value0', value);
                         break;
 
                     default:
@@ -112,6 +121,9 @@
                     case $field.is('input'):
                     case $field.is('select'):
                         return $field.val();
+
+                    case $field.is('div'):
+                        return $field.attr('data-value0');
 
                     default:
                         return $field.html();
