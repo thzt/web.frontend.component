@@ -15,6 +15,7 @@
 <body>
     <input id="button1" type="button" value="testModal" />
     <input id="button2" type="button" value="testConfirm" />
+    <input id="button3" type="button" value="testAlert" />
     <div id="container"></div>
     <script>
         $(function () {
@@ -41,7 +42,11 @@
                         selector: '>button',
                         eventType: 'click',
                         handler: function (closeModal) {
-                            handleModalDialogClickEvent.call(this, closeModal);
+                            var $button = $(this),
+                                index = $button.index();
+
+                            alert(index);
+                            closeModal();
                         }
                     }
                 })
@@ -69,47 +74,19 @@
                 });
             });
 
-            function handleModalDialogClickEvent(closeModal) {
-                var $button = $(this),
-                    index = $button.index();
-
-                switch (index) {
-                    case 0:
-                        closeModal();
-                        break;
-
-                    case 1:
-                        $().modalWrapper('confirm', {
-                            title: 'Confirm Dialog',
-                            message: '确定提交吗？',
-                            yes: {
-                                text: 'YES',
-                                callback: function (closeConfirm) {
-                                    handleConfirmDialogClickEvent.call(null, closeModal, closeConfirm);
-                                }
-                            },
-                            no: {
-                                text: 'NO'
-                            }
-                        });
-                        break;
-                }
-            }
-
-            function handleConfirmDialogClickEvent(closeModal, closeConfirm) {
+            $('#button3').click(function() {
                 $().modalWrapper('alert', {
                     title: 'Alert Dialog',
-                    message: '真的确定吗？',
+                    message: '提交成功了。',
                     yes: {
                         text: 'YES',
                         callback: function (closeAlert) {
+                            alert();
                             closeAlert();
-                            closeConfirm();
-                            closeModal();
                         }
                     }
                 });
-            }
+            });
         });
     </script>
 </body>

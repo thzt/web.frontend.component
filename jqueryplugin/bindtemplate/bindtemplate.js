@@ -18,7 +18,9 @@
 
                 bracketProperty = dotProperty.replace(/[.](\d+)/g, '[$1]').replace(/^(\d+)/, '[$1]'),
                 selector = '[{0}="{1}"]'.replace('{0}', attr).replace('{1}', bracketProperty),
-                $field = $container.find(selector);
+                $field = $container.attr(attr) == null
+                    ? $container.find(selector)
+                    : $container.find(selector).andSelf();
 
             set.call($field, value);
         });
@@ -32,7 +34,9 @@
             attr = arguments[0].attr,
             get = arguments[0].get,
 
-            $fields = $container.find('[{0}]'.replace('{0}', attr));
+            $fields = $container.attr(attr) == null
+                ? $container.find('[{0}]'.replace('{0}', attr))
+                : $container.find('[{0}]'.replace('{0}', attr)).andSelf();
 
         if ($fields.length === 0) {
             return null;

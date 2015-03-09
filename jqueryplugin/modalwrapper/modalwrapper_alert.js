@@ -15,7 +15,22 @@
         $container
             .modalWrapper('init', {
                 width: '500px',
-                title: title,
+                title: {
+                    text: title,
+                    closeClick: function(close) {
+                        var closeAndRemove = function () {
+                            close();
+
+                            //modal dialog will not delete container
+                            //alert dialog should delete container
+                            $container.remove();
+                        };
+
+                        yes.callback
+                            ? yes.callback.call(null, closeAndRemove)
+                            : closeAndRemove();
+                    }
+                },
                 body: message,
                 footer: {
                     html:
