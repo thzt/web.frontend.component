@@ -22,7 +22,7 @@
                                 &times;\
                             </button>\
                             <h4 class="modal-title">'
-                                + title
+                                + title.text
                             + '</h4>\
                         </div>\
                         <div class="modal-body">'
@@ -45,7 +45,9 @@
             .delegate('.modal-header>button', 'click', function (e) {
                 e.stopPropagation();
 
-                close.call($container);
+                title.closeClick
+                    ? title.closeClick.call($container, Function.prototype.bind.call(close, $container))
+                    : close.call($container);
             });
 
         width

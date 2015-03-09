@@ -15,7 +15,22 @@
 
         $container
             .modalWrapper('init', {
-                title: title,
+                title: {
+                    text: title,
+                    closeClick: function(close) {
+                        var closeAndRemove = function () {
+                            close();
+
+                            //modal dialog will not delete container
+                            //alert dialog should delete container
+                            $container.remove();
+                        };
+
+                        no.callback
+                            ? no.callback.call(null, closeAndRemove)
+                            : closeAndRemove();
+                    }
+                },
                 body: message,
                 footer: {
                     html:
@@ -42,13 +57,13 @@
                         switch (index) {
                             case 0:
                                 no.callback
-                                ? no.callback.call(null, closeAndRemove)
-                                : closeAndRemove();
+                                    ? no.callback.call(null, closeAndRemove)
+                                    : closeAndRemove();
                                 break;
 
                             case 1:
                                 yes.callback
-                                && yes.callback.call(null, closeAndRemove);
+                                    && yes.callback.call(null, closeAndRemove);
                                 break;
                         };
                     }
