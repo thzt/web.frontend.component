@@ -4,15 +4,13 @@
     });
 
     function getData() {
-        var $container = this.eq(0),
+        var $containers = this,
 
             attr = arguments[0].attr,
             get = arguments[0].get,
 
             selector = '[{0}]'.replace('{0}', attr),
-            $fields = $container.is(selector)
-                ? $container.find(selector).andSelf()
-                : $container.find(selector);
+            $fields = getFields.call($containers, selector);
 
         if ($fields.length === 0) {
             return null;
@@ -78,6 +76,16 @@
 
     function isNumber(v) {
         return +v + '' === v;
+    }
+
+    function getFields(selector) {
+        var $containers = this;
+
+        return $containers.find(selector).add($containers.filter(function () {
+            var $container = $(this);
+
+            return $container.is(selector);
+        }));
     }
 
 } (jQuery));

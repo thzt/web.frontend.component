@@ -33,6 +33,8 @@
             </div>
         </div>
         <span data-test0="[0]"></span>
+    </div>
+    <div id="container1">
         <input type="text" data-test0="[0]" />
     </div>
     <input id="button1" type="button" value="getData" />
@@ -67,7 +69,7 @@
                     }
                 };
 
-            $('#container')
+            $('#container,#container1')
                  .bindTemplate('setData', {
                      attr: 'data-test0',
                      data: testJson0,
@@ -85,22 +87,22 @@
                 });
 
             $('#button1').click(function () {
-                alert(JSON.stringify($('#container').bindTemplate('getData', {
+                alert(JSON.stringify($('#container,#container1').bindTemplate('getData', {
                     attr: 'data-test0',
                     get: getfieldValue
                 }), null, 10));
 
-                alert(JSON.stringify($('#container').bindTemplate('getData', {
+                alert(JSON.stringify($('#container,#container1').bindTemplate('getData', {
                     attr: 'data-test1',
                     get: getfieldValue
                 }), null, 10));
 
-                alert(JSON.stringify($('#container').bindTemplate('getData', {
+                alert(JSON.stringify($('#container,#container1').bindTemplate('getData', {
                     attr: 'data-test2',
                     get: getfieldValue
                 }), null, 10));
 
-                alert(JSON.stringify($('#container').bindTemplate('getData', {
+                alert(JSON.stringify($('#container,#container1').bindTemplate('getData', {
                     attr: 'data-test3',
                     get: getfieldValue
                 }), null, 10));

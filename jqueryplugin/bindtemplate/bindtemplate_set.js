@@ -4,7 +4,7 @@
     });
 
     function setData() {
-        var $container = this.eq(0),
+        var $containers = this,
 
             attr = arguments[0].attr,
             data = arguments[0].data,
@@ -17,9 +17,7 @@
 
                 bracketProperty = dotProperty.replace(/[.](\d+)/g, '[$1]').replace(/^(\d+)/, '[$1]'),
                 selector = '[{0}="{1}"]'.replace('{0}', attr).replace('{1}', bracketProperty),
-                $fields = $container.is(selector)
-                    ? $container.find(selector).andSelf()
-                    : $container.find(selector);
+                $fields = getFields.call($containers, selector);
 
             $fields.each(function (index) {
                 var $field = $(this);
@@ -52,4 +50,13 @@
         }, obj);
     }
 
+    function getFields(selector) {
+        var $containers = this;
+
+        return $containers.find(selector).add($containers.filter(function () {
+            var $container = $(this);
+
+            return $container.is(selector);
+        }));
+    }
 } (jQuery));
