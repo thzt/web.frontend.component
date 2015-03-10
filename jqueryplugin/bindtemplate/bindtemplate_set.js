@@ -17,7 +17,7 @@
 
                 bracketProperty = dotProperty.replace(/[.](\d+)/g, '[$1]').replace(/^(\d+)/, '[$1]'),
                 selector = '[{0}="{1}"]'.replace('{0}', attr).replace('{1}', bracketProperty),
-                $fields = getFields.call($containers, selector);
+                $fields = $containers.find(selector).add($containers.filter(selector));
 
             $fields.each(function (index) {
                 var $field = $(this);
@@ -50,13 +50,4 @@
         }, obj);
     }
 
-    function getFields(selector) {
-        var $containers = this;
-
-        return $containers.find(selector).add($containers.filter(function () {
-            var $container = $(this);
-
-            return $container.is(selector);
-        }));
-    }
 } (jQuery));

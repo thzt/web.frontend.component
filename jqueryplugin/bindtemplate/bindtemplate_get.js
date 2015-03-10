@@ -10,7 +10,7 @@
             get = arguments[0].get,
 
             selector = '[{0}]'.replace('{0}', attr),
-            $fields = getFields.call($containers, selector);
+            $fields = $containers.find(selector).add($containers.filter(selector));
 
         if ($fields.length === 0) {
             return null;
@@ -76,16 +76,6 @@
 
     function isNumber(v) {
         return +v + '' === v;
-    }
-
-    function getFields(selector) {
-        var $containers = this;
-
-        return $containers.find(selector).add($containers.filter(function () {
-            var $container = $(this);
-
-            return $container.is(selector);
-        }));
     }
 
 } (jQuery));
