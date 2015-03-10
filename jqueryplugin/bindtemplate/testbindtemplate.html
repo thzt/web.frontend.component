@@ -32,11 +32,16 @@
                 <input type="text" data-test2="F[0]" />
             </div>
         </div>
+        <span data-test0="[0]"></span>
+        <input type="text" data-test0="[0]" />
     </div>
     <input id="button1" type="button" value="getData" />
     <script>
         $(function () {
-            var testJson1 = [
+            var testJson0 = [
+                    0
+                ],
+                testJson1 = [
                     {
                         A: 1,
                         B: 2
@@ -63,6 +68,11 @@
                 };
 
             $('#container')
+                 .bindTemplate('setData', {
+                     attr: 'data-test0',
+                     data: testJson0,
+                     set: setfieldValue
+                 })
                 .bindTemplate('setData', {
                     attr: 'data-test1',
                     data: testJson1,
@@ -96,11 +106,13 @@
                 }), null, 10));
             });
 
-            function setfieldValue(value) {
+            function setfieldValue(value, selector, index) {
                 var $field = this;
 
+                console.log(selector, index, value);
+
                 switch (true) {
-                    case $field.is('input'):
+                    case $field.is(':text'):
                     case $field.is('select'):
                         $field.val(value);
                         break;
@@ -115,11 +127,13 @@
                 }
             }
 
-            function getfieldValue() {
+            function getfieldValue(selector) {
                 var $field = this;
 
+                console.log(selector);
+
                 switch (true) {
-                    case $field.is('input'):
+                    case $field.is(':text'):
                     case $field.is('select'):
                         return $field.val();
 

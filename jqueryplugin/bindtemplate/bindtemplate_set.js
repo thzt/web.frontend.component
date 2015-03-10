@@ -17,11 +17,15 @@
 
                 bracketProperty = dotProperty.replace(/[.](\d+)/g, '[$1]').replace(/^(\d+)/, '[$1]'),
                 selector = '[{0}="{1}"]'.replace('{0}', attr).replace('{1}', bracketProperty),
-                $field = $container.is(selector)
+                $fields = $container.is(selector)
                     ? $container.find(selector).andSelf()
                     : $container.find(selector);
 
-            set.call($field, value);
+            $fields.each(function (index) {
+                var $field = $(this);
+
+                set.call($field, value, selector, index);
+            });
         });
 
         return this;

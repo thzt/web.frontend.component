@@ -23,8 +23,9 @@
 
                 bracketProperty = $field.attr(attr),
                 dotProperty = bracketProperty.replace(/\[(\d+)\]/g, '.$1').replace(/^([.])/, ''),
+                selector = '[{0}="{1}"]'.replace('{0}', attr).replace('{1}', bracketProperty),
 
-                value = get.call($field);
+                value = get.call($field, selector);
 
             m.push({
                 dotProperty: dotProperty,
