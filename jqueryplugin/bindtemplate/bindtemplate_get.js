@@ -21,9 +21,9 @@
 
                 bracketProperty = $field.attr(attr),
                 dotProperty = bracketProperty.replace(/\[(\d+)\]/g, '.$1').replace(/^([.])/, ''),
-                selector = '[{0}="{1}"]'.replace('{0}', attr).replace('{1}', bracketProperty),
+                attribute = '{0}="{1}"'.replace('{0}', attr).replace('{1}', bracketProperty),
 
-                value = get.call($field, selector);
+                value = get.call($field, attribute);
 
             m.push({
                 dotProperty: dotProperty,
@@ -77,5 +77,4 @@
     function isNumber(v) {
         return +v + '' === v;
     }
-
 } (jQuery));

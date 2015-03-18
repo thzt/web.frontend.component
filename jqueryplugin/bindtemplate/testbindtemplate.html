@@ -8,67 +8,84 @@
     <script src="../../library/pluginmanager/pluginmanager.js" type="text/javascript"></script>
     <script src="bindtemplate_set.js" type="text/javascript"></script>
     <script src="bindtemplate_get.js" type="text/javascript"></script>
-	<script>
-		$(function(){
-			var json1=[
-					{
-						A: 1,
-						B: [
-							2,
-							3
-						]
-					},
-					[
-						4,
-						5
-					]
-				],
-				json2={
+    <script>
+        $(function () {
+            var json1 = [
+                    {
+                        A: 1,
+                        B: [
+                            2,
+                            3
+                        ]
+                    },
+                    [
+                        4,
+                        5
+                    ]
+                ],
+                json2 = {
                     E: 6,
                     F: [
                         {
-							G:7
-						},
+                            G: 7
+                        },
                         {
-							H:[
-								8
-							],
-							I:9
-						}
+                            H: [
+                                8
+                            ],
+                            I: 9
+                        }
                     ]
+                },
+                json3 = {
+                    J: [
+                        { K: 10 },
+                        11
+                    ]
+
                 };
-				
-			console.log('begin set');
-				
-			$('#div1,#div2')
-				.bindTemplate('setData',{
-					attr:'data-model-1',
-					data:json1,
-					set:setFieldValue
-				}).bindTemplate('setData',{
-					attr:'data-model-2',
-					data:json2,
-					set:setFieldValue
-				});
-				
-			console.log('\nbegin get');
-			
-			var pageData1=$('#div1,#div2').bindTemplate('getData',{
-					attr:'data-model-1',
-					get:getFieldValue
-				}),
-				pageData2=$('#div1,#div2').bindTemplate('getData',{
-					attr:'data-model-2',
-					get:getFieldValue
-				});
-				
-			alert(JSON.stringify(pageData1,null,10));
-			alert(JSON.stringify(pageData2,null,10));
-			
-			function setFieldValue(value, selector, index) {
+
+            console.log('begin set');
+
+            $('#div1,#div2,#div3')
+                .bindTemplate('setData', {
+                    attr: 'data-model-1',
+                    data: json1,
+                    set: setFieldValue
+                }).bindTemplate('setData', {
+                    attr: 'data-model-2',
+                    data: json2,
+                    set: setFieldValue
+                }).bindTemplate('setData', {
+                    attr: 'data-model-3',
+                    data: json3,
+                    set: setFieldValue
+                });
+
+            console.log('\nbegin get');
+
+            var pageData1 = $('#div1,#div2,#div3').bindTemplate('getData', {
+                    attr: 'data-model-1',
+                    get: getFieldValue
+                }),
+                pageData2 = $('#div1,#div2,#div3').bindTemplate('getData', {
+                    attr: 'data-model-2',
+                    get: getFieldValue
+                }),
+                pageData3 = $('#div1,#div2,#div3').bindTemplate('getData', {
+                    attr: 'data-model-3',
+                    get: getFieldValue
+                });
+
+            alert(JSON.stringify(pageData1, null, 10));
+            alert(JSON.stringify(pageData2, null, 10));
+            alert(JSON.stringify(pageData3, null, 10));
+
+            function setFieldValue(value, attribute) {
                 var $field = this;
 
-                console.log('selector:'+selector, 'index:'+index, 'value:'+value);
+                console.log('attribute: ' + attribute);
+                console.log('value: ' + JSON.stringify(value));
 
                 switch (true) {
                     case $field.is(':text'):
@@ -80,16 +97,20 @@
                         $field.attr('data-value', value);
                         break;
 
+                    case $field.is('p'):
+                        $field.html(JSON.stringify(value));
+                        break;
+
                     default:
                         $field.html(value);
                         break;
                 }
             }
 
-            function getFieldValue(selector) {
+            function getFieldValue(attribute) {
                 var $field = this;
 
-                console.log('selector:'+selector);
+                console.log('attribute: ' + attribute);
 
                 switch (true) {
                     case $field.is(':text'):
@@ -99,48 +120,51 @@
                     case $field.is('div'):
                         return $field.attr('data-value');
 
+                    case $field.is('p'):
+                        return [
+                            { K: 12 },
+                            13
+                        ];
+
                     default:
                         return $field.html();
                 }
             }
-		});
-	</script>
+        });
+    </script>
 </head>
 <body>
-	<div id=div1>
-		<div>
-			<table>
-				<tr>
-					<td>
-						<input data-model-2="F[1].H[0]" type=text />
-					</td>
-					<td>
-						<input data-model-1="[0].B[0]" type=text />
-					</td>
-				</tr>
-			</table>
-			
-			<div data-model-1="[1][0]">
-				<select data-model-1="[0].A">
-					<option value=0>0</option>
-					<option value=1>1</option>
-				</select>
-			</div>
-			
-			<input data-model-2="F[1].I" type=text />
-		</div>
-	</div>
-	<div id=div2 data-model-1="[0].B[1]">
-		<input data-model-2="E" type=text />
-		
-		<ul>
-			<li>
-				<span data-model-2="F[0].G"></span>
-			</li>
-			<li>
-				<span data-model-1="[1][1]"></span>
-			</li>
-		</ul>
-	</div>
+    <div id="div1">
+        <div>
+            <table>
+                <tr>
+                    <td>
+                        <input data-model-2="F[1].H[0]" type="text" />
+                    </td>
+                    <td>
+                        <input data-model-1="[0].B[0]" type="text" />
+                    </td>
+                </tr>
+            </table>
+            <div data-model-1="[1][0]">
+                <select data-model-1="[0].A">
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                </select>
+            </div>
+            <input data-model-2="F[1].I" type="text" />
+        </div>
+    </div>
+    <div id="div2" data-model-1="[0].B[1]">
+        <input data-model-2="E" type="text" />
+        <ul>
+            <li><span data-model-2="F[0].G"></span></li>
+            <li><span data-model-1="[1][1]"></span></li>
+        </ul>
+    </div>
+    <div id="div3">
+        <p data-model-3="J">
+        </p>
+    </div>
 </body>
 </html>

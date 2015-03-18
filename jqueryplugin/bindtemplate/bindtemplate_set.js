@@ -10,44 +10,27 @@
             data = arguments[0].data,
             set = arguments[0].set,
 
-            dotProperties = getDotProperties(data);
+			selector = '[{0}]'.replace('{0}', attr),
+            $fields = $containers.find(selector).add($containers.filter(selector));
 
-        _.each(dotProperties, function (dotProperty) {
-            var value = getDotPropertyValue(data, dotProperty),
+        $fields.each(function () {
+            var $field = $(this),
+                bracketProperty = $field.attr(attr),
+                dotProperty = bracketProperty.replace(/\[(\d+)\]/g, '.$1').replace(/^([.])/, ''),
+                value = getDotPropertyValue.call(data, dotProperty),
+                attribute = '{0}="{1}"'.replace('{0}', attr).replace('{1}', bracketProperty);
 
-                bracketProperty = dotProperty.replace(/[.](\d+)/g, '[$1]').replace(/^(\d+)/, '[$1]'),
-                selector = '[{0}="{1}"]'.replace('{0}', attr).replace('{1}', bracketProperty),
-                $fields = $containers.find(selector).add($containers.filter(selector));
-
-            $fields.each(function (index) {
-                var $field = $(this);
-
-                set.call($field, value, selector, index);
-            });
+            set.call($field, value, attribute);
         });
 
         return this;
     }
 
-    function getDotProperties(obj) {
-        return (function (currentObj, currentPos) {
-            var thisFunc = arguments.callee,
-                keys = _.keys(currentObj);
+    function getDotPropertyValue(dotProperty) {
+        var obj = this;
 
-            if (keys.length === 0) {
-                return currentPos.join('.');
-            }
-
-            return _.reduce(keys, function (m, v) {
-                return m.concat(thisFunc(currentObj[v], currentPos.concat(v)));
-            }, []);
-        } (obj, []));
-    }
-
-    function getDotPropertyValue(obj, dotProperty) {
         return _.reduce(dotProperty.split('.'), function (m, v) {
             return m[v];
         }, obj);
     }
-
 } (jQuery));
