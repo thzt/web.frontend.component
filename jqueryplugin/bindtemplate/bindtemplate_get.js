@@ -25,6 +25,10 @@
 
                 value = get.call($field, attribute);
 
+            if (value === undefined) {
+                return m;
+            }
+
             m.push({
                 dotProperty: dotProperty,
                 value: value

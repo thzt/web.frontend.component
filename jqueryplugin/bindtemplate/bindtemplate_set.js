@@ -10,7 +10,7 @@
             data = arguments[0].data,
             set = arguments[0].set,
 
-			selector = '[{0}]'.replace('{0}', attr),
+            selector = '[{0}]'.replace('{0}', attr),
             $fields = $containers.find(selector).add($containers.filter(selector));
 
         $fields.each(function () {
