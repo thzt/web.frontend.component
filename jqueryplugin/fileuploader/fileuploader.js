@@ -14,7 +14,7 @@
         var $container = this.eq(0),
 
             timestamp = +new Date(),
-            iframeName = 'pfizer_fileuploader_iframe_name' + timestamp;
+            iframeName = 'thzt_fileuploader_iframe_name' + timestamp;
 
         //set form.target to iframe, will change iframe src to form's action
         $container.html('\
