@@ -1,11 +1,11 @@
-//version 1.1.0
+//version 1.1.1
 
 (function ($) {
 
     $.extend({
         pluginManager: {
             extend: extend,
-            config: config
+            filter: filter
         }
     });
 
@@ -23,19 +23,19 @@
         return this;
     }
 
-    //add default parameters for plugin
-    //$.pluginManager.config(pluginName, {
-    //    operationName1: [defaultArguments[0], defaultArguments[1], ...],
-    //    operationName2: [defaultArguments[0], defaultArguments[1], ...],
+    //add parameter filter for plugin
+    //$.pluginManager.filter(pluginName, {
+    //    operationName1: function () { },
+    //    operationName2: function () { },
     //    ...
     //});
-    function config(pluginName, allOperationsConfig) {
-        for (var operationName in allOperationsConfig) {
-            if (!allOperationsConfig.hasOwnProperty(operationName)) {
+    function filter(pluginName, allOperationsFilter) {
+        for (var operationName in allOperationsFilter) {
+            if (!allOperationsFilter.hasOwnProperty(operationName)) {
                 continue;
             }
 
-            cache[pluginName][operationName].configs = allOperationsConfig[operationName];
+            cache[pluginName][operationName].filter = allOperationsFilter[operationName];
         }
 
         return this;
@@ -47,7 +47,7 @@
     //    pluginName: {
     //        operationName: {
     //            operation: function () { },
-    //            configs: []
+    //            filter: function () { }
     //        }
     //    }
     //};
@@ -61,48 +61,18 @@
         //extend a plugin to jQuery
         plugin[pluginName] = function(operationName) {
             var $selector = this,
+                operation = cache[pluginName][operationName].operation,
+
                 currentArguments = [].slice.call(arguments, 1),
-                mergedArguments = mergeConfigsAndCurrentArguments.call(currentArguments, pluginName, operationName),
+                operationFilter = cache[pluginName][operationName].filter,
+                filteredArguments = operationFilter.apply($selector, currentArguments);
 
-                operation = cache[pluginName][operationName].operation;
-
-            return operation.apply($selector, mergedArguments);
+            return operation.apply($selector, filteredArguments);
         };
         $.prototype.extend(plugin);
 
-        //creat a repository to this plugin in cache
+        //creat a repository for this plugin in the global cache
         cache[pluginName] = {};
-    }
-
-    function mergeConfigsAndCurrentArguments(pluginName, operationName) {
-        var currentArguments = this,
-            configs = cache[pluginName][operationName].configs,
-
-            length = Math.max(currentArguments.length, configs.length),
-            index,
-
-            mergedArguments = [];
-
-        for (index = 0; index < length; index++) {
-            if (currentArguments[index] == null) {
-                mergedArguments[index] = configs[index];
-                continue;
-            }
-
-            if (configs[index] == null) {
-                mergedArguments[index] = currentArguments[index];
-                continue;
-            }
-
-            if (isNotObject(currentArguments[index]) || isNotObject(configs[index])) {
-                mergedArguments[index] = currentArguments[index];
-                continue;
-            }
-
-            mergedArguments[index] = $.extend(configs[index], currentArguments[index]);
-        }
-
-        return mergedArguments;
     }
 
     function addOperationsToPlugin(pluginName, operationSet) {
@@ -112,14 +82,9 @@
             }
 
             cache[pluginName][operationName] = {
-                operation: operationSet[operationName],
-                configs: []
+                operation: operationSet[operationName]
             };
         }
-    }
-
-    function isNotObject(value) {
-        return typeof (value) !== 'object';
     }
 
 } (jQuery));

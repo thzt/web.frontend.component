@@ -29,16 +29,18 @@
             }
         } (jQuery));
 
-        //add default config
+        //use filter to add default value
         (function ($) {
-            $.pluginManager.config('test', {
-                init: [
-                    1,
-                    {
-                        val: 2
-                    },
-                    [1, 2]
-                ]
+            $.pluginManager.filter('test', {
+                init: function () {
+                    var $selector = this;
+
+                    arguments[0] = arguments[0] || 1;
+                    arguments[1] = $.extend({ val: 2 }, arguments[1]);
+                    arguments[2] = $.extend([1, 2, 3], arguments[2]);
+
+                    return arguments;
+                }
             });
         } (jQuery));
 
