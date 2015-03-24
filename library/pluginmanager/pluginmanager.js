@@ -59,14 +59,17 @@
         var plugin = {};
 
         //extend a plugin to jQuery
-        plugin[pluginName] = function(operationName) {
+        plugin[pluginName] = function (operationName) {
             var $selector = this,
                 operation = cache[pluginName][operationName].operation,
-
                 currentArguments = [].slice.call(arguments, 1),
-                operationFilter = cache[pluginName][operationName].filter,
-                filteredArguments = operationFilter.apply($selector, currentArguments);
+                operationFilter = cache[pluginName][operationName].filter;
 
+            if (operationFilter == null) {
+                return operation.apply($selector, currentArguments);
+            }
+
+            var filteredArguments = operationFilter.apply($selector, currentArguments);
             return operation.apply($selector, filteredArguments);
         };
         $.prototype.extend(plugin);
