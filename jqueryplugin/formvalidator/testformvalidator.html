@@ -14,13 +14,17 @@
     <div>
         <input type="text" data-regexp="^.+$" data-warning="This value can't be empty." />
         <input type="text" data-regexp="^.+$" data-warning="This value can't be empty." />
+        <select data-warning="Can not select this option.">
+            <option value="1" data-cannotselect>1.1</option>
+            <option value="2">1.2</option>
+        </select>
         <input id="button1" type="button" value="test" />
     </div>
     </form>
     <script>
         $(function () {
             $('#button1').click(function () {
-                $('form [data-regexp]').formValidator('check', {
+                $('form input,form select').formValidator('check', {
                     success: function () {
                         alert('ok');
                     }

@@ -5,6 +5,9 @@
         pick: pick,
         upload: upload,
 
+        clear: clear,
+        isPicked: isPicked,
+
         response: response
     });
 
@@ -25,6 +28,7 @@
                 enctype="multipart/form-data" \
                 target="' + iframeName + '">\
                     <input type="file" name="file" />\
+                    <input type="text" name="json" />\
             </form>').hide();
 
         return this;
@@ -35,7 +39,6 @@
             success = arguments[0].success,
 
             $filePickButton = $container.find('input[type=file]');
-
 
         $filePickButton.unbind('change').bind('change', function () {
             var $button = $(this),
@@ -50,13 +53,29 @@
     function upload() {
         var $container = this.eq(0),
             url = arguments[0].url,
+            data = arguments[0].data,
             success = arguments[0].success,
 
             $form = $container.find('form');
 
         uploadSuccessHandler = success;
+
+        $form.find(':text').val(JSON.stringify(data));
         $form.attr('action', url).submit();
 
+        return this;
+    }
+
+    function isPicked() {
+        var $container = this.eq(0);
+
+        return $container.find('input[type=file]').val() !== '';
+    }
+
+    function clear() {
+        var $container = this.eq(0);
+
+        $container.find('input[type=file]').val('');
         return this;
     }
 

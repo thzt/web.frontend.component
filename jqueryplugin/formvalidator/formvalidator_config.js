@@ -10,16 +10,24 @@
 
         return [{
             validate: function () {
-                var $item = this,
+                var $item = this;
 
-                    value = $item.val(),
-                    regexp = new RegExp($item.attr('data-regexp')),
+                switch (true) {
+                    case $item.is(':text,textarea'):
+                        return validateInput.call($item);
 
-                    match = regexp.exec(value);
+                    case $item.is('select'):
+                        return validateSelect.call($item);
 
-                return match != null;
+                    default:
+                        return true;
+                }
             },
-            success: success,
+            success: function () {
+                window.clearTimeout(timer);
+                $(document).find('.thzt_formvalidator').remove();
+                success();
+            },
             failed: function () {
                 var $item = this,
                     message = $item.attr('data-warning');
@@ -29,9 +37,46 @@
         }];
     }
 
-    //-- private fields and functions --
+    //-- private fields --
 
     var timer;
+
+    //-- private functions --
+
+    function validateInput() {
+        var $input = this,
+            regexpAttr = $input.attr('data-regexp');
+
+        if (regexpAttr == null) {
+            return true;
+        }
+
+        var value = $input.val(),
+            regexp = new RegExp(regexpAttr),
+
+            match = regexp.exec(value);
+
+        return match != null;
+    }
+
+    function validateSelect() {
+        var $select = this,
+            $cannotSelectOption = $select.find('option[data-cannotselect]');
+
+        if ($cannotSelectOption.length === 0) {
+            return true;
+        }
+
+        var selectedValue = $select.val(),
+            haveNotSelectCannotSelectOption = $cannotSelectOption.filter(function () {
+                var $option = $(this),
+                    optionValue = $option.val();
+
+                return optionValue === selectedValue;
+            }).length === 0;
+
+        return haveNotSelectCannotSelectOption;
+    }
 
     function showWarning(message) {
         var $item = this;
