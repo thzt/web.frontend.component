@@ -1,49 +1,28 @@
-(function($){
-	$.pluginManager.extend('formValidator',{
-		isIllegal:isIllegal,
-		showFirstWarning:showFirstWarning
-	});
-	
-	var timer;
-	
-	function isIllegal(){
-		var $form=this.eq(0),
-			$illegalTextboxes=getIllegalTextboxes.call($form);
-			
-		return $illegalTextboxes.length!==0;
-	}
-	
-	function showFirstWarning(){
-		var $form=this.eq(0),
-			$illegalTextboxes=getIllegalTextboxes.call($form),
-			
-			$firstTextbox=$illegalTextboxes.eq(0),
-			warning=$firstTextbox.attr('data-warning');
-			
-		window.clearTimeout(timer);
-		$form.find('.thzt_formvalidator').remove();
-		
-		$firstTextbox.before('<span class="thzt_formvalidator">'+warning+'</span>');
-		timer=setTimeout(function(){
-			$firstTextbox.prev('span').remove();
-		},3000);
-		
-		return this;
-	}
-	
-	function getIllegalTextboxes(){
-		var $form=this,
-			$textboxes=$form.find('input[data-regexp]');
-			
-		return $textboxes.filter(function(){
-			var $textbox=$(this),
-			
-				value=$textbox.val(),
-				regexp=new RegExp($textbox.attr('data-regexp')),
-				
-				match=regexp.exec(value);
-				
-			return match==null;
-		});
-	}
-}(jQuery));
+(function ($) {
+    $.pluginManager.extend('formValidator', {
+        check: check
+    });
+
+    function check() {
+        var $selector = this,
+            validate = arguments[0].validate,
+            success = arguments[0].success,
+            failed = arguments[0].failed,
+
+            $illegalItems = $selector.filter(function () {
+                var $item = $(this);
+
+                return !validate.call($item);
+            }),
+            illegalItemCount = $illegalItems.length;
+
+        if (illegalItemCount === 0) {
+            success();
+            return this;
+        }
+
+        failed.call($illegalItems.eq(0));
+        return this;
+    }
+
+} (jQuery));
