@@ -8,6 +8,7 @@
     <script src="../../library/pluginmanager/pluginmanager.js" type="text/javascript"></script>
     <script src="bindtemplate_set.js" type="text/javascript"></script>
     <script src="bindtemplate_get.js" type="text/javascript"></script>
+    <script src="bindtemplate_config.js" type="text/javascript"></script>
     <script>
         $(function () {
             var json1 = [
@@ -50,86 +51,41 @@
             $('#div1,#div2,#div3')
                 .bindTemplate('setData', {
                     attr: 'data-model-1',
-                    data: json1,
-                    set: setFieldValue
+                    data: json1
                 }).bindTemplate('setData', {
                     attr: 'data-model-2',
-                    data: json2,
-                    set: setFieldValue
+                    data: json2
                 }).bindTemplate('setData', {
                     attr: 'data-model-3',
                     data: json3,
-                    set: setFieldValue
+                    set: function (value) {
+                        var $field = this;
+
+                        $field.html(JSON.stringify(value));
+                    }
                 });
 
             console.log('\nbegin get');
 
             var pageData1 = $('#div1,#div2,#div3').bindTemplate('getData', {
-                    attr: 'data-model-1',
-                    get: getFieldValue
-                }),
+                attr: 'data-model-1'
+            }),
                 pageData2 = $('#div1,#div2,#div3').bindTemplate('getData', {
-                    attr: 'data-model-2',
-                    get: getFieldValue
+                    attr: 'data-model-2'
                 }),
                 pageData3 = $('#div1,#div2,#div3').bindTemplate('getData', {
                     attr: 'data-model-3',
-                    get: getFieldValue
+                    get: function () {
+                        return [
+                            { K: 12 },
+                            13
+                        ];
+                    }
                 });
 
             alert(JSON.stringify(pageData1, null, 10));
             alert(JSON.stringify(pageData2, null, 10));
             alert(JSON.stringify(pageData3, null, 10));
-
-            function setFieldValue(value, attribute) {
-                var $field = this;
-
-                console.log('attribute: ' + attribute);
-                console.log('value: ' + JSON.stringify(value));
-
-                switch (true) {
-                    case $field.is(':text'):
-                    case $field.is('select'):
-                        $field.val(value);
-                        break;
-
-                    case $field.is('div'):
-                        $field.attr('data-value', value);
-                        break;
-
-                    case $field.is('p'):
-                        $field.html(JSON.stringify(value));
-                        break;
-
-                    default:
-                        $field.html(value);
-                        break;
-                }
-            }
-
-            function getFieldValue(attribute) {
-                var $field = this;
-
-                console.log('attribute: ' + attribute);
-
-                switch (true) {
-                    case $field.is(':text'):
-                    case $field.is('select'):
-                        return $field.val();
-
-                    case $field.is('div'):
-                        return $field.attr('data-value');
-
-                    case $field.is('p'):
-                        return [
-                            { K: 12 },
-                            13
-                        ];
-
-                    default:
-                        return $field.html();
-                }
-            }
         });
     </script>
 </head>
