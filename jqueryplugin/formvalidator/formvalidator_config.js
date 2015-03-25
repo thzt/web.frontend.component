@@ -11,6 +11,9 @@
         return [{
             validate: function () {
                 var $item = this;
+                if ($item.is(':disabled') || !$item.is(':visible')) {
+                    return true;
+                }
 
                 switch (true) {
                     case $item.is(':text,textarea'):
@@ -84,7 +87,13 @@
         window.clearTimeout(timer);
         $(document).find('.thzt_formvalidator').remove();
 
-        $item.before('<span class="thzt_formvalidator">' + message + '</span>');
+        $item.before('\
+            <div class="thzt_formvalidator">\
+                <div>\
+                </div>\
+                <div>' + message + '</div>\
+            </div>');
+
         timer = setTimeout(function () {
             $item.prev('.thzt_formvalidator').remove();
         }, 3000);
