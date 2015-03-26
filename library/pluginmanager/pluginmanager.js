@@ -16,10 +16,9 @@
     //    ...
     //});
     function extend(pluginName, operationSet) {
-        cache[pluginName] == null
-            && createNewPlugin(pluginName);
+        addOperationSetToCache(pluginName, operationSet);
+        createPlugin(pluginName);
 
-        addOperationsToPlugin(pluginName, operationSet);
         return this;
     }
 
@@ -34,6 +33,12 @@
             if (!allOperationsFilter.hasOwnProperty(operationName)) {
                 continue;
             }
+
+            cache[pluginName] == null
+                && (cache[pluginName] = {});
+
+            cache[pluginName][operationName] == null
+                && (cache[pluginName][operationName] = {});
 
             cache[pluginName][operationName].filter = allOperationsFilter[operationName];
         }
@@ -55,10 +60,25 @@
 
     //-- private functions --
 
-    function createNewPlugin(pluginName) {
+    function addOperationSetToCache(pluginName, operationSet) {
+        for (var operationName in operationSet) {
+            if (!operationSet.hasOwnProperty(operationName)) {
+                continue;
+            }
+
+            cache[pluginName] == null
+                && (cache[pluginName] = {});
+
+            cache[pluginName][operationName] == null
+                && (cache[pluginName][operationName] = {});
+
+            cache[pluginName][operationName].operation = operationSet[operationName];
+        }
+    }
+
+    function createPlugin(pluginName) {
         var plugin = {};
 
-        //extend a plugin to jQuery
         plugin[pluginName] = function (operationName) {
             var $selector = this,
                 operation = cache[pluginName][operationName].operation,
@@ -72,22 +92,8 @@
             var filteredArguments = operationFilter.apply($selector, currentArguments);
             return operation.apply($selector, filteredArguments);
         };
+
         $.prototype.extend(plugin);
-
-        //creat a repository for this plugin in the global cache
-        cache[pluginName] = {};
-    }
-
-    function addOperationsToPlugin(pluginName, operationSet) {
-        for (var operationName in operationSet) {
-            if (!operationSet.hasOwnProperty(operationName)) {
-                continue;
-            }
-
-            cache[pluginName][operationName] = {
-                operation: operationSet[operationName]
-            };
-        }
     }
 
 } (jQuery));
