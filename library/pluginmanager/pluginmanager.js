@@ -34,11 +34,8 @@
                 continue;
             }
 
-            cache[pluginName] == null
-                && (cache[pluginName] = {});
-
-            cache[pluginName][operationName] == null
-                && (cache[pluginName][operationName] = {});
+            cache[pluginName] = cache[pluginName] || {};
+            cache[pluginName][operationName] = cache[pluginName][operationName] || {};
 
             cache[pluginName][operationName].filter = allOperationsFilter[operationName];
         }
@@ -66,11 +63,8 @@
                 continue;
             }
 
-            cache[pluginName] == null
-                && (cache[pluginName] = {});
-
-            cache[pluginName][operationName] == null
-                && (cache[pluginName][operationName] = {});
+            cache[pluginName] = cache[pluginName] || {};
+            cache[pluginName][operationName] = cache[pluginName][operationName] || {};
 
             cache[pluginName][operationName].operation = operationSet[operationName];
         }
