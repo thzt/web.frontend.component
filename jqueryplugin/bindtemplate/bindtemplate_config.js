@@ -7,9 +7,9 @@
     function filterSetData() {
         var $selector = this,
 
-            attr = arguments[0].attr,
-            data = arguments[0].data,
-            set = arguments[0].set;
+            attr = arguments[0] && arguments[0].attr,
+            data = arguments[0] && arguments[0].data,
+            set = arguments[0] && arguments[0].set;
 
         return [{
             attr: attr || 'data-model',
@@ -40,8 +40,8 @@
     function filterGetData() {
         var $selector = this,
 
-            attr = arguments[0].attr,
-            get = arguments[0].get;
+            attr = arguments[0] && arguments[0].attr,
+            get = arguments[0] && arguments[0].get;
 
         return [{
             attr: attr || 'data-model',
