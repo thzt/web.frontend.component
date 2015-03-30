@@ -5,25 +5,18 @@
     });
 
     function init() {
-        var $primary = arguments[0].primary,
-            $related = arguments[0].related,
-
+        var selects = arguments[0].selects,
             data = arguments[0].data,
 
             initial = arguments[0].initial,
-            getSelectedValue = arguments[0].getSelectedValue,
-            fillRelated = arguments[0].fillRelated;
+            change = arguments[0].change;
 
-        initial.call({
-            primary: $primary,
-            related: $related
-        }, data);
+        initial.call(selects, data);
 
-        $primary.change(function () {
-            var $select = $(this),
-                value = getSelectedValue.call($select);
-
-            fillRelated.call($related, value, data);
+        _.each(selects, function ($select, index) {
+            $select.change(function () {
+                change.call(selects, data, index);
+            });
         });
     }
 } (jQuery));

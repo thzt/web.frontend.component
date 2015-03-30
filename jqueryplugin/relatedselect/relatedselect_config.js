@@ -5,50 +5,59 @@
     });
 
     function filterInit() {
-        var $primary = arguments[0].primary,
-            $related = arguments[0].related;
+        var selects = arguments[0].selects,
+            data = arguments[0].data;
 
-        return [
-        {
-            primary: $primary,
-            related: $related,
-            data: arguments[0].data,
-            initial: function (data) {
-                fillPrimary.call($primary, data);
-                fillRelated.call($related, data.Nodes[0].Data.ID, data);
-            },
-            getSelectedValue: function () {
-                var $select = this;
-
-                return $select.val();
-            },
-            fillRelated: fillRelated
+        return [{
+            selects: selects,
+            data: data,
+            initial: initial,
+            change: change
         }];
     }
 
     //-- private functions --
 
-    function fillPrimary(data) {
-        var $primary = this,
-            optionHtml = createOptionHtmlFromNodes(data.Nodes);
+    function initial(data) {
+        var selects = this;
 
-        $primary.html(optionHtml);
+        fill.call(selects, data, []);
     }
 
-    function fillRelated(value, data) {
-        var $related = this,
-            selectedNode = _.find(data.Nodes, function (v) {
-                return v.Data.ID == value;
-            }, ''),
-            optionHtml = createOptionHtmlFromNodes(selectedNode.Nodes);
+    function change(data, index) {
+        var selects = this,
+            state = _.reduce(selects, function (m, v, i) {
+                var $select = v;
 
-        $related.html(optionHtml);
+                if (i > index) {
+                    return m;
+                }
+
+                m.push($select.val());
+                return m;
+            }, []);
+
+        fill.call(selects, data, state);
     }
 
-    function createOptionHtmlFromNodes(nodes) {
-        return _.reduce(nodes, function (m, v) {
-            return m + '<option value="' + v.Data.ID + '">' + v.Data.Name + '</option>';
-        }, '');
+    function fill(node, state) {
+        var selects = this;
+
+        _.each(selects, function ($select, i) {
+            var selectedValue = state[i];
+
+            $select.html(_.reduce(node.Nodes, function (m, v) {
+                return m + '<option value="' + v.Data.Value + '">' + v.Data.Text + '</option>';
+            }, ''));
+
+            node = selectedValue == null
+                ? node.Nodes[0]
+                : _.find(node.Nodes, function (v) {
+                    return v.Data.Value == selectedValue;
+                });
+
+            $select.val(node.Data.Value);
+        });
     }
 
 } (jQuery));

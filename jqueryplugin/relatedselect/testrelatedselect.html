@@ -19,12 +19,14 @@
 </head>
 <body>
     <div id="hiddenField">
-        <span data-model="[0]">{"Data":null,"Nodes":[{"Data":{"ID":0,"Name":"安徽"},"Nodes":[{"Data":{"ID":1,"Name":"安庆市"},"Nodes":null},{"Data":{"ID":2,"Name":"蚌埠市"},"Nodes":null}]},{"Data":{"ID":3,"Name":"福建"},"Nodes":[{"Data":{"ID":4,"Name":"巢湖市"},"Nodes":null},{"Data":{"ID":5,"Name":"池州市"},"Nodes":null}]}]}</span>
+        <span data-model="[0]">{"Data":null,"Nodes":[{"Data":{"Value":"1","Text":"1"},"Nodes":[{"Data":{"Value":"1.1","Text":"1.1"},"Nodes":[{"Data":{"Value":"1.1.1","Text":"1.1.1"},"Nodes":null},{"Data":{"Value":"1.1.2","Text":"1.1.2"},"Nodes":null}]},{"Data":{"Value":"1.2","Text":"1.2"},"Nodes":[{"Data":{"Value":"1.2.1","Text":"1.2.1"},"Nodes":null},{"Data":{"Value":"1.2.2","Text":"1.2.2"},"Nodes":null}]}]},{"Data":{"Value":"2","Text":"2"},"Nodes":[{"Data":{"Value":"2.1","Text":"2.1"},"Nodes":[{"Data":{"Value":"2.1.1","Text":"2.1.1"},"Nodes":null},{"Data":{"Value":"2.1.2","Text":"2.1.2"},"Nodes":null}]},{"Data":{"Value":"2.2","Text":"2.2"},"Nodes":[{"Data":{"Value":"2.2.1","Text":"2.2.1"},"Nodes":null},{"Data":{"Value":"2.2.2","Text":"2.2.2"},"Nodes":null}]}]}]}</span>
     </div>
     <div>
         <select id="select1">
         </select>
         <select id="select2">
+        </select>
+        <select id="select3">
         </select>
     </div>
     <script>
@@ -33,9 +35,12 @@
                 data = eval('(' + json[0] + ')');
 
             $().relatedSelect('init', {
-                primary: $('#select2'),
-                related: $('#select1'),
-                data: data
+                data: data,
+                selects: [
+                    $('#select3'),
+                    $('#select2'),
+                    $('#select1')
+                ]
             });
         });
     </script>
