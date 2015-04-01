@@ -12,10 +12,6 @@
             selector = '[{0}]'.replace('{0}', attr),
             $fields = $containers.find(selector).add($containers.filter(selector));
 
-        if ($fields.length === 0) {
-            return null;
-        }
-
         var dotPropertiesAndValues = _.reduce($fields, function (m, v) {
             var $field = $(v),
 
@@ -36,6 +32,10 @@
 
             return m;
         }, []);
+
+        if (dotPropertiesAndValues.length === 0) {
+            return null;
+        }
 
         return createObject(dotPropertiesAndValues);
     }
