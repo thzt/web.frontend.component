@@ -32,27 +32,20 @@
         $(function () {
             var json = [
             {
-                ID: 'xxx-xxx',
-                Name: 'Aromasin',
-                Data: 1
+                Value: 'xxx-xxx',
+                Text: 'Aromasin'
             },
             {
-                ID: 'xxx-xxx',
-                Name: 'Lipitor',
-                Data: 1
+                Value: 'xxx-xxx',
+                Text: 'Lipitor'
             }];
 
             $('#container').selectItem('init', {
-                data: json,
-                success: function () {
-                    var $container = this;
-                },
-                click: function (index) {
-                    var $td = this;
+                data: json
+            });
 
-                    $('#panel>span').hide();
-                    $('#panel>span').eq(index).show();
-                }
+            $('#container').change(function (e, index) {
+                alert(index);
             });
         });
     </script>

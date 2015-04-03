@@ -5,13 +5,14 @@
     margin-left: 20px;
     margin-top: 10px;
     z-index: 9999;
+	color:red;
 }
 
 .thzt_formvalidator > div:first-child
 {
     border-color: transparent;
     border-width: 0 8px 8px;
-    border-bottom-color: gray;
+    border-bottom-color: red;
     border-style: solid;
     display: inline-block;
     margin-bottom: -4px;
@@ -34,7 +35,7 @@
 
 .thzt_formvalidator > div:last-child
 {
-    border: 1px solid gray;
+    border: 1px solid red;
     border-radius: 5px;
     padding: 5px;
     background: white;
