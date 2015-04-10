@@ -60,6 +60,10 @@
         var $container = this.eq(0);
 
         $container.undelegate().children().remove();
+
+        //trick: otherwise document can't scroll
+        $('body').removeClass('modal-open');
+
         return this;
 
     }
