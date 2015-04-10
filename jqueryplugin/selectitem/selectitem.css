@@ -19,8 +19,12 @@
     padding-right: 10px;
     padding: 20px 20px;
     margin-right: 2px;
+    cursor: default;
 }
-
+.thzt_selectitem > table > tbody > tr > td:not(:first-child)
+{
+    cursor: pointer;
+}
 .thzt_selectitem > table > tbody > tr > td:not(:first-child):hover
 {
     background: #e7e7e7;

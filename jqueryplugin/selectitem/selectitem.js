@@ -3,7 +3,8 @@
     $.pluginManager.extend('selectItem', {
         init: init,
         selectValue: selectValue,
-        getSelectedItem: getSelectedItem
+        getSelectedItem: getSelectedItem,
+        check: check
     });
 
     function init() {
@@ -24,7 +25,13 @@
 
                 var $td = $(this),
                     index = $td.index(),
-                    validTdIndex = index - 1;
+                    selectedIndex = $td.parent('tr').find('>td.thzt_selectitem_selected').index();
+
+                if (index === selectedIndex) {
+                    return;
+                }
+
+                var validTdIndex = index - 1;
 
                 $td.siblings('td').removeClass('thzt_selectitem_selected');
                 $td.addClass('thzt_selectitem_selected');
@@ -69,6 +76,16 @@
             Value: $selectedTd.attr('data-value'),
             Text: $selectedTd.text()
         };
+    }
+
+    function check() {
+        var $container = this.eq(0),
+            index = arguments[0].index,
+            validTdIndex = index + 1;
+
+        $container.find('>table>tbody>tr>td').eq(validTdIndex).click();
+
+        return this;
     }
 
 } (jQuery));
