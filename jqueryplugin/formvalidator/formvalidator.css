@@ -5,7 +5,8 @@
     margin-left: 20px;
     margin-top: 10px;
     z-index: 9999;
-	color:red;
+    color: red;
+    text-align: left;
 }
 
 .thzt_formvalidator > div:first-child

@@ -8,6 +8,12 @@
     <script src="../../library/pluginmanager/pluginmanager.js"></script>
     <script src="formvalidator.js"></script>
     <script src="formvalidator_config.js" type="text/javascript"></script>
+    <style>
+        #text1
+        {
+            width: 300px;
+        }
+    </style>
 </head>
 <body>
     <form>
@@ -15,7 +21,7 @@
         <table>
             <tr>
                 <td>
-                    <input type="text" data-regexp="^.+$" data-warning="This value can't be empty." />
+                    <input id="text1" type="text" data-regexp="^.+$" data-warning="This value can't be empty." />
                 </td>
             </tr>
             <tr>
@@ -33,7 +39,6 @@
             </tr>
         </table>
         <input id="button1" type="button" value="test" />
-        
     </div>
     </form>
     <script>

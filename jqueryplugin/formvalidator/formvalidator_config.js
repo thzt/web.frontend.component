@@ -87,12 +87,20 @@
         window.clearTimeout(timer);
         $(document).find('.thzt_formvalidator').remove();
 
-        $item.before('\
-            <div class="thzt_formvalidator">\
-                <div>\
-                </div>\
-                <div>' + message + '</div>\
-            </div>');
+        var warningDiv = $('\<div class="thzt_formvalidator">\
+            <div>\
+            </div>\
+            <div>' + message + '</div>\
+        </div>');
+
+        warningDiv.css({
+            marginLeft: +$item.css('width').slice(0, -2) / 5 + 'px'
+        });
+        warningDiv.find('>div:first-child').css({
+            left: +$item.css('width').slice(0, -2) / 5 + 'px'
+        });
+
+        warningDiv.insertBefore($item);
 
         timer = setTimeout(function () {
             $item.prev('.thzt_formvalidator').remove();
