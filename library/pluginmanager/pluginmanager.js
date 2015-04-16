@@ -1,11 +1,13 @@
-//version 1.1.1
+//version 1.1.2
 
 (function ($) {
 
     $.extend({
         pluginManager: {
             extend: extend,
-            filter: filter
+            filter: filter,
+
+            remove: remove
         }
     });
 
@@ -39,6 +41,13 @@
 
             cache[pluginName][operationName].filter = allOperationsFilter[operationName];
         }
+
+        return this;
+    }
+
+    function remove(pluginName) {
+        cache[pluginName] = null;
+        $.prototype[pluginName] = null;
 
         return this;
     }
