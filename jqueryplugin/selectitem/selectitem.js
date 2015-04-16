@@ -2,8 +2,12 @@
 
     $.pluginManager.extend('selectItem', {
         init: init,
+
         selectValue: selectValue,
+        selectIndex: selectIndex,
+
         getSelectedItem: getSelectedItem,
+
         check: check
     });
 
@@ -68,13 +72,29 @@
         return this;
     }
 
+    function selectIndex() {
+        var $container = this.eq(0),
+            index = arguments[0].index,
+
+            $allTd = $container.find('>table>tbody>tr>td:not(:first-child)'),
+            $selectedTd = $allTd.eq(index);
+
+        $allTd.removeClass('thzt_selectitem_selected');
+        $selectedTd.addClass('thzt_selectitem_selected');
+
+        return this;
+    }
+
     function getSelectedItem() {
         var $container = this.eq(0),
-            $selectedTd = $container.find('>table>tbody>tr>td.thzt_selectitem_selected');
+            $selectedTd = $container.find('>table>tbody>tr>td.thzt_selectitem_selected'),
+            index = $selectedTd.index(),
+            validTdIndex = index < 0 ? index : index - 1;
 
         return {
             Value: $selectedTd.attr('data-value'),
-            Text: $selectedTd.text()
+            Text: $selectedTd.text(),
+            Index: validTdIndex
         };
     }
 

@@ -29,6 +29,10 @@
 {
     background: #e7e7e7;
 }
+.thzt_selectitem > table > tbody > tr > td:first-child
+{
+    font-weight: bold;
+}
 
 .thzt_selectitem_selected
 {

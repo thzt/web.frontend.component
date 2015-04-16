@@ -25,9 +25,7 @@
             </tr>
         </table>
     </div>
-    <div id="panel">
-        <span>1</span><span>2</span>
-    </div>
+    <input id="button1" type="button" value="test" />
     <script>
         $(function () {
             var json = [
@@ -46,6 +44,10 @@
 
             $('#container').change(function (e, index) {
                 alert(index);
+            });
+
+            $('#button1').click(function() {
+                alert($('#container').selectItem('getSelectedItem').Index);
             });
         });
     </script>
