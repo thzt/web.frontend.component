@@ -1,10 +1,10 @@
 ﻿(function ($) {
     $.scriptManager = {
-        load: load,
-        remove: remove
+        install: install,
+        uninstall: uninstall
     };
 
-    function load() {
+    function install() {
         var src = arguments[0].src,
             success = arguments[0].success,
 
@@ -20,7 +20,7 @@
         return this;
     }
 
-    function remove() {
+    function uninstall() {
         var src = arguments[0].src;
 
         $('script[src="' + src + '"]').remove();
