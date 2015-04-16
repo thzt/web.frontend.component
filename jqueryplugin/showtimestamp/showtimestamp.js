@@ -9,6 +9,7 @@
     function init() {
         var $container = this.eq(0);
 
+        $container.addClass('thzt_showtimestamp');
         $container.delegate('>input', 'click', function (e) {
             e.stopPropagation();
 
@@ -25,6 +26,7 @@
         var $container = this.eq(0);
 
         $container.find('span').html('');
+        $container.removeClass('thzt_showtimestamp');
         $container.undelegate();
 
         return this;

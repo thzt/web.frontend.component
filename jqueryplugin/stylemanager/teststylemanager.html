@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>test style manager</title>
+    <script src="../../jquery/jquery-1.11.1.js" type="text/javascript"></script>
+    <script src="../../library/pluginmanager/pluginmanager.js" type="text/javascript"></script>
+    <script src="stylemanager.js" type="text/javascript"></script>
+</head>
+<body>
+    <input id="button1" type="button" value="install" />
+    <input id="button2" type="button" value="uninstall" />
+    <div id="container">
+        <input type="button" value="show timestamp" /><span>123</span>
+    </div>
+    <script>
+        $(function () {
+            $('#button1').click(function () {
+                $.styleManager.install({
+                    href: '../showtimestamp/showtimestamp.css',
+                    success: function () {
+                        $('#container').addClass('thzt_showtimestamp');
+                    }
+                });
+            });
+
+            $('#button2').click(function () {
+                $.styleManager.uninstall({
+                    href: '../showtimestamp/showtimestamp.css'
+                });
+                $('#container').removeClass('thzt_showtimestamp');
+            });
+        });
+    </script>
+</body>
+</html>
