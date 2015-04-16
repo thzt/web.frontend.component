@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>test plugin loader</title>
+    <script src="../../jquery/jquery-1.11.1.js" type="text/javascript"></script>
+    <script src="../../library/pluginmanager/pluginmanager.js" type="text/javascript"></script>
+    <script src="../scriptmanager/scriptmanager.js" type="text/javascript"></script>
+    <script src="../stylemanager/stylemanager.js" type="text/javascript"></script>
+</head>
+<body>
+    <input id="button1" type="button" value="install" />
+    <input id="button2" type="button" value="uninstall" />
+    <div id="container">
+        <input type="button" value="show timestamp" /><span></span>
+    </div>
+    <script>
+        $(function () {
+            var cssFilePath = '../showtimestamp/showtimestamp.css',
+                jsFilePath = '../showtimestamp/showtimestamp.js';
+
+            $('#button1').click(function () {
+                $.styleManager.install({
+                    href: cssFilePath
+                });
+                $.scriptManager.install({
+                    src: jsFilePath,
+                    success: function () {
+                        $('#container').showTimestamp('init');
+                    }
+                });
+            });
+
+            $('#button2').click(function () {
+                $('#container').showTimestamp('remove');
+
+                $.pluginManager.remove('showTimestamp');
+
+                $.styleManager.uninstall({
+                    href: cssFilePath
+                });
+                $.scriptManager.uninstall({
+                    src: jsFilePath
+                });
+            });
+        });
+    </script>
+</body>
+</html>
