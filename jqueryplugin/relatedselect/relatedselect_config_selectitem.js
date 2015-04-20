@@ -46,6 +46,15 @@
         var selects = this;
 
         _.each(selects, function ($select, i) {
+            if (node == null || node.Nodes == null || node.Nodes.length === 0) {
+                $select.selectItem('init', {
+                    data: null
+                });
+
+                node = null;
+                return;
+            }
+
             var selectedValue = state[i],
                 data = _.map(node.Nodes, function (v) {
                     return v.Data;

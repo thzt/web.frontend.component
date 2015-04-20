@@ -22,11 +22,17 @@
                         $item.val(value);
                         break;
 
+                    case $item.is(':checkbox,:radio'):
+                        $item.attr('checked', 'checked');
+                        break;
+
                     case $item.is('span'):
                         $item.html(value);
                         break;
 
                     case $item.is('div'):
+                    case $item.is('tr'):
+                    case $item.is('td'):
                         $item.attr('data-value', value);
                         break;
 
@@ -52,10 +58,15 @@
                     case $item.is(':text,textarea,select'):
                         return $item.val();
 
+                    case $item.is(':checkbox,:radio'):
+                        return $item.is(':checked');
+
                     case $item.is('span'):
                         return $item.html().trim();
 
                     case $item.is('div'):
+                    case $item.is('tr'):
+                    case $item.is('td'):
                         return $item.attr('data-value');
 
                     default:

@@ -44,11 +44,15 @@
                         11
                     ]
 
-                };
+                },
+                json4 = [
+                    ['a', 'b'],
+                    ['c', 'd']
+                ];
 
             console.log('begin set');
 
-            $('#div1,#div2,#div3')
+            $('#div1,#div2,#div3,#table1')
                 .bindTemplate('setData', {
                     attr: 'data-model-1',
                     data: json1
@@ -63,6 +67,9 @@
 
                         $field.html(JSON.stringify(value));
                     }
+                })
+                .bindTemplate('setData', {
+                    data: json4
                 });
 
             console.log('\nbegin get');
@@ -81,11 +88,13 @@
                             13
                         ];
                     }
-                });
+                }),
+                pageData4 = $('#div1,#div2,#div3,#table1').bindTemplate('getData');
 
             alert(JSON.stringify(pageData1, null, 10));
             alert(JSON.stringify(pageData2, null, 10));
             alert(JSON.stringify(pageData3, null, 10));
+            alert(JSON.stringify(pageData4, null, 10));
         });
     </script>
 </head>
@@ -122,5 +131,23 @@
         <p data-model-3="J">
         </p>
     </div>
+    <table id="table1">
+        <tr>
+            <td>
+                <span data-model="[0][0]"></span>
+            </td>
+            <td>
+                <span data-model="[0][1]"></span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span data-model="[1][0]"></span>
+            </td>
+            <td>
+                <span data-model="[1][1]"></span>
+            </td>
+        </tr>
+    </table>
 </body>
 </html>
