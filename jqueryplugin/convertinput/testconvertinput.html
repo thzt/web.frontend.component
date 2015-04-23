@@ -9,7 +9,8 @@
     <script src="convertinput_config.js" type="text/javascript"></script>
 </head>
 <body>
-    <input id="text1" type="text" />
+    <input id="text1" type="text" data-percentage-convert />
+    <span id="span1" data-thousand-unit></span>
     <input id="button1" type="button" value="getValue" />
     <script>
         $(function () {
@@ -35,10 +36,16 @@
                     value: 0.1
                 });
 
-            $('#button1').click(function () {
-                var data = $('#text1').convertInput('getValue');
+            $('#span1').convertInput('setValue', {
+                value: 12345678
+            });
 
-                alert(data);
+            $('#button1').click(function () {
+                var data1 = $('#text1').convertInput('getValue'),
+                    data2 = $('#span1').convertInput('getValue');
+
+                alert(data1);
+                alert(data2);
             });
         });
     </script>

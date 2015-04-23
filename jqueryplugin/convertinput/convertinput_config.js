@@ -11,16 +11,17 @@
         return [{
             value: value,
             set: function (val) {
-                var $input = this,
-                    regexp = /^(?:\d+(?:[.]\d+)?)$/,
-                    match = regexp.exec(val);
+                var $item = this;
 
-                if (match == null) {
-                    $input.val('0 %');
-                    return;
+                switch (true) {
+                    case $item.is('[data-percentage-convert]'):
+                        handlePercentageConvertSetter.call($item, val);
+                        break;
+
+                    case $item.is('[data-thousand-unit]'):
+                        handleThousandUnitSetter.call($item, val);
+                        break;
                 }
-
-                $input.val(+val * 100 + ' %');
             }
         }];
     }
@@ -28,18 +29,87 @@
     function getValueFilter() {
         return [{
             get: function () {
-                var $input = this,
-                    value = $input.val(),
-                    regexp = /^(\d+(?:[.]\d+)?) %$/,
-                    match = regexp.exec(value);
+                var $item = this;
 
-                if (match == null) {
-                    return 0;
+                switch (true) {
+                    case $item.is('[data-percentage-convert]'):
+                        return handlePercentageConvertGetter.call($item);
+
+                    case $item.is('[data-thousand-unit]'):
+                        return handleThousandUnitGetter.call($item);
                 }
-
-                return +match[1] / 100;
             }
         }];
+    }
+
+    // private tools -->
+
+    // -- set
+
+    function handlePercentageConvertSetter(value) {
+        var $item = this,
+            regexp = /^-?\d+(?:[.]\d+)?$/,
+            match = regexp.exec(value),
+            displayValue = match == null
+                ? '0.00 %'
+                : (+value * 100).toFixed(2) + ' %';
+
+        setValueToField.call($item, displayValue);
+    }
+
+    function handleThousandUnitSetter(value) {
+        var $item = this,
+            displayValue = (Math.round(+value / 1000) + '').replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g, '$&,');
+
+        setValueToField.call($item, displayValue);
+    }
+
+    function setValueToField(value) {
+        var $item = this;
+
+        switch (true) {
+            case $item.is(':text'):
+                $item.val(value);
+                break;
+
+            case $item.is('span'):
+                $item.html(value);
+                break;
+        }
+    }
+
+    // -- get
+
+    function handlePercentageConvertGetter() {
+        var $item = this,
+            value = getValueOfField.call($item),
+            regexp = /^(-?\d+(?:[.]\d+)?) %$/,
+            match = regexp.exec(value),
+            getterValue = match == null
+                ? 0
+                : +(+match[1] / 100).toFixed(4);
+
+        return getterValue;
+    }
+
+    function handleThousandUnitGetter() {
+        var $item = this,
+            value = getValueOfField.call($item),
+            getterValue = +(value.replace(/,/g, '')) * 1000;
+
+        return getterValue;
+    }
+
+    function getValueOfField() {
+        var $item = this;
+
+        switch (true) {
+            case $item.is(':text'):
+                return $item.val();
+
+            case $item.is('span'):
+                return $item.html();
+        }
     }
 
 } (jQuery));
