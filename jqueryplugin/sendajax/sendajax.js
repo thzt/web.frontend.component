@@ -32,7 +32,7 @@
         }
 
         var responseText = xhr.responseText,
-            regexp = /^(?:\r|\r\n|\n|.)*?<script>((?:\r|\r\n|\n|.)*)<\/script>(?:\r|\r\n|\n|.)*?$/,
+            regexp = /^<script>((?:\r|\r\n|\n|.)*)<\/script>$/,
             match = regexp.exec(responseText),
             isServerDefinedError = match != null;
 
