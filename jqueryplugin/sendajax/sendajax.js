@@ -2,10 +2,9 @@
     $.sendAjax = function () {
         var url = arguments[0].url,
             data = arguments[0].data,
-            success = arguments[0].success,
-            complete = arguments[0].complete,
 
-            console = window.console;
+            success = arguments[0].success,
+            complete = arguments[0].complete;
 
         $.ajax({
             cache: false,
@@ -14,41 +13,41 @@
 
             url: url,
             data: data,
-            success: function (r) {
-                if (!r.status) {
-                    var errorMessage = '$.sendAjax response.status is unexpected.\n'
-                        + 'url: ' + url + '\n'
-                        + 'data: ' + JSON.stringify(data) + '\n'
-                        + 'responseText: ' + JSON.stringify(r);
 
-                    console && console.error(errorMessage);
-                    alert(r.content);
-
-                    return;
-                }
-
-                success && success.call(this, r.content);
-            },
+            success: success,
+            complete: complete,
             error: function (xhr, statusText, errorThrown) {
-
-                //chrome bug
-                //when continuous refresh the browse or network break off, this will happen.
-                if (xhr.status === 0 && xhr.responseText === '') {
-                    return;
-                }
-
-                var errorMessage = '$.sendAjax error.\n'
-                    + 'url: ' + url + '\n'
-                    + 'data: ' + JSON.stringify(data) + '\n'
-                    + 'statusText: ' + statusText + '\n'
-                    + 'responseText: ' + xhr.responseText;
-
-                console && console.error(errorMessage);
-                alert(errorMessage);
-            },
-            complete: function () {
-                complete && complete.apply(this, arguments);
+                handleError.call(xhr, url, data, statusText);
             }
         });
     };
+
+    function handleError(url, data, statusText) {
+        var xhr = this;
+
+        //chrome bug
+        //when continuous refresh the browse or network break off, this will happen.
+        if (xhr.status === 0 && xhr.responseText === '') {
+            return;
+        }
+
+        var responseText = xhr.responseText,
+            regexp = /^(?:\r|\r\n|\n|.)*?<script>((?:\r|\r\n|\n|.)*)<\/script>(?:\r|\r\n|\n|.)*?$/,
+            match = regexp.exec(responseText),
+            isServerDefinedError = match != null;
+
+        if (isServerDefinedError) {
+            $.globalEval(match[1]);
+            return;
+        }
+
+        var errorMessage = '$.sendAjax error.\n'
+            + 'url: ' + url + '\n'
+            + 'data: ' + JSON.stringify(data) + '\n'
+            + 'statusText: ' + statusText + '\n'
+            + 'responseText: ' + xhr.responseText;
+
+        window.console && window.console.error(errorMessage);
+    }
+
 } (jQuery));
