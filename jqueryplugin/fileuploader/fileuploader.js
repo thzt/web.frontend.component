@@ -6,83 +6,73 @@
         upload: upload,
 
         clear: clear,
-        isPicked: isPicked,
-
-        response: response
+        isPicked: isPicked
     });
 
-    var uploadSuccessHandler;
-
     function init() {
-        var $container = this.eq(0),
+        var $container = this.eq(0);
 
-            timestamp = +new Date(),
-            iframeName = 'thzt_fileuploader_iframe_name' + timestamp;
-
-        //set form.target to iframe, will change iframe src to form's action
-        $container.html('\
-            <iframe name="' + iframeName + '"></iframe>\
-            <form \
-                method="post" \
-                action="" \
-                enctype="multipart/form-data" \
-                target="' + iframeName + '">\
-                    <input type="file" name="file" />\
-                    <input type="text" name="json" />\
-            </form>').hide();
-
+        $container.html('<input type="file" />').hide();
         return this;
     }
 
     function pick() {
         var $container = this.eq(0),
-            success = arguments[0].success,
+            success = arguments[0].success;
 
-            $filePickButton = $container.find('input[type=file]');
+        $container
+            .html('<input type="file" />')
+            .find('>:file')
+            .change(function () {
+                var $button = $(this);
 
-        $filePickButton.unbind('change').bind('change', function () {
-            var $button = $(this),
-                filePath = $button.val();
-
-            success.call(null, filePath);
-        }).click();
+                success($button.val());
+            })
+            .click();
 
         return this;
     }
 
     function upload() {
         var $container = this.eq(0),
+
             url = arguments[0].url,
             data = arguments[0].data,
-            success = arguments[0].success,
+            success = arguments[0].success;
 
-            $form = $container.find('form');
+        if (!isPicked.call($container)) {
+            return this;
+        }
 
-        uploadSuccessHandler = success;
+        var xhr = new XMLHttpRequest(),
+            formData = new FormData();
 
-        $form.find(':text').val(JSON.stringify(data));
-        $form.attr('action', url).submit();
+        formData.append('json', JSON.stringify(data));
+        formData.append('file', $container.find('>:file')[0].files[0]);
+
+        xhr.open('post', url, true);  //ture means async request
+        xhr.onload = function () {
+            success.call(xhr, eval('(' + xhr.responseText + ')'));
+        };
+        xhr.send(formData);
 
         return this;
     }
 
     function isPicked() {
-        var $container = this.eq(0);
+        var $container = this.eq(0),
 
-        return $container.find('input[type=file]').val() !== '';
+            $file = $container.find('>:file'),
+            isPickedFile = $file.val() !== '';
+
+        return isPickedFile;
     }
 
     function clear() {
         var $container = this.eq(0);
 
-        $container.find('input[type=file]').val('');
+        $container.html('<input type="file" />');
         return this;
-    }
-
-    function response() {
-        var responseJson = arguments[0];
-
-        uploadSuccessHandler.call(null, responseJson);
     }
 
 } (jQuery));

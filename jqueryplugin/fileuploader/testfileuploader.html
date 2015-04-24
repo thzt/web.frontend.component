@@ -13,6 +13,8 @@
     <input id="button1" type="button" value="pick" />
     <input id="text1" type="text" />
     <input id="button2" type="button" value="upload" />
+    <input id="button3" type="button" value="clear" />
+    <input id="button4" type="button" value="isPicked" />
     <script>
         $(function () {
             $('#div1').fileUploader('init');
@@ -31,7 +33,8 @@
 
             //server-sice interface
             //[HttpPost]
-            //public ActionResult Upload(HttpPostedFileBase file, string json)
+            //public JsonResult Upload(HttpPostedFileBase file, FormCollection form)
+            //string json=form["json"];
             $('#button2').click(function () {
                 $('#div1').fileUploader('upload', {
                     url: '/Test/Upload',
@@ -40,14 +43,20 @@
                         name: 'Tom'
                     },
                     success: function (r) {
-                        if (!r.status) {
-                            alert(r.content);
-                            return;
-                        }
-
-                        alert(r.content);
+                        alert(r);
                     }
                 });
+            });
+
+            $('#button3').click(function () {
+                $('#div1').fileUploader('clear');
+                $('#text1').val('');
+            });
+
+            $('#button4').click(function () {
+                var isPicked = $('#div1').fileUploader('isPicked');
+
+                alert(isPicked);
             });
         });
     </script>
