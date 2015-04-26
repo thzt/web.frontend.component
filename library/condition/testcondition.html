@@ -10,19 +10,19 @@
         (function () {
             var condition = new window.Condition();
 
-            condition.set(1, 2, 'a');
-            condition.set(1, 3, 'b');
-            condition.set(2, 3, 'c');
+            condition.add(1, 2, 'a');
+            condition.add(1, 3, 'b');
+            condition.add(2, 3, 'c');
 
-            condition.clear(2);
+            condition.remove(2);
 
-            var data1 = condition.get(1, 2),
-                data2 = condition.get(1, 3),
-                data3 = condition.get(2, 3);
+            var data1 = condition.find(1, 2),
+                data2 = condition.find(1, 3),
+                data3 = condition.find(2, 3);
 
-            console.log(data1);
-            console.log(data2);
-            console.log(data3);
+            alert(data1);
+            alert(data2);
+            alert(data3);
         }());
 
     </script>
