@@ -2,14 +2,16 @@
     $.sendAjax = function () {
         var url = arguments[0].url,
             data = arguments[0].data,
+            type = arguments[0].type,
+            dataType = arguments[0].dataType,
 
             success = arguments[0].success,
             complete = arguments[0].complete;
 
         $.ajax({
             cache: false,
-            type: 'post',
-            dataType: 'json',
+            type: type || 'post',
+            dataType: dataType || 'json',
 
             url: url,
             data: data,
