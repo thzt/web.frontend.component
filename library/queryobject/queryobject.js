@@ -1,16 +1,15 @@
 (function (global) {
-    var originalQueryString = global.location.search,
-        decodedQueryString = global.decodeURI(originalQueryString),
+    var queryString = global.location.search,
 
         queryObject = {},
         regexp = /([^?&]+?)=([^&]+)(?=&)?/g,
         match;
 
-    while (match = regexp.exec(decodedQueryString)) {
+    while (match = regexp.exec(queryString)) {
         var key = match[1],
             value = match[2];
 
-        queryObject[key] = value;
+        queryObject[key] = global.decodeURIComponent(value);
     }
 
     global.queryObject = queryObject;
