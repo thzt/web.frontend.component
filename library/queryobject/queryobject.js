@@ -1,16 +1,17 @@
-(function (global, queryString) {
-    global.queryObject = (function () {
-        var queryObject = {},
-            regexp = /([^?&]+?)=([^?&]+?)(?=&)?/g,
-            match;
+(function (global) {
+    var originalQueryString = global.location.search,
+        decodedQueryString = global.decodeURI(originalQueryString),
 
-        while (match = regexp.exec(queryString)) {
-            var key = match[1],
-                value = match[2];
+        queryObject = {},
+        regexp = /([^?&]+?)=([^&]+)(?=&)?/g,
+        match;
 
-            queryObject[key] = value;
-        }
+    while (match = regexp.exec(decodedQueryString)) {
+        var key = match[1],
+            value = match[2];
 
-        return queryObject;
-    } ());
-} (window, window.location.search));
+        queryObject[key] = value;
+    }
+
+    global.queryObject = queryObject;
+} (window));
