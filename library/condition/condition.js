@@ -2,9 +2,11 @@
     global.Condition = Condition;
 
     function Condition() {
-        var instance = this;
+        var instance = this,
+            isEqual = arguments[0] && arguments[0].isEqual;
 
-        instance.cache = {};
+        instance.table = [];
+        instance.isEqual = isEqual;
         return this;
     }
 
@@ -14,53 +16,103 @@
         add: addCondition,
         find: findCondition,
 
-        remove: removeCondition
+        remove: removeCondition,
+        clear: clearCondition
     };
 
     function addCondition() {
         var instance = this,
-            cache = instance.cache,
+            table = instance.table,
+            items = [].slice.call(arguments, 0),
+            conditions = [].slice.call(arguments, 0, -1),
+            result = arguments[arguments.length - 1],
 
-            index;
+            matchIndex = findIndex.call(instance, conditions);
 
-        for (index = 0; index < arguments.length - 2; index++) {
-            cache = cache[arguments[index]] = cache[arguments[index]] || {};
+        if (matchIndex === -1) {
+            table.push(items);
+            return this;
         }
 
-        cache[arguments[index]] = arguments[arguments.length - 1];
+        var row = table[matchIndex];
+        row[row.length - 1] = result;
         return this;
     }
 
     function findCondition() {
         var instance = this,
-            cache = instance.cache,
+            table = instance.table,
+            conditions = [].slice.call(arguments, 0),
 
-            index;
+            matchIndex = findIndex.call(instance, conditions);
 
-        for (index = 0; index < arguments.length; index++) {
-            cache = cache[arguments[index]];
-            if (cache == null) {
-                return null;
-            }
+        if (matchIndex === -1) {
+            return null;
         }
 
-        return cache;
+        var row = table[matchIndex];
+        return row[row.length - 1];
     }
 
     function removeCondition() {
         var instance = this,
-            cache = instance.cache,
+            table = instance.table,
+            conditions = [].slice.call(arguments, 0),
 
-            index;
+            matchIndex = findIndex.call(instance, conditions);
 
-        for (index = 0; index < arguments.length - 1; index++) {
-            cache = cache[arguments[index]];
-            if (cache == null) {
-                return this;
-            }
+        if (matchIndex === -1) {
+            return this;
         }
 
-        cache[arguments[index]] = null;
+        var newTable = [];
+        for (var i = 0; i < table.length; i++) {
+            if (i === matchIndex) {
+                continue;
+            }
+
+            newTable.push(table[i]);
+        }
+
+        instance.table = newTable;
         return this;
     }
-}(window));
+
+    function clearCondition() {
+        var instance = this;
+
+        instance.table = [];
+        return this;
+    }
+
+    //-- private
+
+    function findIndex(conditions) {
+        var instance = this,
+            table = instance.table,
+            isEqual = instance.isEqual || function (u, v) {
+                return u === v;
+            };
+
+        for (var i = 0; i < table.length; i++) {
+            if (table[i].length !== conditions.length + 1) {
+                continue;
+            }
+
+            var j;
+            for (j = 0; j < conditions.length; j++) {
+                if (!isEqual(table[i][j], conditions[j])) {
+                    break;
+                }
+            }
+
+            if (j != conditions.length) {
+                continue;
+            }
+
+            return i;
+        }
+
+        return -1;
+    }
+} (window));
