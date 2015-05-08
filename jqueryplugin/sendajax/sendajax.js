@@ -19,17 +19,23 @@
             success: success,
             complete: complete,
             error: function (xhr, statusText, errorThrown) {
-                handleError.call(xhr, url, data, statusText);
+                handleError.call(xhr, url, data, statusText, success);
             }
         });
     };
 
-    function handleError(url, data, statusText) {
+    function handleError(url, data, statusText, success) {
         var xhr = this;
 
         //chrome bug
         //when continuous refresh the browse or network break off, this will happen.
         if (xhr.status === 0 && xhr.responseText === '') {
+            return;
+        }
+
+        //when sever return null, it should be successful.
+        if (xhr.responseText === '') {
+            success(null);
             return;
         }
 
