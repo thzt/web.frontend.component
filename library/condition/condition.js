@@ -3,10 +3,10 @@
 
     function Condition() {
         var instance = this,
-            isEqual = arguments[0] && arguments[0].isEqual;
+            areEqual = arguments[0] && arguments[0].areEqual;
 
         instance.table = [];
-        instance.isEqual = isEqual;
+        instance.areEqual = areEqual;
         return this;
     }
 
@@ -90,7 +90,7 @@
     function findIndex(conditions) {
         var instance = this,
             table = instance.table,
-            isEqual = instance.isEqual || function (u, v) {
+            areEqual = instance.areEqual || function (u, v) {
                 return u === v;
             };
 
@@ -101,7 +101,7 @@
 
             var j;
             for (j = 0; j < conditions.length; j++) {
-                if (!isEqual(table[i][j], conditions[j])) {
+                if (!areEqual(table[i][j], conditions[j])) {
                     break;
                 }
             }
