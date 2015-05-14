@@ -27,7 +27,7 @@
                 }
 
                 if (index === partCount - 1) {
-                    part = dataList.slice(index * partLength, index * partLength + lastPartLength);
+                    part = dataList.slice(index * partLength, index * partLength + (lastPartLength || partLength));
                     partSuccess(part, next);
                     index++;
                     return;
