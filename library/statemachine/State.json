@@ -1,0 +1,22 @@
+﻿{
+    "Begin": [
+        {
+            "Receive": "1",
+            "Action": "To Intermediate State",
+            "Goto": "Intermediate"
+        },
+        {
+            "Receive": "2",
+            "Action": "To End State",
+            "Goto": "End"
+        }
+    ],
+    "Intermediate": [
+        {
+            "Receive": "3",
+            "Action": "To End State",
+            "Goto": "End"
+        }
+    ],
+    "End": []
+}
