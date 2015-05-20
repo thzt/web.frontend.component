@@ -48,11 +48,12 @@
 
     function handlePercentageConvertSetter(value) {
         var $item = this,
+            fixedDigit = +$item.attr('data-percentage-convert'),
             regexp = /^-?\d+(?:[.]\d+)?$/,
             match = regexp.exec(value),
             displayValue = match == null
-                ? '0.00 %'
-                : (+value * 100).toFixed(2) + ' %';
+                ? (0).toFixed(fixedDigit) + ' %'
+                : (+value * 100).toFixed(fixedDigit) + ' %';
 
         setValueToField.call($item, displayValue);
     }
@@ -82,12 +83,13 @@
 
     function handlePercentageConvertGetter() {
         var $item = this,
+            fixedDigit = +$item.attr('data-percentage-convert'),
             value = getValueOfField.call($item),
             regexp = /^(-?\d+(?:[.]\d+)?) %$/,
             match = regexp.exec(value),
             getterValue = match == null
                 ? 0
-                : +(+match[1] / 100).toFixed(4);
+                : +(+match[1] / 100).toFixed(fixedDigit + 2);
 
         return getterValue;
     }
