@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>test slide menu</title>
+		<script src="../../jquery/jquery-1.11.1.js"></script>
+		<script src="../../library/pluginmanager/pluginmanager.js"></script>
+		<link rel="stylesheet" href="slidemenu.css">
+		<script src="slidemenu.js"></script>
+		<style>
+			body{
+				padding: 0;
+				margin: 0;
+			}
+			
+			#testSlideMenu{
+				background: #5BC5FF;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="testSlideMenu">
+			<div>title</div>
+			<div>
+				<input type="button" id="button2" value="close" />
+			</div>
+			<div>background</div>
+			<div>
+				<input type="button" id="button1" value="open" />
+			</div>
+		</div>
+		<script>
+			$(function(){
+				$('#testSlideMenu').slideMenu('init');
+				
+				$('#button1').click(function(){
+					$('#testSlideMenu').slideMenu('open');
+				});
+				$('#button2').click(function(){
+					$('#testSlideMenu').slideMenu('close');
+				});
+			});
+		</script>
+	</body>
+
+</html>
