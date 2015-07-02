@@ -1,0 +1,34 @@
+
+.thzt_pageunfound{
+	background: #1C468D;
+	position:fixed;
+	width:100%;
+	height:100%;
+	padding: 0 10%;
+}						
+.thzt_pageunfound>table{
+	width:100%;
+	height:100%;
+	text-align: left;
+}			
+.thzt_pageunfound>table>tbody>tr>td>div{
+	display:inline-block;
+}
+
+.thzt_pageunfound>table>tbody>tr>td>div>div>span{
+	display:block;
+}
+
+.thzt_pageunfound>table>tbody>tr>td>div>div:nth-child(1){
+	color:white;
+	font-family: "微软雅黑";
+	font-size:2.5em;
+}
+.thzt_pageunfound>table>tbody>tr>td>div>div:nth-child(2){
+	margin:10px 0;
+	color:white;
+}
+
+.thzt_pageunfound>table>tbody>tr>td>div>div:nth-child(2)>span{
+	padding:5px 0;
+}
