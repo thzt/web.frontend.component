@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset=utf-8>
+		<title>test advertisement</title>
+		<link href=articlelist.css rel=stylesheet />
+		<script src=../../jquery/jquery-1.11.1.js></script>
+		<script src=../../library/pluginmanager/pluginmanager.js></script>
+		
+		<link rel="stylesheet" href="advertise.css">
+		<script src=advertise.js></script>
+		
+		<style>
+			body{
+				margin:0;
+				padding:0;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="advertise">
+			<div>×</div>
+			<table><tr><td><div>
+				123
+			</div></td></tr></table>
+		</div>
+		
+		<script>
+			$(function(){
+				$('#advertise').advertise('init',{
+					timeout:7000
+				});
+			});
+		</script>
+	</body>
+</html>
