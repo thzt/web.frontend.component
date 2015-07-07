@@ -1,3 +1,6 @@
+//use: 
+//$.prototype.each
+
 (function($){
 	
 	$.prototype.extend({

@@ -1,3 +1,6 @@
+//use: 
+//$.prototype.each
+
 (function($){
 		
 	$.prototype.extend({
@@ -7,26 +10,26 @@
 	function find(selector){
 		var $elements=this,
 			resultList=[];
-		
-		[].every.call($elements,function(parentItem){			
-			var collection=document.querySelectorAll(selector);
 			
-			[].every.call(collection,function(item){
-				
-				var isContain=resultList.some(function(current){
-					return current===item;
-				});
+		$elements.each(function(){
+			var parentItem=this,
+				$collection=$(selector);
+			
+			$collection.each(function(){
+				var item=this,
+					isContain=resultList.some(function(current){
+						return current===item;
+					});
 				
 				if(isContain){
-					return true;
+					return;
 				}
 				
 				if(!isChildOf.call(item,parentItem)){
-					return true;
+					return;
 				}
 				
 				resultList.push(item);
-				return true;
 			});
 		});
 			
@@ -37,6 +40,7 @@
 		var child=this,
 			parentElement=child.parentElement;
 		
+		//because: document.documentElement.parentElement===null
 		if(parentElement==null){
 			return false;
 		}

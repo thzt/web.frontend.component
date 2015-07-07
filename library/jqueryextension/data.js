@@ -1,3 +1,6 @@
+//use: 
+//$.prototype.each
+
 (function($){
 	
 	$.prototype.extend({
@@ -16,19 +19,21 @@
 	
 	function getData(key){
 		var $elements=this,
-			isAllSame=[].every.call($elements,function(v){
-				if(v.data==null){
-					return false;
-				}
-				
-				if(v.data[key]==null){
-					return false;
-				}
-				
-				return $elements[0].data[key]===v.data[key];
-			});
+			isValid=true;
 			
-		if(!isAllSame){
+		$elements.each(function(){
+			var item=this;
+			
+			if(item.data==null
+				||item.data[key]==null
+				||$elements[0].data[key]!==item.data[key]){
+					
+				isValid=false;
+				return false;
+			}
+		});
+		
+		if(!isValid){
 			return null;
 		}
 		

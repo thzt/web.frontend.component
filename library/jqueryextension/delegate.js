@@ -1,3 +1,7 @@
+//use: 
+//$.prototype.find
+//$.prototype.on
+
 (function($){
 	
 	$.prototype.extend({
@@ -6,42 +10,29 @@
 	});
 	
 	function delegate(selector,eventName,eventHandler){
-		var $elements=this;
-			
-		$elements.each(function(){
-			var htmlElement=this,
-				$targetElements=$(htmlElement).find(selector),
+		var $elements=this,
+			$targetElements=$elements.find(selector);
+		
+		$elements.on(eventName,function(e){
+			var targetElement=e.target,
+				isContain=[].some.call($targetElements,function(current){
+					return current===targetElement;
+				});
 				
-				handler=function(e){
-					var targetElement=e.target,
-						isContain=[].some.call($targetElements,function(current){
-							return current===targetElement;
-						});
-						
-					if(!isContain){
-						return;
-					}
-					
-					eventHandler.call(targetElement);
-				};
-								
-			htmlElement.addEventListener(eventName,handler,false);
-			$(htmlElement).data(eventName,handler);
+			if(!isContain){
+				return;
+			}
+			
+			eventHandler.call(targetElement);
 		});
 				
 		return this;
 	}
 	
 	function undelegate(eventName){
-		var $elements=this,
-			eventHandler=$elements.data(eventName);
+		var $elements=this;
 			
-		$elements.each(function(){
-			var htmlElement=this;
-			
-			htmlElement.removeEventListener(eventName,eventHandler,false);
-		});
-		
+		$elements.off(eventName);		
 		return this;
 	}
 	
