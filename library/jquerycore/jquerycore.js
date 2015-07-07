@@ -1,8 +1,5 @@
 (function(global){
 	
-	//import
-	var findAll=global.findAll;
-	
 	//export
 	global.jQuery=jQuery;
 	
@@ -43,7 +40,7 @@
 	function select(selector){
 		switch(true){
 			case typeof selector==='string':
-				return findAll(selector);
+				return global.document.querySelectorAll(selector);
 				
 			case selector.length!=null:
 				return selector;

@@ -4,7 +4,6 @@
 	<meta charset="UTF-8">
 	<title>test jquery extension</title>
 	
-	<script src="../findall/findall.js"></script>
 	<script src="../jquerycore/jquerycore.js"></script>
 	
 	<script src="each.js"></script>
@@ -47,7 +46,7 @@
 	<input type="text" id="text1" />
 	
 	<script>
-		(function($,findAll){
+		(function($){
 			
 			$('#button1').on('click',function(){
 				var htmlButton=this,
@@ -72,7 +71,7 @@
 				$('#div1').undelegate('click');
 			});
 			
-		}(jQuery,findAll));
+		}(jQuery));
 	</script>
 </body>
 </html>
