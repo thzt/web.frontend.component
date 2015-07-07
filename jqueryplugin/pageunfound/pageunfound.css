@@ -21,11 +21,12 @@
 .thzt_pageunfound>table>tbody>tr>td>div>div:nth-child(1){
 	color:white;
 	font-family: "微软雅黑";
-	font-size:2.5em;
+	font-size:7.5em;
 }
 .thzt_pageunfound>table>tbody>tr>td>div>div:nth-child(2){
 	margin:10px 0;
 	color:white;
+	font-size:3.5em;
 }
 
 .thzt_pageunfound>table>tbody>tr>td>div>div:nth-child(2)>span{

@@ -7,13 +7,35 @@
 	<script src="../jquerycore/jquerycore.js"></script>
 	
 	<script src="each.js"></script>
+	<script src="find.js"></script>
 	<script src="on.js"></script>
 	<script src="val.js"></script>
-	<script src="addClass_removeClass.js"></script>
+	<script src="addClass.js"></script>
+	<script src="delegate.js"></script>
+	
+	<style>
+		body{
+			margin:0;
+			padding:0;
+		}
+		
+		.test-div{
+			width:200px;
+			height:200px;
+			border:1px solid;
+		}
+	</style>
 </head>
 <body>
 	<input type="button" id="button1" value="val addClass" />	
 	<input type="button" id="button2" value="removeClass" />
+	<div id="div1" class="test-div">
+		<input type="button" value="testDelegate1" />
+		<input type="button" value="testDelegate2" />
+		<div>
+			<input type="button" value="testDelegate3" />
+		</div>
+	</div>
 	<input type="text" id="text1" />
 	
 	<script>
@@ -30,6 +52,18 @@
 			
 			$('#button2').on('click',function(){			
 				$('#text1').removeClass('testClass');
+			});
+			
+			$('#div1').find('input').each(function(){
+				var $button=$(this);
+				
+				console.log($button.val());
+			});
+			
+			$('#div1').delegate('input','click',function(e){
+				var $button=$(this);
+				
+				alert($button.val());
 			});
 			
 		}(jQuery));

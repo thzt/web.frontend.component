@@ -8,7 +8,13 @@
 		var $elements=this;
 				
 		[].every.call($elements,function(v){
-			return callback.call(v);
+			var result=callback.call(v);
+			
+			if(result===false){
+				return false;
+			}
+			
+			return true;
 		});
 		
 		return this;
