@@ -39,12 +39,16 @@
 	
 	function select(selector){
 		switch(true){
+			
+			//use case: $('input')
 			case typeof selector==='string':
 				return global.document.querySelectorAll(selector);
-				
+			
+			//use case: $([object NodeList])
 			case selector.length!=null:
 				return selector;
 				
+			//use case: $([object HTMLInputElement])
 			case selector.length==null:
 				return [selector];			
 		}
