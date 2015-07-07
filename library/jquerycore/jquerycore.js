@@ -1,10 +1,12 @@
-(function(global,document){
+(function(global){
+	
+	//import
+	var findAll=global.findAll;
 	
 	//export
 	global.jQuery=jQuery;
 	
-	//private region
-	
+	//private region	
 	jQuery.prototype=InstanceCreation.prototype;
 	jQuery.extend=jQuery.prototype.extend=extend;
 	
@@ -41,7 +43,7 @@
 	function select(selector){
 		switch(true){
 			case typeof selector==='string':
-				return document.querySelectorAll(selector);
+				return findAll(selector);
 				
 			case selector.length!=null:
 				return selector;
@@ -50,4 +52,4 @@
 				return [selector];			
 		}
 	}
-}(window,document));
+}(window));

@@ -4,13 +4,15 @@
 	<meta charset="UTF-8">
 	<title>test jquery extension</title>
 	
+	<script src="../findall/findall.js"></script>
 	<script src="../jquerycore/jquerycore.js"></script>
 	
 	<script src="each.js"></script>
 	<script src="find.js"></script>
+	<script src="data.js"></script>
 	<script src="on.js"></script>
 	<script src="val.js"></script>
-	<script src="addClass.js"></script>
+	<script src="addclass.js"></script>
 	<script src="delegate.js"></script>
 	
 	<style>
@@ -24,6 +26,11 @@
 			height:200px;
 			border:1px solid;
 		}
+		
+		.testClass{
+			background: sienna;
+			color:white;
+		}
 	</style>
 </head>
 <body>
@@ -36,10 +43,11 @@
 			<input type="button" value="testDelegate3" />
 		</div>
 	</div>
+	<input type="button" value="otherButton" />
 	<input type="text" id="text1" />
 	
 	<script>
-		(function($){
+		(function($,findAll){
 			
 			$('#button1').on('click',function(){
 				var htmlButton=this,
@@ -52,21 +60,19 @@
 			
 			$('#button2').on('click',function(){			
 				$('#text1').removeClass('testClass');
+				$('#text1').val('');	
 			});
 			
-			$('#div1').find('input').each(function(){
-				var $button=$(this);
-				
-				console.log($button.val());
-			});
+			console.log($('#div1').find('input').length);
 			
 			$('#div1').delegate('input','click',function(e){
 				var $button=$(this);
 				
 				alert($button.val());
+				$('#div1').undelegate('click');
 			});
 			
-		}(jQuery));
+		}(jQuery,findAll));
 	</script>
 </body>
 </html>
