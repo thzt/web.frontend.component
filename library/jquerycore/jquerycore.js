@@ -1,4 +1,10 @@
 (function(global,document){
+	
+	//export
+	global.jQuery=jQuery;
+	
+	//private region
+	
 	jQuery.prototype=InstanceCreation.prototype;
 	jQuery.extend=jQuery.prototype.extend=extend;
 	
@@ -7,9 +13,14 @@
 	}
 	
 	function InstanceCreation(selector){
-		var instance=this;
+		var instance=this,
+			elements=select(selector);
 			
-		instance[0]=document.querySelector(selector);
+		[].forEach.call(elements,function(v,i){
+			instance[i]=v;
+		});
+		
+		instance.length=elements.length;		
 		return this;
 	}
 	
@@ -27,6 +38,16 @@
 		return this;
 	};
 	
-	//export:
-	global.jQuery=jQuery;
+	function select(selector){
+		switch(true){
+			case typeof selector==='string':
+				return document.querySelectorAll(selector);
+				
+			case selector.length!=null:
+				return selector;
+				
+			case selector.length==null:
+				return [selector];			
+		}
+	}
 }(window,document));

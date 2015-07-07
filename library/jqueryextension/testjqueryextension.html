@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>test jquery extension</title>
+	
+	<script src="../jquerycore/jquerycore.js"></script>
+	
+	<script src="each.js"></script>
+	<script src="on.js"></script>
+	<script src="val.js"></script>
+</head>
+<body>
+	<input type="button" id="button1" value="test" />
+	<input type="text" id="text1" />
+	
+	<script>
+		(function($){
+			
+			$('#button1').on('click',function(){
+				var htmlButton=this,
+					$button=$(htmlButton),
+					buttonValue=$button.val();
+					
+				$('#text1').val(buttonValue);
+			});
+			
+		}(jQuery));
+	</script>
+</body>
+</html>
