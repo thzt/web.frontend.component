@@ -6,9 +6,9 @@
 	
 	function each(callback){
 		var $elements=this;
-		
-		[].forEach.call($elements,function(v){
-			callback.call(v);
+				
+		[].every.call($elements,function(v){
+			return callback.call(v);
 		});
 		
 		return this;

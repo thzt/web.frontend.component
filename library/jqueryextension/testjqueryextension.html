@@ -9,9 +9,11 @@
 	<script src="each.js"></script>
 	<script src="on.js"></script>
 	<script src="val.js"></script>
+	<script src="addClass_removeClass.js"></script>
 </head>
 <body>
-	<input type="button" id="button1" value="test" />
+	<input type="button" id="button1" value="val addClass" />	
+	<input type="button" id="button2" value="removeClass" />
 	<input type="text" id="text1" />
 	
 	<script>
@@ -22,7 +24,12 @@
 					$button=$(htmlButton),
 					buttonValue=$button.val();
 					
-				$('#text1').val(buttonValue);
+				$('#text1').val(buttonValue);				
+				$('#text1').addClass('testClass');
+			});
+			
+			$('#button2').on('click',function(){			
+				$('#text1').removeClass('testClass');
 			});
 			
 		}(jQuery));
