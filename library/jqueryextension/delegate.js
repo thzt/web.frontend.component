@@ -1,5 +1,5 @@
 //use: 
-//$.prototype.find
+//$.prototype.search
 //$.prototype.on
 
 (function($){
@@ -11,7 +11,7 @@
 	
 	function delegate(selector,eventName,eventHandler){
 		var $elements=this,
-			$targetElements=$elements.find(selector);
+			$targetElements=$elements.search(selector);
 		
 		$elements.on(eventName,function(e){
 			var targetElement=e.target,
