@@ -5,24 +5,27 @@
 	});
 	
 	var staticConfig={
-		filter:{
-			'':tagNameFilter,
-			'#':idFilter,
-			'.':classFilter
+			searcher:{
+				' ':descendantSearcher,
+				'>':childrenSearcher
+			},
+			filter:{
+				'':tagNameFilter,
+				'#':idFilter,
+				'.':classFilter
+			}
 		},
-		searcher:{
-			' ':descendantSearcher,
-			'>':childrenSearcher
-		}
-	};
+		
+		SEARCHER=' >',
+		FILTER='#.';
 		
 	function search(selector){
-		var elements=this,
-			levelItems=splitLevel(selector,' >'),
+		var $elements=this,
+			levelItems=splitLevel(selector,SEARCHER),
 			
-			result=elements;
+			result=$elements;
 			
-		levelItems.every(function(levelItem){
+		levelItems.forEach(function(levelItem){
 			
 			//1. searcher
 			var level=levelItem.level,
@@ -30,23 +33,21 @@
 				levelSearcherResult=staticConfig.searcher[level].call(result);
 				
 			//2. filter
-			var typeItems=splitType(levelSelector,'#.'),
+			var typeItems=splitType(levelSelector,FILTER),
 				typeFilterResult=levelSearcherResult;	
 				
-			typeItems.every(function(typeItem){
+			typeItems.forEach(function(typeItem){
 				var type=typeItem.type,
 					typeSelector=typeItem.selector;
 					
-				typeFilterResult=staticConfig.filter[type].call(typeFilterResult,typeSelector);				
-				return true;
+				typeFilterResult=staticConfig.filter[type].call(typeFilterResult,typeSelector);
 			});
 			
 			//3. result
 			result=typeFilterResult;
-			return true;
 		});
 		
-		return result
+		return result;
 	}
 	
 	//private region
@@ -55,44 +56,65 @@
 	//-------------------------------------------------------------
 	
 	function childrenSearcher(){
-		var elements=this,
+		var $elements=this,
 			result=[];
 		
-		[].every.call(elements,function(item){
+		[].forEach.call($elements,function(item){
 			var children=item.children;
 			
-			[].every.call(children,function(child){				
+			[].forEach.call(children,function(child){				
 				var isContain=result.some(function(v){
 					return v===child;
 				});
 				
 				if(isContain){
-					return true;
+					return;
 				}
 				
 				result.push(child);
-				return true;
 			});
-			
-			return true;
 		});
 		
 		return result;
 	}
 	
 	function descendantSearcher(){
-		var elements=this;
+		var $elements=this;
 		
-		//todo: get all descendant elements
+		[].forEach.call($elements,function(item){
+			var children=childrenSearcher.call([item]);	
+			if(children.length===0){
+				return;
+			}
+			
+			children.forEach(function(child){
+				var descendants=descendantSearcher.call([child]);
+				
+				[].forEach.call(descendants,function(current){
+					var isContain=[].some.call($elements,function(v){
+						return v===current;
+					});
+					
+					if(isContain){					
+						return;
+					}
+					
+					$elements[$elements.length]=current;
+					$elements.length++;
+				});
+			});
+		});
+		
+		return $elements;
 	}
 	
 	//type filter
 	//-------------------------------------------------------------
 	
 	function tagNameFilter(tagName){
-		var elements=this;
+		var $elements=this;
 		
-		return [].filter.call(elements,function(item){
+		return [].filter.call($elements,function(item){
 			var tag=item.tagName;
 			
 			return tag.toLowerCase()===tagName.toLowerCase();
@@ -100,9 +122,9 @@
 	}
 	
 	function idFilter(id){
-		var elements=this;
+		var $elements=this;
 		
-		return [].filter.call(elements,function(item){
+		return [].filter.call($elements,function(item){
 			var idAttr=item.getAttribute('id');
 			
 			if(idAttr==null
@@ -115,9 +137,9 @@
 	}
 	
 	function classFilter(className){
-		var elements=this;
+		var $elements=this;
 		
-		return [].filter.call(elements,function(item){
+		return [].filter.call($elements,function(item){
 			var classAttr=item.getAttribute('class');
 			
 			if(classAttr==null){

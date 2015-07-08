@@ -13,12 +13,12 @@
 	<div id="div1">
 		<div class="testDiv">
 			<div>
-				<span class="testSpan"></span>
+				<span class="testSpan">1</span>
 			</div>
 		</div>
 		<div class="testDiv">
 			<input type="text">
-			<span class="testSpan"></span>
+			<span class="testSpan">2</span>
 		</div>
 	</div>
 	
@@ -30,6 +30,9 @@
 			
 			var $span=$('#div1').search('>.testDiv>div>span.testSpan');
 			console.log($span);
+			
+			var $span2=$('#div1').search('span');
+			console.log($span2);
 			
 		}(jQuery));
 	</script>
