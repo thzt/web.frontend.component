@@ -1,3 +1,9 @@
+//use
+//$.fn.find
+//$.fn.add
+//$.fn.filter
+//$.fn.attr
+
 (function ($) {
     $.pluginManager.extend('bindTemplate', {
         getData: getData

@@ -1,3 +1,9 @@
+//use
+//$.fn.add
+//$.fn.find
+//$.fn.filter
+//$.fn.attr
+
 (function ($) {
     $.pluginManager.extend('bindTemplate', {
         setData: setData

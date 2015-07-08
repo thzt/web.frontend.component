@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>test search</title>
+	<title>test find</title>
 	
 	<script src="../jquerycore/jquerycore.js"></script>
 	
-	<script src="search.js"></script>
+	<script src="find.js"></script>
 </head>
 <body>
 	
@@ -18,21 +18,24 @@
 		</div>
 		<div class="testDiv">
 			<input type="text">
-			<span class="testSpan">2</span>
+			<span class="testSpan" data-model="1">2</span>
 		</div>
 	</div>
 	
 	<script>
 		(function($){
 			
-			var $inputs=$('#div1').search('>.testDiv>input');
+			var $inputs=$('#div1').find('>.testDiv>input');
 			console.log($inputs);
 			
-			var $span=$('#div1').search('>.testDiv>div>span.testSpan');
-			console.log($span);
+			var $span1=$('#div1').find('>.testDiv>div>span.testSpan');
+			console.log($span1);
 			
-			var $span2=$('#div1').search('span');
+			var $span2=$('#div1').find('span');
 			console.log($span2);
+			
+			var $span3=$('#div1').find('span').filter('[data-model]=1');
+			console.log($span3);
 			
 		}(jQuery));
 	</script>

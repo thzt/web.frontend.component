@@ -1,7 +1,8 @@
 (function($){
 	
 	$.prototype.extend({
-		find:find
+		find:find,
+		filter:filter
 	});
 	
 	var staticConfig={
@@ -12,12 +13,13 @@
 			filter:{
 				'':tagNameFilter,
 				'#':idFilter,
-				'.':classFilter
+				'.':classFilter,
+				'[':attrFilter
 			}
 		},
 		
 		SEARCHER=' >',
-		FILTER='#.';
+		FILTER='#.\\[';
 		
 	function find(selector){
 		var $elements=this,
@@ -26,28 +28,35 @@
 			result=$elements;
 			
 		levelItems.forEach(function(levelItem){
-			
-			//1. searcher
 			var level=levelItem.level,
 				levelSelector=levelItem.selector,
-				levelSearcherResult=staticConfig.searcher[level].call(result);
 				
-			//2. filter
-			var typeItems=splitType(levelSelector,FILTER),
-				typeFilterResult=levelSearcherResult;	
+				//searcher
+				levelSearcherResult=staticConfig.searcher[level].call(result),
 				
-			typeItems.forEach(function(typeItem){
-				var type=typeItem.type,
-					typeSelector=typeItem.selector;
-					
-				typeFilterResult=staticConfig.filter[type].call(typeFilterResult,typeSelector);
-			});
-			
-			//3. result
-			result=typeFilterResult;
+				//filter
+				$typeFilterResult=filter.call(levelSearcherResult,levelSelector);
+				
+			result=$typeFilterResult;
 		});
 		
 		return result;
+	}
+	
+	function filter(selector){
+		var $elements=this,
+			typeItems=splitType(selector,FILTER),
+			
+			typeFilterResult=$elements;
+			
+		typeItems.forEach(function(typeItem){
+			var type=typeItem.type,
+				typeSelector=typeItem.selector;
+				
+			typeFilterResult=staticConfig.filter[type].call(typeFilterResult,typeSelector);
+		});
+	
+		return $(typeFilterResult);
 	}
 	
 	//private region
@@ -158,6 +167,35 @@
 			}
 			
 			return true;
+		});
+	}
+	
+	function attrFilter(attr){
+		attr='['+attr;
+		
+		var $elements=this,
+			regexp=/\[(.+)\](?:(?:=)(.+))?/,
+			match=regexp.exec(attr);
+			
+		if(match==null){
+			return $elements;
+		}
+		
+		var attrName=match[1],
+			attrValue=match[2];
+			
+		return [].filter.call($elements,function(item){
+			var itemAttr=item.getAttribute(attrName);
+			
+			if(itemAttr==null){
+				return false;
+			}
+			
+			if(attrValue==null){
+				return true;
+			}
+			
+			return itemAttr===attrValue;
 		});
 	}
 	
