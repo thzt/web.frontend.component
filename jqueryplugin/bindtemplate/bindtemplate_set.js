@@ -3,6 +3,7 @@
 //$.fn.find
 //$.fn.filter
 //$.fn.attr
+//$.fn.each
 
 (function ($) {
     $.pluginManager.extend('bindTemplate', {

@@ -10,6 +10,7 @@
 	<script src="../../library/jqueryextension/find.js"></script>
 	<script src="../../library/jqueryextension/add.js"></script>
 	<script src="../../library/jqueryextension/attr.js"></script>
+	<script src="../../library/jqueryextension/each.js"></script>
 	
 	<script src="../../library/condition/condition.js"></script>
 	<script src="../../library/condition/simplepluginmanager.js"></script>
@@ -46,6 +47,24 @@
 			});
 			
 			console.log(JSON.stringify(data,null,4));
+			
+			json.a=4;
+			json.b[0]=5;
+			json.b[1]=6;
+			
+			setTimeout(function(){
+				$('#div1').bindTemplate('setData',{
+					attr:'data-model',
+					data:json,
+					set:function(value){
+						var $textbox=this,
+							htmlTextbox=$textbox[0];
+							
+						htmlTextbox.value=value;
+						return this;
+					}
+				});
+			},2000);
 			
 		}(jQuery));
 	</script>
