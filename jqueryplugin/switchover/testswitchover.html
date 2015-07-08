@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>test tab page</title>
+	
+	<script src="../../jquery/jquery-1.11.1.js" type="text/javascript"></script>
+	
+	<script src="../../library/condition/condition.js"></script>
+	<script src="../../library/condition/simplepluginmanager.js"></script>
+	
+    <script src="switchover.js" type="text/javascript"></script>	
+	
+	<style>
+		body{
+			margin:0;
+			padding:0;
+		}
+		
+		#container>div{
+			width:500px;
+			height:500px;
+			background: sienna;
+			margin:0 auto;
+		}
+	</style>
+</head>
+<body>
+	
+	<div id="container">
+		<div></div>
+	</div>
+	
+	<script>
+		(function($){
+			
+			$('#container').switchOver('init',{
+				selector:'>div',
+				success:function(deltaX,deltaY){
+					alert('deltaX='+deltaX+'\ndeltaY='+deltaY);
+				}
+			});
+			
+		}(jQuery));
+	</script>
+</body>
+</html>
