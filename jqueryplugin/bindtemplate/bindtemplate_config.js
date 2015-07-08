@@ -1,3 +1,9 @@
+//use:
+//$.fn.val
+//$.fn.html
+//$.fn.attr
+//$.fn.is
+
 (function ($) {
     $.pluginManager.filter('bindTemplate', {
         setData: filterSetData,

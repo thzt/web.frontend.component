@@ -174,7 +174,7 @@
 		attr='['+attr;
 		
 		var $elements=this,
-			regexp=/\[(.+)\](?:(?:=)(.+))?/,
+			regexp=/\[(.+?)(?:=(.+))?\]/,
 			match=regexp.exec(attr);
 			
 		if(match==null){
