@@ -36,7 +36,7 @@
     function getDotPropertyValue(dotProperty) {
         var obj = this;
 
-        return _.reduce(dotProperty.split('.'), function (m, v) {
+        return [].reduce.call(dotProperty.split('.'), function (m, v) {
             return m[v];
         }, obj);
     }

@@ -18,7 +18,7 @@
             selector = '[{0}]'.replace('{0}', attr),
             $fields = $containers.find(selector).add($containers.filter(selector));
 
-        var dotPropertiesAndValues = _.reduce($fields, function (m, v) {
+        var dotPropertiesAndValues = [].reduce.call($fields, function (m, v) {
             var $field = $(v),
 
                 bracketProperty = $field.attr(attr),
@@ -51,14 +51,14 @@
             ? []
             : {};
 
-        _.each(dotPropertiesAndValues, function (v) {
+        [].forEach.call(dotPropertiesAndValues, function (v) {
             var dotProperty = v.dotProperty,
                 value = v.value,
                 propertyList = dotProperty.split('.'),
 
                 current = obj;
 
-            _.each(propertyList, function (v, i) {
+            [].forEach.call(propertyList, function (v, i) {
 
                 if (i === propertyList.length - 1) {
                     current[v] = value;
