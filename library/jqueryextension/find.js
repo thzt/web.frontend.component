@@ -22,6 +22,15 @@
 		SEARCHER=' >',
 		FILTER='#.\\[:';
 		
+	//>tag.class #id[attr=value]
+	//first split level, levelItems=[{level:'>',selector:'tag.class'},{level:' ',selector:'#id[attr=value]'}]
+	//use levelItem.level to decide searching mode: childrenSearcher/descendantSearcher
+	
+	//for each level, split type, typeItems=[{type:'',selector:'tag'},{type:'.',selector:'class'}]
+	//use typeItem to filter elements set
+	
+	//warning: if there have a problem of efficiency, we can search from tail, instead to use parentSearcher/ancestorSearcher, 
+	//and filter by id first.
 	function find(selector){
 		var $elements=this,
 			levelItems=splitLevel(selector,SEARCHER),
