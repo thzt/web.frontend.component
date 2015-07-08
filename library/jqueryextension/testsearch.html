@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>test search</title>
+	
+	<script src="../jquerycore/jquerycore.js"></script>
+	
+	<script src="search.js"></script>
+</head>
+<body>
+	
+	<div id="div1">
+		<div class="testDiv">
+			<div>
+				<span class="testSpan"></span>
+			</div>
+		</div>
+		<div class="testDiv">
+			<input type="text">
+			<span class="testSpan"></span>
+		</div>
+	</div>
+	
+	<script>
+		(function($){
+			
+			var $inputs=$('#div1').search('>.testDiv>input');
+			console.log($inputs);
+			
+			var $span=$('#div1').search('>.testDiv>div>span.testSpan');
+			console.log($span);
+			
+		}(jQuery));
+	</script>
+	
+</body>
+</html>
