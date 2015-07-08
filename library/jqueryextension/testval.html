@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>test val</title>
+	
+	<script src="../jquerycore/jquerycore.js"></script>
+	
+	<script src="each.js"></script>
+	<script src="val.js"></script>
+</head>
+<body>
+	
+	<input type="text" value="1" />
+	<input type="text" value="2" />
+	
+	<script>
+		(function($){
+			
+			alert($('input').val());
+			$('input').val(3);
+			
+		}(jQuery));
+	</script>
+</body>
+</html>

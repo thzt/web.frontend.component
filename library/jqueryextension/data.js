@@ -4,7 +4,8 @@
 (function($){
 	
 	$.prototype.extend({
-		data:data
+		data:data,
+		removeData:removeData
 	});
 	
 	function data(key,value){
@@ -15,6 +16,24 @@
 		}
 		
 		return setData.call($elements,key,value);
+	}
+	
+	function removeData(key){
+		var $elements=this;
+		
+		$elements.each(function(){
+			var item=this;
+			
+			if(item.data==null
+				||item.data[key]==null){
+					
+				return;
+			}
+			
+			item.data[key]=null;
+		});
+		
+		return this;
 	}
 	
 	function getData(key){

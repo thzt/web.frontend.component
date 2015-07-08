@@ -13,13 +13,10 @@
 		var $elements=this;
 		
 		$elements.each(function(){
-			var htmlElement=this,
-				handler=function(e){
-					eventHandler.call(htmlElement,e);
-				};
+			var htmlElement=this;
 			
-			htmlElement.addEventListener(eventName,handler,false);
-			$(htmlElement).data(eventName,handler);
+			htmlElement.addEventListener(eventName,eventHandler,false);
+			$(htmlElement).data(eventName,eventHandler);
 		});
 		
 		return this;
