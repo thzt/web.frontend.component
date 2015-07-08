@@ -9,12 +9,16 @@
 	<script src="../../library/jqueryextension/add.js"></script>
 	<script src="../../library/jqueryextension/attr.js"></script>
 	<script src="../../library/jqueryextension/each.js"></script>
+	<script src="../../library/jqueryextension/html.js"></script>
+	<script src="../../library/jqueryextension/is.js"></script>
+	<script src="../../library/jqueryextension/val.js"></script>
 	
 	<script src="../../library/condition/condition.js"></script>
 	<script src="../../library/condition/simplepluginmanager.js"></script>
 	
 	<script src="bindtemplate_set.js"></script>
 	<script src="bindtemplate_get.js"></script>
+	<script src="bindtemplate_config.js"></script>
 </head>
 <body>
 	
@@ -33,16 +37,7 @@
 				b:[2,3]
 			};
 			
-			var data=$('#div1').bindTemplate('getData',{
-				attr:'data-model',
-				get:function(){
-					var $textbox=this,
-						htmlTextbox=$textbox[0],
-						value=htmlTextbox.value;
-					
-					return value;
-				}
-			});
+			var data=$('#div1').bindTemplate('getData');
 			
 			console.log(JSON.stringify(data,null,4));
 			
@@ -52,15 +47,7 @@
 			
 			setTimeout(function(){
 				$('#div1').bindTemplate('setData',{
-					attr:'data-model',
-					data:json,
-					set:function(value){
-						var $textbox=this,
-							htmlTextbox=$textbox[0];
-							
-						htmlTextbox.value=value;
-						return this;
-					}
+					data:json
 				});
 			},2000);
 			

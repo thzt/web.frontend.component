@@ -14,12 +14,13 @@
 				'':tagNameFilter,
 				'#':idFilter,
 				'.':classFilter,
-				'[':attrFilter
+				'[':attrFilter,
+				':':formFilter
 			}
 		},
 		
 		SEARCHER=' >',
-		FILTER='#.\\[';
+		FILTER='#.\\[:';
 		
 	function find(selector){
 		var $elements=this,
@@ -197,6 +198,27 @@
 			
 			return itemAttr===attrValue;
 		});
+	}
+	
+	function formFilter(name){
+		var $elements=this;
+		
+		switch(true){
+			case name==='text':
+				return $elements.filter('input[type=text]');
+				
+			case name==='checkbox':
+				return $elements.filter('input[type=checkbox]');
+			
+			case name==='redio':
+				return $elements.filter('input[type=radio]');
+			
+			case name==='checked':
+				return $elements.filter('[checked]');
+			
+			default:
+				return $elements;
+		}
 	}
 	
 	//split

@@ -25,8 +25,8 @@
 	<script>
 		(function($){
 			
-			var $inputs=$('#div1').find('>.testDiv>input');
-			console.log($inputs);
+			var $inputs1=$('#div1').find('>.testDiv>input');
+			console.log($inputs1);
 			
 			var $span1=$('#div1').find('>.testDiv>div>span.testSpan');
 			console.log($span1);
@@ -36,6 +36,9 @@
 			
 			var $span3=$('#div1').find('span').filter('[data-model=1]');
 			console.log($span3);
+			
+			var $inputs2=$('#div1').find(':text');
+			console.log($inputs2);
 			
 		}(jQuery));
 	</script>
