@@ -22,7 +22,7 @@
             data: data,
             set: set || function (value) {
                 var $item = this;
-
+                
                 switch (true) {
                     case $item.is(':text,textarea,select'):
                         $item.val(value);

@@ -26,23 +26,49 @@
 		<input type="text" data-model="a" value="1">
 		<input type="text" data-model="b[0]" value="2">
 		<input type="text" data-model="b[1]" value="3">
+		<input type="checkbox" data-model="c">
+		
+		<table>
+			<tr>
+				<td><span data-model="d[0][0]">1</span></td>
+				<td><span data-model="d[0][1]">2</span></td>
+				<td><span data-model="d[0][2]">3</span></td>
+				<td><span data-model="d[0][3]">4</span></td>
+			</tr>
+			<tr>
+				<td><span data-model="d[1][0]">5</span></td>
+				<td><span data-model="d[1][1]">6</span></td>
+				<td><span data-model="d[1][2]">7</span></td>
+				<td><span data-model="d[1][3]">8</span></td>
+			</tr>
+			<tr>
+				<td><span data-model="d[2][0]">9</span></td>
+				<td><span data-model="d[2][1]">10</span></td>
+				<td><span data-model="d[2][2]">11</span></td>
+				<td><span data-model="d[2][3]">12</span></td>
+			</tr>
+		</table>
 	</div>
 	
 	<script>
 		(function($){
 			
-			var json={
-				a:1,
-				b:[2,3]
-			};
-			
-			var data=$('#div1').bindTemplate('getData');
-			
+			//get data
+			var data=$('#div1').bindTemplate('getData');			
 			console.log(JSON.stringify(data,null,4));
 			
-			json.a=4;
-			json.b[0]=5;
-			json.b[1]=6;
+			//set data
+			var json={
+				a:4,
+				b:[5,6],
+				c:true,
+				d:[
+					['a','b','c','d'],
+					['e','f','g','h'],
+					['i','j','k','l'],
+					['m','n','o','p']
+				]
+			};
 			
 			setTimeout(function(){
 				$('#div1').bindTemplate('setData',{

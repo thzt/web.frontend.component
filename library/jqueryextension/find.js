@@ -219,7 +219,7 @@
 			case name==='checkbox':
 				return $elements.filter('input[type=checkbox]');
 			
-			case name==='redio':
+			case name==='radio':
 				return $elements.filter('input[type=radio]');
 			
 			case name==='checked':
