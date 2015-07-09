@@ -10,6 +10,7 @@
 	function init(){
 		var $container=this,
 			selector=arguments[0].selector,
+			progress=arguments[0].progress,
 			success=arguments[0].success;
 		
 		(function(){
@@ -20,7 +21,14 @@
 				startY=e.originalEvent.changedTouches[0].clientY;
 			});
 			$container.delegate(selector,'touchmove',function(e){
-				e.preventDefault();
+				var htmlElement=this,
+					progressX=e.originalEvent.changedTouches[0].clientX,
+					progressY=e.originalEvent.changedTouches[0].clientY,
+					progressDeltaX=progressX-startX,
+					progressDeltaY=progressY-startY;
+				
+				e.preventDefault();				
+				progress&&progress.call(htmlElement,progressDeltaX,progressDeltaY);
 			});
 			$container.delegate(selector,'touchend',function(e){
 				var endX=e.originalEvent.changedTouches[0].clientX,
@@ -29,7 +37,7 @@
 					deltaX=endX-startX,
 					deltaY=endY-startY;
 				
-				success.call(null,deltaX,deltaY);
+				success&&success.call(null,deltaX,deltaY);
 			});
 		}());
 		

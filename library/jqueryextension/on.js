@@ -16,8 +16,10 @@
 				//because jQuery wrap original e with event.originalEvent property.
 				var event={
 					originalEvent:e,
-					preventDefault:e.preventDefault,
-					stopPropagation:e.stopPropagation
+					
+					//preventDefault or stopPropagation must bind 'this' to original e.
+					preventDefault:e.preventDefault.bind(e),
+					stopPropagation:e.stopPropagation.bind(e)
 				};
 			
 				return eventHandler.call(this,event);

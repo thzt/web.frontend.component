@@ -12,6 +12,7 @@
 	<script src="../../library/jqueryextension/data.js"></script>
 	<script src="../../library/jqueryextension/on.js"></script>
 	<script src="../../library/jqueryextension/delegate.js"></script>
+	<script src="../../library/jqueryextension/html.js"></script>
 	
 	<script src="../../library/condition/condition.js"></script>
 	<script src="../../library/simplepluginmanager/simplepluginmanager.js"></script>
@@ -29,6 +30,8 @@
 			height:500px;
 			background: sienna;
 			margin:0 auto;
+			font-size:50px;
+			color:white;
 		}
 	</style>
 </head>
@@ -43,6 +46,11 @@
 			
 			$('#container').switchOver('init',{
 				selector:'>div',
+				progress:function(deltaX,deltaY){
+					var $element=$(this);
+					
+					$element.html('deltaX='+deltaX+'<br/>deltaY='+deltaY);
+				},
 				success:function(deltaX,deltaY){
 					alert('deltaX='+deltaX+'\ndeltaY='+deltaY);
 				}
