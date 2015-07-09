@@ -10,13 +10,24 @@
 	});
 	
 	function bindEvent(eventName,eventHandler){
-		var $elements=this;
+		var $elements=this,
+			handler=function(e){
+				
+				//because jQuery wrap original e with event.originalEvent property.
+				var event={
+					originalEvent:e,
+					preventDefault:e.preventDefault,
+					stopPropagation:e.stopPropagation
+				};
+			
+				return eventHandler.call(this,event);
+			};
 		
 		$elements.each(function(){
 			var htmlElement=this;
 			
-			htmlElement.addEventListener(eventName,eventHandler,false);
-			$(htmlElement).data(eventName,eventHandler);
+			htmlElement.addEventListener(eventName,handler,false);
+			$(htmlElement).data(eventName,handler);
 		});
 		
 		return this;

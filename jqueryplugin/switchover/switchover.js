@@ -1,3 +1,6 @@
+//use:
+//$.fn.delegate
+
 (function($){
 	
 	$.pluginManager.extend('switchOver',{

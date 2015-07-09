@@ -14,7 +14,10 @@
 			$targetElements=$elements.find(selector);
 		
 		$elements.on(eventName,function(e){
-			var targetElement=e.target,
+			
+			//e is jQuery event.
+			//use e.originalEvent to get html event.
+			var targetElement=e.originalEvent.target,
 				isContain=[].some.call($targetElements,function(current){
 					return current===targetElement;
 				});
@@ -23,7 +26,7 @@
 				return;
 			}
 			
-			eventHandler.call(targetElement);
+			eventHandler.call(targetElement,e);
 		});
 				
 		return this;
