@@ -16,7 +16,10 @@
 				styleObj=getStyleObject.call($element);
 				
 			iterateOnObject.call(valueObj,function(p,v){
-				styleObj[p]=v;
+				var key=convertKey(p),
+					value=convertValue(v);
+				
+				styleObj[key]=value;
 			});
 			
 			setStyleObjectToElement.call($element,styleObj);
@@ -91,6 +94,22 @@
 		}
 		
 		return this;
+	}
+		
+	function convertKey(key){
+		return key.replace(/[A-Z]/g,function(c){
+			return '-'+c.toLowerCase()
+		});
+	}
+	
+	function convertValue(value){
+		var isNumber=value===+value;
+		
+		if(isNumber){
+			return value+'px';
+		}
+		
+		return value;
 	}
 	
 }(jQuery));
