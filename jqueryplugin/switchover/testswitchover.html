@@ -4,15 +4,15 @@
 	<meta charset="UTF-8">
 	<title>test switch over</title>
 	
-	<!--<script src="../../jquery/jquery-1.11.1.js" type="text/javascript"></script>-->
+	<script src="../../jquery/jquery-1.11.1.js" type="text/javascript"></script>
 	
-	<script src="../../library/jquerycore/jquerycore.js"></script>
+	<!--<script src="../../library/jquerycore/jquerycore.js"></script>
 	<script src="../../library/jqueryextension/find.js"></script>
 	<script src="../../library/jqueryextension/each.js"></script>
 	<script src="../../library/jqueryextension/data.js"></script>
 	<script src="../../library/jqueryextension/on.js"></script>
 	<script src="../../library/jqueryextension/delegate.js"></script>
-	<script src="../../library/jqueryextension/html.js"></script>
+	<script src="../../library/jqueryextension/html.js"></script>-->
 	
 	<script src="../../library/condition/condition.js"></script>
 	<script src="../../library/simplepluginmanager/simplepluginmanager.js"></script>
@@ -25,13 +25,18 @@
 			padding:0;
 		}
 		
-		#container>div{
+		#container{
 			width:500px;
 			height:500px;
-			background: sienna;
 			margin:0 auto;
+			overflow:hidden;
+		}
+		#container>div{
+			height:500px;
+			background: sienna;
 			font-size:50px;
 			color:white;
+			position:relative;
 		}
 	</style>
 </head>
@@ -50,9 +55,16 @@
 					var $element=$(this);
 					
 					$element.html('deltaX='+deltaX+'<br/>deltaY='+deltaY);
+					$element.css({
+						left:deltaX
+					});
 				},
 				success:function(deltaX,deltaY){
-					alert('deltaX='+deltaX+'\ndeltaY='+deltaY);
+					var $element=$(this);
+					
+					$element.css({
+						left:0
+					});
 				}
 			});
 			

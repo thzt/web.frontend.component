@@ -14,34 +14,39 @@
 			success=arguments[0].success;
 		
 		(function(){
-			var startX,startY;
+			var startPos;
 		
 			$container.delegate(selector,'touchstart',function(e){
-				startX=e.originalEvent.changedTouches[0].clientX;
-				startY=e.originalEvent.changedTouches[0].clientY;
+				startPos=getPosition(e);
 			});
 			$container.delegate(selector,'touchmove',function(e){
 				var htmlElement=this,
-					progressX=e.originalEvent.changedTouches[0].clientX,
-					progressY=e.originalEvent.changedTouches[0].clientY,
-					progressDeltaX=progressX-startX,
-					progressDeltaY=progressY-startY;
+					delta=getDeltaPosition(startPos,getPosition(e));
 				
 				e.preventDefault();				
-				progress&&progress.call(htmlElement,progressDeltaX,progressDeltaY);
+				progress&&progress.apply(htmlElement,delta);
 			});
 			$container.delegate(selector,'touchend',function(e){
-				var endX=e.originalEvent.changedTouches[0].clientX,
-					endY=e.originalEvent.changedTouches[0].clientY,
-					
-					deltaX=endX-startX,
-					deltaY=endY-startY;
+				var htmlElement=this,				
+					delta=getDeltaPosition(startPos,getPosition(e));
 				
-				success&&success.call(null,deltaX,deltaY);
+				success&&success.apply(htmlElement,delta);
 			});
 		}());
 		
 		return this;
+	}
+	
+	//[x,y]
+	function getPosition(e){
+		var touches=e.originalEvent.changedTouches,
+			touch=touches[0];
+		
+		return [touch.clientX,touch.clientY];
+	}
+	
+	function getDeltaPosition(startPos,endPos){
+		return [endPos[0]-startPos[0],endPos[1]-startPos[1]];
 	}
 		
 }(jQuery));
