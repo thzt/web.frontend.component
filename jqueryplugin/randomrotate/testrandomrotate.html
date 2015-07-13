@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>test random rotate</title>
+		
+	<script src="../../jquery/jquery-1.11.1.js"></script>
+	
+	<script src="../../library/timer/timer.js"></script>	
+	<script src="../../library/pluginmanager/pluginmanager.js"></script>
+	
+	<script src="randomrotate.js"></script>
+	
+	<style>
+		.random-rotate{
+			width:5px;
+			height:200px;
+			background:green;
+			border-top:20px solid red;
+			border-bottom:20px solid green;
+			
+			margin-top:50px;
+			margin-left:150px;
+			margin-bottom:50px;
+		}
+	</style>
+</head>
+<body>
+	<div id="block" class="random-rotate"></div>
+	<input type="text" id="text1" value="20">
+	<input type="button" id="begin" value="begin">
+	<input type="button" id="stop" value="stop">
+	
+	<script>
+		$(function(){
+			$('#block').randomRotate('init',{
+				velocity:10,
+				interval:20
+			});
+			
+			$('#begin').click(function(){
+				$('#block').randomRotate('begin');
+			});
+			
+			$('#stop').click(function(){
+				$('#block').randomRotate('stop',{
+					degree:+$('#text1').val()
+				});
+			});
+		});
+	</script>
+</body>
+</html>

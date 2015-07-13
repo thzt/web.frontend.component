@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>test timer</title>
+	
+	<script src="timer.js"></script>
+</head>
+<body>
+	
+	<input type="button" id="button1" value="stop">
+	
+	<script>
+		(function(){
+			var Timer=window.Timer,
+				timer=new Timer({
+					interval:1000,
+					tick:function(t){
+						console.log(t);
+					}
+				});
+		
+			timer.begin();
+			
+			document.querySelector('#button1').addEventListener('click',function(){
+				alert(timer.isRunning());
+				timer.stop();
+				alert(timer.isRunning());
+			},false);
+		}());
+	</script>
+	
+</body>
+</html>
