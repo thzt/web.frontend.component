@@ -12,38 +12,44 @@
 	<script src="randomrotate.js"></script>
 	
 	<style>
-		.random-rotate{
-			width:5px;
-			height:200px;
-			background:green;
-			border-top:20px solid red;
-			border-bottom:20px solid green;
-			
-			margin-top:50px;
-			margin-left:150px;
-			margin-bottom:50px;
+		body{
+			margin:0;
+			padding:0;
 		}
+		
+		.round-pointer>img:nth-child(2){
+			left:410px;
+			top:165px;
+			position:absolute;
+			z-index:1;
+			transform-origin:center 281px;
+		}
+		
 	</style>
 </head>
 <body>
-	<div id="block" class="random-rotate"></div>
+	<div class="round-pointer">
+		<img src="round.png" alt="">
+		<img id="rotate" src="pointer.png" alt="">
+	</div>
+	
 	<input type="text" id="text1" value="20">
 	<input type="button" id="begin" value="begin">
 	<input type="button" id="stop" value="stop">
 	
 	<script>
 		$(function(){
-			$('#block').randomRotate('init',{
+			$('#rotate').randomRotate('init',{
 				velocity:10,
 				interval:20
 			});
 			
 			$('#begin').click(function(){
-				$('#block').randomRotate('begin');
+				$('#rotate').randomRotate('begin');
 			});
 			
 			$('#stop').click(function(){
-				$('#block').randomRotate('stop',{
+				$('#rotate').randomRotate('stop',{
 					degree:+$('#text1').val()
 				});
 			});
