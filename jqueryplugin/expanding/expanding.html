@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>test expanding</title>
+	
+	<script src="../../jquery/jquery-1.11.1.js"></script>
+	<script src="../../library/pluginmanager/pluginmanager.js"></script>
+	
+	<link rel="stylesheet" href="expanding.css">
+	<script src="expanding.js"></script>
+	<script src="expanding_config.js"></script>
+	
+	<style>
+		body{
+			margin:0;
+			padding:0;
+		}
+	</style>
+</head>
+<body>
+	
+	<div id="expanding" class="thzt_expanding">
+		<div>
+			<span></span>
+			<span></span>
+		</div>
+	</div>
+	
+	<script>
+		$(function(){
+			$('#expanding').expanding('init',{
+				maxRadius:500,
+				left:300,
+				top:300,
+				
+				color:[255,0,0],
+				radius:300,
+				interval:3000	
+			});
+		});
+	</script>
+	
+</body>
+</html>
