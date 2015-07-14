@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	
+	<script src="../../jquery/jquery-1.11.1.js"></script>
+	
+	<style>
+		body{
+			margin:0;
+			padding:0;
+			background:gray;
+		}
+	</style>
+</head>
+<body>
+	<canvas id="myCanvas"></canvas>
+	
+	<script>
+		(function(){
+			var canvasWidth=500,
+				canvasHeight=500,
+				part=[0.1,0.2,0.3,0.4],
+				color=['#000','#f00','#0f0','#00f'],
+				radius=200,
+				gapWidth=5,
+				gapColor='#fff',
+				centerColor='#fff';
+			
+			var ctx=createContext.call($('#myCanvas'),canvasWidth,canvasHeight);
+			part.forEach(function(v,i){
+				var degree=2*Math.PI*v;
+				
+				drawArc.call(ctx,[0,0],[radius,0],degree,color[i]);
+				rotate.call(ctx,degree);
+			});
+			part.forEach(function(v,i){
+				var degree=2*Math.PI*v;
+				
+				drawLine.call(ctx,[0,0],[radius,0],gapWidth,gapColor);
+				rotate.call(ctx,degree);
+			});
+			
+			drawArc.call(ctx,[0,0],[radius/2,0],2*Math.PI,centerColor);
+			
+			setInterval(function(){
+				drawLine.call(ctx,[0,0],[radius,0],gapWidth+1,color[3]);
+				rotate.call(ctx,gapWidth/radius);
+				drawLine.call(ctx,[0,0],[radius,0],gapWidth-1,gapColor);
+				
+				drawArc.call(ctx,[0,0],[radius/2,0],2*Math.PI,centerColor);
+			},50);
+			
+			function createContext(width,height){
+				var $canvas=this,
+					canvas=$canvas[0],
+					ctx=canvas.getContext('2d');
+					
+				canvas.width=width;
+				canvas.height=height;
+				
+				ctx.translate(width/2,height/2);
+				
+				return ctx;
+			}
+			
+			function drawLine(from,to,width,color){
+				var ctx=this;
+				
+				ctx.beginPath();
+				ctx.moveTo(from[0],from[0]);
+				ctx.lineWidth=width;
+		        ctx.lineTo(to[0],to[1]);
+				ctx.strokeStyle = color;
+		        ctx.stroke();
+				
+				return ctx;
+			}
+			
+			function drawArc(from,to,degree,color){
+				var ctx=this;
+				
+				ctx.beginPath();
+				ctx.moveTo(from[0],from[0]);
+		        ctx.arc(from[0],from[0],to[0],to[1],degree);
+				ctx.fillStyle = color;
+		        ctx.fill();
+				
+				return ctx;
+			}
+			
+			function rotate(degree){
+				var ctx=this;
+				
+				ctx.rotate(degree);
+				return ctx;
+			}
+		}());
+	</script>
+</body>
+</html>
