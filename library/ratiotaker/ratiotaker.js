@@ -26,8 +26,11 @@
 				max=instance.max,
 				section=instance.section;
 				
-			if(value<min||value>max){
-				return null;
+			if(value<min){
+				return min;
+			}
+			if(value>max){
+				return max;
 			}
 				
 			return section[Math.round((value-min)/(max-min)*(section.length-1))];
