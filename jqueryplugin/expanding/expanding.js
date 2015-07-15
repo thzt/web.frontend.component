@@ -47,37 +47,6 @@
 			opacity:1
 		});
 		
-		animate({
-			trigger:function(ratio){
-				var width=(radius-30)*ratio+30,
-					height=width;
-					
-				$container.find('>div>span:first-child').css({
-					width:width,
-					height:height
-				});
-			},
-			complete:function(){
-				
-				animate({
-					trigger:function(ratio){
-						var opacity=1-ratio;
-						
-						$container.find('>div>span:first-child').css({
-							opacity:opacity
-						});
-					},
-					complete:function(){
-						loopAnimate.call($container,radius,interval);
-					},
-					interval:500
-				});
-			},
-			interval:interval
-		});
-		
-		// jQuery.fn.animate will shake, so we write our onw animate funtion.
-		/*
 		$container.find('>div>span:first-child').animate({
 			width:radius,
 			height:radius
@@ -88,34 +57,6 @@
 		},500,function(){
 			loopAnimate.call($container,radius,interval);
 		});
-		*/
-	}
-	
-	function animate(){
-		var trigger=arguments[0].trigger,
-			complete=arguments[0].complete,
-			interval=arguments[0].interval,
-			
-			count=0,
-			unit=50;
-		
-		var timer=setInterval(function(){
-			count+=unit;
-			
-			var ratio=count/interval;			
-			if(ratio>1){
-				window.clearInterval(timer);
-				complete();
-				return;
-			}
-			
-			var result=trigger(ratio);
-			if(result===false){
-				window.clearInterval(timer);
-				complete();
-				return;
-			}
-		},unit);
 	}
 	
 }(jQuery));
