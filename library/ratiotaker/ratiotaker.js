@@ -27,10 +27,10 @@
 				section=instance.section;
 				
 			if(value<min){
-				return min;
+				return section[0];
 			}
 			if(value>max){
-				return max;
+				return section[section.length-1];
 			}
 				
 			return section[Math.round((value-min)/(max-min)*(section.length-1))];
