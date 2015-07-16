@@ -1,19 +1,13 @@
 .thzt_expanding{
-	display:table;
 	position:absolute;
 }
-.thzt_expanding>div{
-	display:table-cell;
-	vertical-align: middle;
-	text-align: center;
-}
-.thzt_expanding>div>span:first-child{
+.thzt_expanding>span:first-child{
 	display:inline-block;
-	width:30px;
-	height:30px;
+	margin-top:-1px;
+	position:absolute;
 }
 
-.thzt_expanding>div>span:last-child{
+.thzt_expanding>span:last-child{
 	position:absolute;
 	float:left;
 	width:10px;

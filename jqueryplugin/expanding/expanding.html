@@ -16,27 +16,50 @@
 			margin:0;
 			padding:0;
 		}
+		
+		#expanding{
+			border:1px solid;
+		}
 	</style>
 </head>
 <body>
 	
 	<div id="expanding" class="thzt_expanding">
-		<div>
-			<span></span>
-			<span></span>
-		</div>
+		<span></span>
+		<span></span>
 	</div>
+	
+	<input type="button" id="button1" value="begin" />
+	<input type="button" id="button2" value="stop" />
+	<select name="" id="select1">
+		<option value="green">green</option>
+		<option value="yellow">yellow</option>
+		<option value="orange">orange</option>
+		<option value="red">red</option>
+	</select>
+	<input type="text" id="text1" value="180" />
 	
 	<script>
 		$(function(){
-			$('#expanding').expanding('init',{
-				maxRadius:500,
-				left:300,
-				top:300,
-				
-				color:[255,0,0],
-				radius:300,
-				interval:3000	
+			var json={
+				green:[0,255,0],
+				yellow:[255,255,0],
+				orange:[255,97,0],
+				red:[255,0,0]
+			};
+			
+			$('#button1').click(function(){
+				$('#expanding').expanding('init',{
+					left:300,
+					top:300,
+					
+					color:json[$('#select1').val()],
+					radius:+$('#text1').val()
+				});
+			});
+			
+			$('#button2').click(function(){
+				$('#expanding').expanding('stop');
 			});
 		});
 	</script>
