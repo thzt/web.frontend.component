@@ -62,7 +62,6 @@
 			opacity:1
 		});
 		
-		// jQuery.fn.animate will shake, so we write our onw animate funtion.
 		$container.find('>span:first-child').animate({
 			width:radius,
 			height:radius,
