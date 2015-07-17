@@ -3,7 +3,8 @@
 	$.pluginManager.extend('randomRotate',{
 		init:init,
 		begin:begin,
-		stop:stop
+		stop:stop,
+		isRunning:isRunning
 	});
 	
 	var Timer=global.Timer;
@@ -66,6 +67,21 @@
 		timer2.begin();
 		
 		return this;
+	}
+	
+	function isRunning(){
+		var $container=this,
+		
+			timers=$container.data('thzt_randomrotate_timers'),
+			timer1=timers[0],
+			timer2=timers[1],
+			
+			isTimer1Running=timer1.isRunning(),
+			isTimer2Running=timer2.isRunning(),
+			
+			isRunning=isTimer1Running||isTimer2Running;
+			
+		return isRunning;
 	}
 	
 	//private region
