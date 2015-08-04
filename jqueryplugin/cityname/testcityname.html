@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>test city name</title>
+	
+	<script src="../../jquery/jquery-1.11.1.js"></script>
+	<script src="../../library/pluginmanager/pluginmanager.js"></script>
+	
+	<link rel="stylesheet" href="cityname.css">
+	<script src="cityname.js"></script>
+	
+	<style>
+		body{
+			 margin:0;
+			 padding: 0;
+			 background:gray;
+		}
+	</style>
+</head>
+<body>
+	
+	<div id="div1"></div>
+
+	<script>
+		$(function(){
+			var cityData=[
+				{
+					id:1,
+					name:'烟台市',
+					position:[500,200],
+					color:['#02C0A6','#fff']
+				},
+				{
+					id:2,
+					name:'青岛市',
+					position:[400,250],
+					color:['#02C0A6','#fff']
+				}
+			];
+			
+			$('#div1').cityName('init',{
+				data:cityData
+			});
+			
+			$('#div1').cityName('setColor',{
+				id:2,
+				color:['#FFCA1B','#FFCA1B']
+			});
+		});
+	</script>
+</body>
+</html>
