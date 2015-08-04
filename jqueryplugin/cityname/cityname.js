@@ -8,8 +8,7 @@
 	// data=[{
 	// 	id:1,
 	// 	name:'烟台市',
-	// 	position:[x,y],
-	// 	color:['##02C0A6','#fff']
+	// 	position:[x,y]
 	// }];
 	function init(){
 		var $container=this.eq(0),
@@ -17,8 +16,8 @@
 			html=data.reduce(function(memo,val){
 				return memo+'\
 					<div data-id="'+val.id+'" style="left:'+val.position[0]+'px;top:'+val.position[1]+'px;">\
-						<span style="background:'+val.color[0]+';"></span>\
-						<span style="color:'+val.color[1]+';">'+val.name+'</span>\
+						<span></span>\
+						<span>'+val.name+'</span>\
 					</div>';
 			},'');
 			

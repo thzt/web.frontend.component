@@ -3,6 +3,8 @@
 }
 .thzt_cityname>div{
 	position:absolute;
+	margin-left:-5px;
+	margin-top:-10px;
 }
 .thzt_cityname>div>span{
 	display:inline-block;
@@ -11,8 +13,10 @@
 	border-radius:10px;
 	width:10px;
 	height:10px;
+	background: #02C0A6;
 }
 .thzt_cityname>div>span:nth-child(2){
 	margin-left:10px;
 	cursor:pointer;
+	color:white;
 }
