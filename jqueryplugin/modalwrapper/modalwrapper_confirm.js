@@ -57,14 +57,14 @@
 
                         switch (index) {
                             case 0:
-                                no.callback
-                                    ? no.callback.call(null, closeAndRemove)
+                                yes.callback
+                                    ? yes.callback.call(null, closeAndRemove)
                                     : closeAndRemove();
                                 break;
 
                             case 1:
-                                yes.callback
-                                    && yes.callback.call(null, closeAndRemove);
+                                no.callback
+                                    && no.callback.call(null, closeAndRemove);
                                 break;
                         };
                     }
