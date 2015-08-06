@@ -12,6 +12,14 @@
             yes = arguments[0].yes,
 
             $container = $('<div></div>').appendTo('body');
+            
+        //modal dialog will not delete container
+        //add this handle to delete it.
+        $container.delegate('.modal-header>button', 'click', function (e) {
+            e.stopPropagation();
+
+            $container.remove();
+        });
 
         $container
             .modalWrapper('init', {
@@ -54,16 +62,8 @@
                     }
                 }
             });
-
-        //modal dialog will not delete container
-        //add this handle to delete it.
-        $container.delegate('.modal-header>button', 'click', function (e) {
-            e.stopPropagation();
-
-            $container.remove();
-        });
-
-        $container.modalWrapper('show');
+            
+        return this;
     }
 
 } (jQuery));
