@@ -2,7 +2,6 @@
 
     $.pluginManager.extend('modalWrapper', {
         init: init,
-        show: show,
         close: close
     });
 
@@ -52,7 +51,8 @@
 
         width
             && $container.find('.modal-dialog').css('width', width);
-
+            
+        show.call($container);
         return this;
     }
 
@@ -63,10 +63,15 @@
 
         //trick: otherwise document can't scroll
         $('body').removeClass('modal-open');
-
+        
+        //trick: remove remainder background div
+        $('.modal-backdrop.fade.in').remove();
+        
         return this;
 
     }
+    
+    // private tool
 
     function show() {
         var $container = this.eq(0);
