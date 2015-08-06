@@ -1,7 +1,12 @@
 ﻿.modal-header
 {
-    background: #36B2D4;
+    background: #5E87B0;
     color: white;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
+}
+
+.modal-content,
+.modal-header{
+    border-radius:0;
 }

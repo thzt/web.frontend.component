@@ -7,6 +7,7 @@
     function confirm() {
         var title = arguments[0].title,
             message = arguments[0].message,
+            buttonStyle=arguments[0].buttonStyle||'btn btn-primary',
 
             yes = arguments[0].yes,
             no = arguments[0].no,
@@ -34,13 +35,13 @@
                 body: message,
                 footer: {
                     html:
-                        '<button type="button" class="btn btn-default">\
-                            ' + no.text + '\
-                        </button>\
-                        <button type="button" class="btn btn-primary">\
+                         '<span class="'+buttonStyle+'">\
                             ' + yes.text + '\
-                        </button>',
-                    selector: '>button',
+                        </span>\
+                        <span class="'+buttonStyle+'">\
+                            ' + no.text + '\
+                        </span>',
+                    selector: '>span',
                     eventType: 'click',
                     handler: function (close) {
                         var $button = $(this),

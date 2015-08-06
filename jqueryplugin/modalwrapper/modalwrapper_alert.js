@@ -7,7 +7,8 @@
     function alertMessage() {
         var title = arguments[0].title,
             message = arguments[0].message,
-
+            buttonStyle=arguments[0].buttonStyle||'btn btn-primary',
+            
             yes = arguments[0].yes,
 
             $container = $('<div></div>').appendTo('body');
@@ -34,10 +35,10 @@
                 body: message,
                 footer: {
                     html:
-                        '<button type="button" class="btn btn-primary">\
+                        '<span class="'+buttonStyle+'">\
                             ' + yes.text + '\
-                        </button>',
-                    selector: '>button',
+                        </span>',
+                    selector: '>span',
                     eventType: 'click',
                     handler: function (close) {
                         var $button = $(this);
