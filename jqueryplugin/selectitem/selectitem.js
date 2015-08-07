@@ -19,12 +19,12 @@
         $container
             .removeClass('thzt_selectitem')
             .undelegate()
-            .find('>table>tbody>tr>td:not(:first-child)')
+            .find('>table')
             .remove();
 
         $container
             .addClass('thzt_selectitem')
-            .delegate('>table>tbody>tr>td:not(:first-child)', 'click', function (e) {
+            .delegate('>table>tbody>tr>td', 'click', function (e) {
                 e.stopPropagation();
 
                 var $td = $(this),
@@ -35,16 +35,16 @@
                     return;
                 }
 
-                var validTdIndex = index - 1;
-
                 $td.siblings('td').removeClass('thzt_selectitem_selected');
                 $td.addClass('thzt_selectitem_selected');
 
-                $container.trigger('change', [validTdIndex]);
+                $container.trigger('change', [index]);
             })
-            .find('>table>tbody>tr').append(_.reduce(data, function (memo, item) {
-                return memo + '<td data-value="' + item.Value + '">' + item.Text + '</td>';
-            }, ''));
+            .html('<table><tr>'
+                +[].reduce.call(data, function (memo, item) {
+                    return memo + '<td data-value="' + item.Value + '">' + item.Text + '</td>';
+                }, '')
+                +'</tr></table>');
 
         return this;
     }
@@ -53,7 +53,7 @@
         var $container = this.eq(0),
             value = arguments[0].value,
 
-            $allTd = $container.find('>table>tbody>tr>td:not(:first-child)'),
+            $allTd = $container.find('>table>tbody>tr>td'),
             $selectedTd = $allTd.filter(function () {
                 var $td = $(this),
                     val = $td.attr('data-value');
@@ -76,7 +76,7 @@
         var $container = this.eq(0),
             index = arguments[0].index,
 
-            $allTd = $container.find('>table>tbody>tr>td:not(:first-child)'),
+            $allTd = $container.find('>table>tbody>tr>td'),
             $selectedTd = $allTd.eq(index);
 
         $allTd.removeClass('thzt_selectitem_selected');
@@ -88,23 +88,20 @@
     function getSelectedItem() {
         var $container = this.eq(0),
             $selectedTd = $container.find('>table>tbody>tr>td.thzt_selectitem_selected'),
-            index = $selectedTd.index(),
-            validTdIndex = index < 0 ? index : index - 1;
+            index = $selectedTd.index();
 
         return {
             Value: $selectedTd.attr('data-value'),
             Text: $selectedTd.text(),
-            Index: validTdIndex
+            Index: index
         };
     }
 
     function check() {
         var $container = this.eq(0),
-            index = arguments[0].index,
-            validTdIndex = index + 1;
+            index = arguments[0].index;
 
-        $container.find('>table>tbody>tr>td').eq(validTdIndex).click();
-
+        $container.find('>table>tbody>tr>td').eq(index).click();
         return this;
     }
 

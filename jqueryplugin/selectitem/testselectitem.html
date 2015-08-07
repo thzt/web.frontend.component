@@ -5,7 +5,6 @@
     <title>test select item</title>
     <link href="selectitem.css" rel="stylesheet" type="text/css" />
     <script src="../../jquery/jquery-1.11.1.js" type="text/javascript"></script>
-    <script src="../../underscore/underscore-1.6.0.js" type="text/javascript"></script>
     <script src="../../library/pluginmanager/pluginmanager.js" type="text/javascript"></script>
     <script src="selectitem.js" type="text/javascript"></script>
     <style>
@@ -16,30 +15,32 @@
     </style>
 </head>
 <body>
-    <div id="container">
-        <table>
-            <tr>
-                <td>
-                    请选择
-                </td>
-            </tr>
-        </table>
-    </div>
-    <input id="button1" type="button" value="test" />
+    <div id="container"></div>
+    
+    <input id="button1" type="button" value="getSelectedItem" />   
+    <input id="button2" type="button" value="selectIndex" />
+    <input id="button3" type="button" value="selectValue" /> 
+    <input id="button4" type="button" value="check" />
     <script>
         $(function () {
-            var json = [
-            {
-                Value: 'xxx-xxx',
-                Text: 'Aromasin'
-            },
-            {
-                Value: 'xxx-xxx',
-                Text: 'Lipitor'
-            }];
+            var caseStepData=[
+        		{Value:0,Text:'案件信息'},
+        		{Value:1,Text:'证据材料'},
+        		{Value:2,Text:'管辖权异议'},
+        		{Value:3,Text:'调解'},
+        		{Value:4,Text:'律师匹配'},
+        		{Value:5,Text:'律师提问'},
+        		{Value:6,Text:'应诉方案'},
+        		{Value:7,Text:'答辩状'},
+        		{Value:8,Text:'代理词'},
+        		{Value:9,Text:'开庭报告'},
+        		{Value:10,Text:'优化建议'},
+        		{Value:11,Text:'判/调/裁决书'},
+        		{Value:12,Text:'归档'}
+        	];
 
             $('#container').selectItem('init', {
-                data: json
+                data: caseStepData
             });
 
             $('#container').change(function (e, index) {
@@ -47,7 +48,25 @@
             });
 
             $('#button1').click(function() {
-                alert($('#container').selectItem('getSelectedItem').Index);
+                alert(JSON.stringify($('#container').selectItem('getSelectedItem')));
+            });
+            
+            $('#button2').click(function(){
+                $('#container').selectItem('selectIndex', {
+                    index: 0
+                });
+            });
+            
+            $('#button3').click(function(){
+                $('#container').selectItem('selectValue', {
+                    value: 'value2'
+                });
+            });
+            
+            $('#button4').click(function(){
+                $('#container').selectItem('check', {
+                    index: 0
+                });
             });
         });
     </script>
