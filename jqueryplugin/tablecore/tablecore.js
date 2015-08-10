@@ -10,12 +10,13 @@
 			
 			dataSize=data.length,
 			pageSize=$container.find('>table>tbody>tr').length,
-			pageCount=Math.ceil(dataSize/pageSize);
+			pageCount=Math.ceil(dataSize/pageSize),
+			pageIndex=0;
 		
 		$container
 			.addClass('thzt_tablecore')
 			.bindTemplate('setData',{
-				data:data
+				data:getRenderData(data,pageIndex*pageSize,(pageIndex+1)*pageSize)
 			})
 			.delegate('>div:last-child>span[data-page]','click',function(e){
 				e.stopPropagation();
@@ -33,7 +34,7 @@
 				data:data,
 				pageSize:pageSize,
 				pageCount:pageCount,
-				pageIndex:0
+				pageIndex:pageIndex
 			})			
 			.find('>div:last-child').html(getPageButtonHtml(pageCount)).end()
 			.find('>table>thead>tr>th[data-sort]').addClass('thzt_tablecore_sort_init').end();
