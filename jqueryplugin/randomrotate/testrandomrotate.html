@@ -50,7 +50,10 @@
 			
 			$('#stop').click(function(){
 				$('#rotate').randomRotate('stop',{
-					degree:+$('#text1').val()
+					degree:+$('#text1').val(),
+					done:function(){
+						alert();
+					}
 				});
 			});
 		});

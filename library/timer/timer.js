@@ -15,7 +15,9 @@
 	Timer.prototype={
 		begin:function(){
 			var instance=this,
-				totolTime=0;
+				totolTime=0,
+				
+				interrupt=arguments[0]&&arguments[0].interrupt;
 				
 			instance.timer=setInterval(function(){
 				var result=instance.tick(++totolTime);
@@ -26,6 +28,8 @@
 				
 				global.clearInterval(instance.timer);
 				instance.timer=null;
+				
+				interrupt&&interrupt(totolTime);				
 			},instance.interval);
 			
 			return this;

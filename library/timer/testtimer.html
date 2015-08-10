@@ -16,11 +16,19 @@
 				timer=new Timer({
 					interval:1000,
 					tick:function(t){
+						if(t>5){
+							return false;
+						}
+						
 						console.log(t);
 					}
 				});
 		
-			timer.begin();
+			timer.begin({
+				interrupt:function(t){
+					alert(t);
+				}
+			});
 			
 			document.querySelector('#button1').addEventListener('click',function(){
 				alert(timer.isRunning());

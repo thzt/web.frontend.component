@@ -43,6 +43,7 @@
 	function stop(){
 		var $container=this,
 			degree=arguments[0].degree,
+			done=arguments[0].done,
 		
 			timers=$container.data('thzt_randomrotate_timers'),
 			timer1=timers[0],
@@ -64,7 +65,11 @@
 		$container.data('thzt_randomrotate_final_degree',degree);
 			
 		timer1.stop();
-		timer2.begin();
+		timer2.begin({
+			interrupt:function(){
+				done&&done();
+			}
+		});
 		
 		return this;
 	}
