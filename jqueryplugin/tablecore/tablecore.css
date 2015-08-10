@@ -9,13 +9,16 @@
   border-collapse: collapse;
   text-align: center;
 }
+.thzt_tablecore > table > thead > tr {
+  background: #5E87B0;
+}
 .thzt_tablecore > table > thead > tr > th {
   white-space: nowrap;
   padding: 12px 5px;
-  background: #5E87B0;
   border-width: 0;
   color: white;
   text-align: center;
+  cursor:pointer;
 }
 .thzt_tablecore > table > tbody > tr:nth-child(even) {
   background: #f5f5f5;
@@ -30,3 +33,14 @@
   margin: 10px 0;
   cursor:pointer;
 }
+
+.thzt_tablecore_sort_init{
+	background:url('img/sort_both.png') no-repeat center right !important;
+}
+.thzt_tablecore_sort_ascend{
+	background:url('img/sort_asc.png') no-repeat center right !important;
+}
+.thzt_tablecore_sort_descend{
+	background:url('img/sort_desc.png') no-repeat center right !important;
+}
+
