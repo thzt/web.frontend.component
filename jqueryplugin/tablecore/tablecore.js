@@ -38,6 +38,7 @@
 			.find('>div:last-child').html(getPageButtonHtml(pageCount)).end()
 			.find('>table>thead>tr>th[data-sort]').addClass('thzt_tablecore_sort_init').end();
 			
+		setCurrentPageStyle.call($container);			
 		return this;
 	}
 	
@@ -74,6 +75,8 @@
 				pageCount:pageCount,
 				pageIndex:pageIndex
 			});
+			
+		setCurrentPageStyle.call($container);
 	}
 	
 	function handleTitleClickEvent(){
@@ -121,6 +124,23 @@
 				pageCount:pageCount,
 				pageIndex:pageIndex
 			});
+			
+		setCurrentPageStyle.call($container);
+	}
+	
+	function setCurrentPageStyle(){
+		var $container=this,
+		
+			tableData=$container.data('thzt_tablecore_data'),			
+			pageIndex=tableData.pageIndex;
+			
+		$container
+			.find('>div:last-child>span[data-page]')
+			.removeClass('thzt_tablecore_currentpage')
+			.eq(pageIndex+1)
+			.addClass('thzt_tablecore_currentpage');
+			
+		return this;
 	}
 	
 	function timesReduce(n,callback,initVal){
@@ -137,7 +157,7 @@
 		return '<span>共'+pageCount+'页</span>\
 			<span data-page="previous">上一页</span>\
 			'+timesReduce(pageCount,function(index,memo){
-				return memo+'<span  data-page="'+index+'">'+(index+1)+'</span>';
+				return memo+'<span '+(index===0&&'class="thzt_tablecore_currentpage"')+' data-page="'+index+'">'+(index+1)+'</span> ';
 			},'')+'\
 			<span data-page="next">下一页</span>';
 	}

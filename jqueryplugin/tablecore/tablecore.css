@@ -28,10 +28,18 @@
   white-space: nowrap;
   padding: 10px 5px;
 }
-.thzt_tablecore > * + * + div {
+.thzt_tablecore > div:last-child {
   float: right;
   margin: 10px 0;
   cursor:pointer;
+}
+.thzt_tablecore > div:last-child > span {
+  text-decoration: underline;
+}
+.thzt_tablecore > div:last-child > span:first-child,
+.thzt_tablecore > div:last-child > span:nth-child(2),
+.thzt_tablecore > div:last-child > span:last-child {
+  text-decoration: none;
 }
 
 .thzt_tablecore_sort_init{
@@ -44,3 +52,6 @@
 	background:url('img/sort_desc.png') no-repeat center right !important;
 }
 
+.thzt_tablecore_currentpage{
+  text-decoration: none !important;
+}
