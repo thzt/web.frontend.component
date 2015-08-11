@@ -16,6 +16,7 @@
 	<script src="tablecore_init.js"></script>
 	<script src="tablecore_page.js"></script>
 	<script src="tablecore_sort.js"></script>
+	<script src="tablecore_clear.js"></script>
 	
 	<style>
 		.big-button {
@@ -31,6 +32,9 @@
 	</style>
 </head>
 <body>
+	
+	<input id="button1" type="button" value="init">
+	<input id="button2" type="button" value="clear">
 	
 	<div id="tableCore">
 		
@@ -107,8 +111,14 @@
 				[8,'XX公司','上海','上海','H','13911111111','h@xx.cn','10',['编辑','删除']]
 			];
 			
-			$('#tableCore').tableCore('init',{
-				data:json
+			$('#button1').click(function(){
+				$('#tableCore').tableCore('init',{
+					data:json
+				});
+			}).click();
+			
+			$('#button2').click(function(){
+				$('#tableCore').tableCore('clear');
 			});
 		});
 	</script>

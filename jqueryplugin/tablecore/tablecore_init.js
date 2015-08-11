@@ -40,7 +40,8 @@
 			})			
 			.find('>div:last-child').html(getPageButtonHtml.call($container,pageCount)).end()
 			.find('>table>thead>tr>th[data-sort]').addClass('thzt_tablecore_sort_init').end()
-			.tableCore('tool').setPageButtonStyle.call($container);
+			.tableCore('tool').setPageButtonStyle.call($container)
+			.show();
 					
 		return this;
 	}
