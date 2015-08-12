@@ -1,0 +1,17 @@
+.thzt_tablepage>span{
+	text-decoration:underline;
+	margin: 0 5px;
+}
+.thzt_tablepage>span:first-child,
+.thzt_tablepage>span:nth-child(2),
+.thzt_tablepage>span:last-child
+{
+	text-decoration:none;
+}
+.thzt_tablepage>span[data-page]{
+	cursor:pointer;
+}
+
+.thzt_tablepage_currentpage{
+  text-decoration: none !important;
+}

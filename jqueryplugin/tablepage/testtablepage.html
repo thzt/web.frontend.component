@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>test table page</title>
+	
+    <script src="../../jquery/jquery-1.11.1.js" type="text/javascript"></script>
+    <script src="../../library/pluginmanager/pluginmanager.js" type="text/javascript"></script>
+	
+	<link rel="stylesheet" href="tablepage.css">
+	<script src="tablepage.js"></script>
+	<script src="tablepage_config.js"></script>
+</head>
+<body>
+	
+	<div id="tablePage"></div>
+	
+	<script>
+		$(function(){
+			$('#tablePage').tablePage('init',{
+				pageCount:10,
+				click:function(pageIndex,afterClick){
+					console.log(pageIndex);
+					afterClick();
+				}
+			});
+		});
+	</script>
+</body>
+</html>

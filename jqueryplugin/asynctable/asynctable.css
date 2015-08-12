@@ -1,0 +1,35 @@
+.thzt_asynctable {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+}
+.thzt_asynctable > thead > tr {
+  background: #5E87B0;
+}
+.thzt_asynctable > thead > tr > th {
+  white-space: nowrap;
+  padding: 12px 5px;
+  border-width: 0;
+  color: white;
+  text-align: center;
+  cursor:pointer;
+}
+.thzt_asynctable > tbody > tr:nth-child(even) {
+  background: #f5f5f5;
+}
+.thzt_asynctable > tbody > tr > td {
+  border: 1px solid #ddd;
+  white-space: nowrap;
+  padding: 0 5px;
+  height:40px;
+}
+
+.thzt_asynctable_sort_init{
+	background:url('img/sort_both.png') no-repeat center right !important;
+}
+.thzt_asynctable_sort_ascend{
+	background:url('img/sort_asc.png') no-repeat center right !important;
+}
+.thzt_asynctable_sort_descend{
+	background:url('img/sort_desc.png') no-repeat center right !important;
+}
