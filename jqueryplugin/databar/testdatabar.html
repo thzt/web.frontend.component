@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>test data bar</title>
+	
+    <script src="../../jquery/jquery-1.11.1.js"></script>
+    <script src="../../library/pluginmanager/pluginmanager.js"></script>
+	
+	<link rel="stylesheet" href="databar.css">
+	<script src="databar.js"></script>
+	
+	<style>
+		body{
+			background: black;
+			margin:0;
+			padding: 0;
+		}
+		
+		#dataBar{
+			border: 1px solid white;
+		}
+	</style>
+</head>
+<body>
+	
+	<div id="dataBar"></div>
+	
+	<script>
+		$(function(){
+			var json=[
+				{
+					name:'北京',
+					value:234578,
+					width:100
+				},
+				{
+					name:'天津',
+					value:9987855,
+					width:190
+				}
+			];
+				
+			$('#dataBar').dataBar('init',{
+				data:json
+			});
+		});
+	</script>
+	
+</body>
+</html>

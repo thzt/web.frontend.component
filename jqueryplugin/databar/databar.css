@@ -1,0 +1,37 @@
+.thzt_databar{
+	position:absolute;
+	font-size:16px;
+}
+.thzt_databar>div{
+	width:25em;
+	margin:.7em 0;
+}
+.thzt_databar>div>span{
+	display:inline-block;
+	float:left;
+}
+.thzt_databar>div::after{
+	content:"";
+	display:block;
+	clear:both;
+}
+.thzt_databar>div>span:first-child{
+	color:white;
+	margin-right:.8em;
+	font-family: '方正粗圆简体';
+	text-align: right;
+	display:inline-block;
+	width:3em;
+}
+.thzt_databar>div>span:nth-child(2){
+	color:#119AFF;
+	width:4em;
+	margin-right:1em;
+}
+.thzt_databar>div>span:last-child{
+	display:inline-block;
+	height:.5em;
+	margin:.25em 0;
+	border-radius:10px;
+	background: -webkit-gradient(linear, 0% 50%, 100% 50%, from(#0072D2), to(#02C1A2));
+}
