@@ -9,8 +9,11 @@
 	
 	<link rel="stylesheet" href="asynctable.css">
 	<script src="asynctable.js"></script>
+	<script src="asynctable_get.js"></script>
 </head>
 <body>
+	
+	<input type="button" id="button1" value="getSortStatus">
 	
 	<table id="asyncTable">
 		<thead>
@@ -82,6 +85,12 @@
 					console.log(isAscend);
 					afterSort();
 				}
+			});
+			
+			$('#button1').click(function(){
+				var sortStatus=$('#asyncTable').asyncTable('getSortStatus');
+				
+				alert(JSON.stringify(sortStatus));
 			});
 		})
 	</script>
