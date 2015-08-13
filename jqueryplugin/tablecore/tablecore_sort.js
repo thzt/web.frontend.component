@@ -23,7 +23,15 @@
 			case $th.hasClass('thzt_tablecore_sort_init'):
 			case $th.hasClass('thzt_tablecore_sort_descend'):
 				data.sort(function(v1,v2){
-					return v1[columnIndex]>v2[columnIndex];
+					if(v1[columnIndex]===v2[columnIndex]){
+						return 0;
+					}
+					
+					if(v1[columnIndex]<v2[columnIndex]){
+						return -1;
+					}
+					
+					return 1;
 				});
 				$th.removeClass('thzt_tablecore_sort_init thzt_tablecore_sort_descend')
 					.addClass('thzt_tablecore_sort_ascend');
@@ -31,7 +39,15 @@
 			
 			case $th.hasClass('thzt_tablecore_sort_ascend'):
 				data.sort(function(v1,v2){
-					return v1[columnIndex]<v2[columnIndex];
+					if(v1[columnIndex]===v2[columnIndex]){
+						return 0;
+					}
+					
+					if(v1[columnIndex]>v2[columnIndex]){
+						return -1;
+					}
+					
+					return 1;
 				});
 				$th.removeClass('thzt_tablecore_sort_ascend')
 					.addClass('thzt_tablecore_sort_descend');
