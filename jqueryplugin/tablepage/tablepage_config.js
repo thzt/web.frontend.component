@@ -1,7 +1,8 @@
 (function($){
 	
 	$.pluginManager.filter('tablePage',{
-		init:filterInit
+		init:filterInit,
+		setPageCount:filterSetPageCount
 	});
 	
 	function filterInit(){
@@ -13,6 +14,16 @@
 			pageCount:pageCount,
 			pageMaxCount:pageMaxCount||5,
 			click:click
+		}];
+	}
+	
+	function filterSetPageCount(){
+		var pageCount=arguments[0].pageCount,
+			pageMaxCount=arguments[0].pageMaxCount;
+			
+		return [{
+			pageCount:pageCount,
+			pageMaxCount:pageMaxCount||5
 		}];
 	}
 	

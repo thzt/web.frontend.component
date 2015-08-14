@@ -1,7 +1,8 @@
 (function($){
 	
 	$.pluginManager.extend('tablePage',{
-		init:init
+		init:init,
+		setPageCount:setPageCount
 	});
 	
 	function init(){
@@ -30,6 +31,27 @@
 				var $span=$(this);				
 				handlePageClickEvent.call($span,click);
 			});
+	}
+	
+	function setPageCount(){
+		var $container=this.eq(0),
+			pageCount=arguments[0].pageCount,
+			pageMaxCount=arguments[0].pageMaxCount,
+			
+			html='<span>共'+pageCount+'页</span>'
+				+'<span data-page="previous">上一页</span>'
+				+timesReduce(Math.min(pageCount,pageMaxCount),function(i,memo){
+					return memo+'<span '+(i===0&&'class="thzt_tablepage_currentpage"')+' data-page="'+i+'" data-page-index>'+(i+1)+'</span>'
+				},'')
+				+'<span data-page="next">下一页</span>';
+				
+		$container
+			.html(html)
+			.data('thzt_tablepage_data',{
+				pageCount:pageCount,
+				pageIndex:0
+			});
+		return this;
 	}
 	
 	function handlePageClickEvent(click){

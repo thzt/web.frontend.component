@@ -16,13 +16,14 @@
 	
 	<input type="button" id="button1" value="getPageIndex">
 	<input type="button" id="button2" value="setPageIndex">
+	<input type="button" id="button3" value="setPageCount">
 	
 	<div id="tablePage"></div>
 	
 	<script>
 		$(function(){
 			$('#tablePage').tablePage('init',{
-				pageCount:0,
+				pageCount:10,
 				click:function(pageIndex,afterClick){
 					console.log(pageIndex);
 					afterClick();
@@ -35,6 +36,11 @@
 			$('#button2').click(function(){
 				$('#tablePage').tablePage('setPageIndex',{
 					pageIndex:7
+				});
+			});
+			$('#button3').click(function(){
+				$('#tablePage').tablePage('setPageCount',{
+					pageCount:5
 				});
 			});
 		});
