@@ -78,7 +78,12 @@
 	}
 	
 	function handlePagePreviousEvent(pageIndex,pageCount,click){
-		var $container=this;
+		var $container=this,
+			haveNoPage=$container.find('>span[data-page-index]').length===0;
+			
+		if(haveNoPage){
+			return;
+		}
 		
 		click(pageIndex,function(){
 			var $minPageSpan=$container.find('>span[data-page-index]').eq(0),
@@ -121,7 +126,12 @@
 	}
 	
 	function handlePageNextEvent(pageIndex,pageCount,click){
-		var $container=this;
+		var $container=this,
+			haveNoPage=$container.find('>span[data-page-index]').length===0;
+			
+		if(haveNoPage){
+			return;
+		}
 		
 		click(pageIndex,function(){
 			var $maxPageSpan=$container.find('>span[data-page-index]').eq(-1),

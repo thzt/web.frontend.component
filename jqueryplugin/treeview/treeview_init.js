@@ -104,12 +104,11 @@
 	function initSelection(){
 		var container=this.eq(0);
 		
-		container.delegate('>div','click',function(e){
-			var div=$(this),
-				textSpan=div.find('>span:last-child');
+		container.delegate('>div>span:last-child','click',function(e){
+			var span=$(this);
 				
 			container.find('.thzt_treeview_select').removeClass('thzt_treeview_select');
-			textSpan.addClass('thzt_treeview_select');
+			span.addClass('thzt_treeview_select');
 			
 			container
 				.find('li')
@@ -126,13 +125,13 @@
 			e.stopPropagation();
 		});
 		
-		container.delegate('li','click',function(e){
-			var li=$(this),
-				textSpan=li.find('>div>span:last-child'),
-				iconSpan=textSpan.prev('span');
+		container.delegate('li>div>span:last-child','click',function(e){
+			var span=$(this),
+				li=span.closest('li'),
+				iconSpan=span.prev('span');
 				
 			container.find('.thzt_treeview_select').removeClass('thzt_treeview_select');
-			textSpan.addClass('thzt_treeview_select');
+			span.addClass('thzt_treeview_select');
 			
 			container
 				.find('li')

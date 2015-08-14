@@ -23,10 +23,11 @@
 			nodeClick=container.data('thzt_treeview_nodeclick'),
 			leafClick=container.data('thzt_treeview_leafclick');
 			
-		container.delegate('>div','click',function(e){
+		container.delegate('>div>span:last-child','click',function(e){
 			e.stopPropagation();
 		
-			var div=$(this);
+			var span=$(this),
+				div=span.closest('div'),
 			
 				current=container.treeView('get');
 			
@@ -34,10 +35,11 @@
 				&&rootClick.call(div,current);
 		});
 			
-		container.delegate('li','click',function(e){
+		container.delegate('li>div>span:last-child','click',function(e){
 			e.stopPropagation();
 		
-			var li=$(this),
+			var span=$(this),
+				li=span.closest('li'),
 				isLeaf=li.find('>ul').length===0,
 				
 				current=container.treeView('get');
