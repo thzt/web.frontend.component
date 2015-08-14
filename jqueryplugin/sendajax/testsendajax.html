@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>test sendajax</title>
+	
+	<script src="../../jquery/jquery-1.11.1.js" type="text/javascript"></script>
+    <script src="../../library/pluginmanager/pluginmanager.js" type="text/javascript"></script>
+	
+    <script src="sendajax.js" type="text/javascript"></script>
+</head>
+<body>
+	
+	<input type="button" id="button1" value="testPostRequest">
+	<input type="button" id="button2" value="testGetRequest">
+	
+	<script>
+		$(function(){
+			$('#button1').click(function(){
+				$.sendAjax({
+					url:'/Home/Index',
+					data:{
+						a:1
+					},
+					success:function(r){
+						console.log(r);
+					},
+					complete:function(){
+						
+					}
+				});
+			});
+			
+			$('#button2').click(function(){
+				$.sendAjax({
+					type:'get',
+					
+					url:'/Home/Index',
+					data:{
+						a:1
+					},
+					success:function(r){
+						console.log(r);
+					},
+					complete:function(){
+						
+					}
+				});
+			});
+			
+		});
+	</script>
+	
+</body>
+</html>
