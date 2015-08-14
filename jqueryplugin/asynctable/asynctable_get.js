@@ -1,7 +1,8 @@
 (function($){
 	
 	$.pluginManager.extend('asyncTable',{
-		getSortStatus:getSortStatus
+		getSortStatus:getSortStatus,
+		getPageSize:getPageSize
 	});
 	
 	function getSortStatus(){
@@ -25,6 +26,13 @@
 		}
 		
 		return null;
+	}
+	
+	function getPageSize(){
+		var $container=this.eq(0),
+			pageSize=$container.find('>tbody>tr').length;
+			
+		return pageSize;
 	}
 	
 }(jQuery));
