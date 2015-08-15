@@ -36,13 +36,15 @@
 					type:'get',
 					
 					url:'/Home/Index',
-					data:serialize({
+					data:{
 						a:1,
 						b:{
 							c:1,
-							d:2
+							d:{
+									
+							}
 						}
-					}),
+					},
 					success:function(r){
 						console.log(r);
 					},
