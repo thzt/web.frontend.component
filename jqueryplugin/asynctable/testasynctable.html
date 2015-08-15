@@ -19,19 +19,20 @@
 <body>
 	
 	<input type="button" id="button1" value="getSortStatus">
+	<input type="button" id="button2" value="getPageSize">
 	
 	<table id="asyncTable">
 		<thead>
 			<tr>
-				<th data-sort>序号</th>
-				<th>执业律所</th>
-				<th>所属省份</th>
-				<th>所属城市</th>
-				<th data-sort>对接人</th>
-				<th>对接人电话</th>
-				<th>对接人邮箱</th>
-				<th>委托案件数</th>
-				<th>操作</th>
+				<th data-value="a" data-sort>序号</th>
+				<th data-value="b">执业律所</th>
+				<th data-value="c">所属省份</th>
+				<th data-value="d">所属城市</th>
+				<th data-value="e" data-sort>对接人</th>
+				<th data-value="f">对接人电话</th>
+				<th data-value="g">对接人邮箱</th>
+				<th data-value="h">委托案件数</th>
+				<th data-value="i">操作</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -85,17 +86,20 @@
 	<script>
 		$(function(){
 			$('#asyncTable').asyncTable('init',{
-				sort:function(columnIndex,isAscend,afterSort){
-					console.log(columnIndex);
-					console.log(isAscend);
+				sort:function(sortStatus,afterSort){
+					console.log(JSON.stringify(sortStatus));
 					afterSort();
 				}
 			});
 			
 			$('#button1').click(function(){
 				var sortStatus=$('#asyncTable').asyncTable('getSortStatus');
-				
-				alert(JSON.stringify(sortStatus));
+				console.log(JSON.stringify(sortStatus));
+			});
+			
+			$('#button2').click(function(){
+				var pageSize=$('#asyncTable').asyncTable('getPageSize');
+				console.log(pageSize);
 			});
 			
 			var json=[

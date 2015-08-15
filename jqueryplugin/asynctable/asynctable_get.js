@@ -11,6 +11,8 @@
 			
 		if($ascendTh.length!==0){
 			return {
+				columnValue:$ascendTh.attr('data-value'),
+				columnText:$ascendTh.html(),
 				columnIndex:$ascendTh.index(),
 				isAscend:true
 			};
@@ -20,6 +22,8 @@
 		
 		if($descendTh.length!==0){
 			return {
+				columnValue:$descendTh.attr('data-value'),
+				columnText:$descendTh.html(),
 				columnIndex:$descendTh.index(),
 				isAscend:false
 			};

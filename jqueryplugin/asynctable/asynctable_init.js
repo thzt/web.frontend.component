@@ -23,11 +23,17 @@
 	
 	function handleSortClickEvent(sort){
 		var $th=this,
-			columnIndex=$th.index(),
 			isAscend=$th.hasClass('thzt_asynctable_sort_init')
-				||$th.hasClass('thzt_asynctable_sort_descend');
+				||$th.hasClass('thzt_asynctable_sort_descend'),
 				
-		sort(columnIndex,isAscend,function(){
+			sortStatus={
+				columnValue:$th.attr('data-value'),
+				columnText:$th.html(),
+				columnIndex:$th.index(),
+				isAscend:isAscend
+			};
+				
+		sort(sortStatus,function(){
 			$th.siblings('th[data-sort]')
 				.removeClass('thzt_asynctable_sort_ascend thzt_asynctable_sort_descend')
 				.addClass('thzt_asynctable_sort_init');
