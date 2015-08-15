@@ -19,6 +19,8 @@
 //  pageSize:10,
 //	sortStatus:{
 //		columnIndex:0,
+//		columnText:'',
+//	    columnValue:'',
 //		isAscend:true
 //	},
 //	condition:{
@@ -161,7 +163,7 @@
 		});
 	}
 	
-	function handleSortClickEvent(columnIndex,isAscend,afterSort){
+	function handleSortClickEvent(sortStatus,afterSort){
 		var instance=this,
 		
 			url=instance.url,
@@ -175,10 +177,7 @@
 			data:{
 				pageIndex:0,
 				pageSize:pageSize,
-				sortStatus:{
-					columnIndex:columnIndex,
-					isAscend:isAscend
-				},
+				sortStatus:sortStatus,
 				condition:condition
 			},
 			success:function(r){
