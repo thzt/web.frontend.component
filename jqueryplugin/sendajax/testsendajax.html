@@ -36,18 +36,24 @@
 					type:'get',
 					
 					url:'/Home/Index',
-					data:{
-						a:1
-					},
+					data:serialize({
+						a:1,
+						b:{
+							c:1,
+							d:2
+						}
+					}),
 					success:function(r){
 						console.log(r);
 					},
 					complete:function(){
 						
+					},
+					serialize:function(data){
+						return $.param(data).replace(/(%5B)(.*?)(%5D)/g,'.$2');
 					}
 				});
 			});
-			
 		});
 	</script>
 	

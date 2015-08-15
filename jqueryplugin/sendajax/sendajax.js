@@ -6,22 +6,28 @@
 
             success = arguments[0].success,
             complete = arguments[0].complete,
+            
+            serialize=arguments[0].serialize,
 
             isPostRequest = type.toLowerCase() === 'post';
 
         isPostRequest
-            ? sendPostRequest(url, data, success, complete)
-            : sendGetRequest(url, data, success, complete);
+            ? sendPostRequest(url, data, success, complete,serialize)
+            : sendGetRequest(url, data, success, complete,serialize);
     };
 
-    function sendPostRequest(url, data, success, complete) {
+    function sendPostRequest(url, data, success, complete,serialize) {
         $.ajax({
             cache: false,
             type: 'post',
             dataType: 'json',
 
             url: url,
-            data: data,
+            data: serialize
+                ?serialize(data)
+                
+                //jQuery will use $.param(data) to serialize data
+                :data,
 
             success: success,
             complete: complete,
@@ -51,14 +57,18 @@
         });
     }
 
-    function sendGetRequest(url, data, success, complete) {
+    function sendGetRequest(url, data, success, complete,serialize) {
         $.ajax({
             cache: false,
             type: 'get',
             dataType: 'html',
 
             url: url,
-            data: data,
+            data: serialize
+                ?serialize(data)
+                
+                //jQuery will use $.param(data) to serialize data
+                :data,
 
             success: function (html) {
                 var isServerDefinedError = tryHandleServerDefinedError(html);

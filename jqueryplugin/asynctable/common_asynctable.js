@@ -28,6 +28,7 @@
 //}
 
 
+
 //3. receive
 //
 //{
@@ -40,8 +41,7 @@
 //	}
 //}
 
-
-(function(global){
+(function(global,$){
 	
 	global.AsyncTable=AsyncTable;
 	
@@ -104,7 +104,8 @@
 					});
 					
 					instance.condition=condition;
-				}
+				},
+				serialize:serialize
 			});
 			
 			return this;
@@ -159,7 +160,8 @@
 				});
 				
 				afterClick();
-			}
+			},
+			serialize:serialize
 		});
 	}
 	
@@ -193,8 +195,23 @@
 				});
 				
 				afterSort();
-			}
+			},
+			serialize:serialize
 		});
 	}
-}(window));
+	
+	// default serialized format
+	// $.param({a:{b:{c:1},d:2}})
+	// 'a%5Bb%5D%5Bc%5D=1&a%5Bd%5D=2'
+	// decodeURI('a%5Bb%5D%5Bc%5D=1&a%5Bd%5D=2');
+	// 'a[b][c]=1&a[d]=2'
+	
+	// here convert data to struts framework required format
+	// $.param({a:{b:{c:1},d:2}}).replace(/(%5B)(.*?)(%5D)/g,'.$2');
+	// 'a.b.c=1&a.d=2'
+	function serialize(data){
+		return $.param(data).replace(/(%5B)(.*?)(%5D)/g,'.$2');
+	}
+	
+}(window,jQuery));
 
