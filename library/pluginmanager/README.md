@@ -154,21 +154,25 @@ It is simpler than the original jquery way.
 
 I need only to create a new file.
 
-<code>
-	(function($){
-		$.pluginManager.extend('pluginManager',{
-			getValue:getValue
-		});
+(function($){
+
+	$.pluginManager.extend('pluginManager',{
+	
+		getValue:getValue
 		
-		function getValue(){
-			var $selectedElements=this,
+	});
+	
+	function getValue(){
+	
+		var $selectedElements=this,
+		
+			//==={'length':'0'}
 			
-				//==={'length':'0'}
-				args=arguments; 
-			
-				//business logic
-		}
-	}(jQuery));
-</code>
+			args=arguments; 
+		
+			//business logic
+	}
+	
+}(jQuery));
 
 Cool!
