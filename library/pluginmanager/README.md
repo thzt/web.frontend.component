@@ -168,3 +168,73 @@ I need only to create a new file.
 ```
 
 Cool! isn't it?
+
+## **Going further**
+
+Sometimes I must write a plugin which must support default arguments.
+
+For example,
+
+```javascript
+$('#container').pluginName('init',17);
+```
+
+I don't want to give 17 as parameter every time.
+
+If I don't give a parameter, I assume that it is 17.
+
+How can we do that?
+
+<br/>
+
+In original jquery way, we have to write ugly code.
+
+```javascript
+function handleInitMethod(){
+	var $selectedElements=this,  
+	
+		//==={'0':'init','1':value,,'length':'2'}
+		args=arguments,
+		
+		value=arguments[1]||17;
+		
+	//business logic
+}
+```
+
+When someone others look at this code, 
+
+he would ask that "There is a magic number 17, why it must be 17 ?"
+
+<br/>
+
+In my way, I implement a filter layer, as this:
+
+```javascript
+(function($){
+	$.pluginManager.filter('pluginManager',{
+		init:filterInit
+	});
+	
+	function filterInit(value){
+		return [
+			value||17
+		];
+	}
+}(jQuery));
+```
+
+It does some arguments mapping,
+
+maps calling arguments to list, then passing it as arguments to the core implementation.
+
+so that, the core implementation would not see the dafaul setting.
+
+It is the correct way, 
+
+because the people who implement the core won't and don't want to care about the default setting.
+
+Let's begin!
+
+
+
