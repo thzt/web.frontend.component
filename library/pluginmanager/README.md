@@ -6,11 +6,11 @@ I think it should be :
 
 **html:**
 
-&lt;div id="container"&gt;&lt;/div&gt;
+	<div id="container"></div>
 
 **js:**
 
-$('#container').pluginName('a','b','c');
+	$('#container').pluginName('a','b','c');
 
 <br/>
 
@@ -48,7 +48,7 @@ On the other hand, the operations on the plugins, we must deal with it manually.
 
 For example, if we want to support 'init' opertaion, as below,
 
-$('#container').pluginName('init',value);
+	$('#container').pluginName('init',value);
 
 we must write the plugin library as this,
 
@@ -89,7 +89,7 @@ used to write plugins.
 
 Let's recreate the use case.
 
-$('#container').pluginName('init',value);
+	$('#container').pluginName('init',value);
 
 <br/>
 
@@ -120,7 +120,7 @@ Let's look at the extensibility of the plugin.
 
 If one day we want to use the plugin as this,
 
-$('#container').pluginName('getValue');
+	$('#container').pluginName('getValue');
 
 How to do this.
 
@@ -145,4 +145,4 @@ I need only to create a new file.
 		}
 	}(jQuery));
 
-Cool!
+Cool! isn't it?
