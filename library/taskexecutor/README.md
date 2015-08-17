@@ -100,7 +100,7 @@ $.sendAjax({
 });
 ```
 
-I don't what to say any more, the callback hell.
+I could not say any more, the callback hell.
 
 ## **More advanced**
 
