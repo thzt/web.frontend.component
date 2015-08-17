@@ -1,8 +1,10 @@
+## **Normal way**
+
 Usually, when I want to write a jquery plugin, 
 
 First I imagine its use case.
 
-I think it should be :
+I assume it should be:
 
 html:
 
@@ -15,8 +17,6 @@ js:
 ```javascript
 $('#container').pluginName('a','b','c');
 ```
-
-	
 
 <br/>
 
@@ -44,7 +44,7 @@ Then I can implement this interface.
 }(jQuery));
 ```
 
-<br/>
+## **Problem**
 
 However, all business logic must be write in one file,
 
@@ -89,11 +89,13 @@ and even handleInitMethod include 'init' as its first argument,
 
 I hope 'value' to be the first argument.
 
+```javascript
 function handleInitMethod(value){}
+```
 
-<br/>
+## **My solution**
 
-Because of these, I write a library called pluginmanager, 
+Because of these, I write a library called **pluginmanager**, 
 
 used to write plugins.
 
@@ -130,7 +132,7 @@ The implementation,
 
 It works!
 
-<br/>
+## **Extensibility**
 
 Let's look at the extensibility of the plugin.
 
