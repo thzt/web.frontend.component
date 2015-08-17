@@ -21,7 +21,9 @@ such as [modalwrapper](https://github.com/thzt/web.frontend.component/tree/maste
 
 [datepickerwrapper](https://github.com/thzt/web.frontend.component/tree/master/jqueryplugin/datepickerwrapper) capsulated datetimepicker.
 
-Why do I create these wrappers, you can see chinese blog: [设计的连续性](http://thzt.github.io/design/2015/03/20/design/)
+Why do I create these wrappers, you can see chinese blog: 
+
+[设计的连续性](https://thzt.github.io/design/2015/03/20/design/)
 
 <br/>
 
@@ -33,12 +35,27 @@ Most of libs, I create test-xxx.html to show the use-case of them separately.
 
 As you see, there would be so many jqueryplugins in real world project.
 
-So I create a library to manage them. 
-
-[pluginmanager](https://github.com/thzt/web.frontend.component/tree/master/library/pluginmanager)
+So I create a library to manage them: [pluginmanager](https://github.com/thzt/web.frontend.component/tree/master/library/pluginmanager)
 
 **Therefore I can write plugins in an uniform way.**
 
 For more details, you can see [testpluginmanager.html](https://github.com/thzt/web.frontend.component/blob/master/library/pluginmanager/testpluginmanager.html) in its own folder,
 
-or chinese blogs: [jQuery插件的把玩方式](http://thzt.github.io/design/2015/03/24/jquery-plugin/)
+or chinese blogs: 
+
+[jQuery插件的把玩方式](https://thzt.github.io/design/2015/03/24/jquery-plugin/)
+
+<br/>
+
+other related blog about the art of design are as follow:
+
+[封装的内涵](https://thzt.github.io/experience/2015/01/29/encapsulation/)
+
+[设计的正交性](https://thzt.github.io/design/2015/02/07/design-for-orthogonality/)
+
+[你有多少时间用来创造](https://thzt.github.io/experience/2015/03/06/creativity/)
+
+[可替换的设计策略](https://thzt.github.io/design/2015/03/31/choice/)
+
+[抽象的层次](https://thzt.github.io/experience/2015/08/11/hierarchy-of-abstraction/)
+
