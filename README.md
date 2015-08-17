@@ -1,13 +1,15 @@
 web.frontend.component
 ======================
 
+## **Big picture**
+
 Here are some commonly used web-frontend components.
 
 In [/library](https://github.com/thzt/web.frontend.component/tree/master/library) directory, there are some pure javascript libs.
 
 In [/jqueryplugin](https://github.com/thzt/web.frontend.component/tree/master/jqueryplugin) directory, there are some plugins based on jquery.
 
-<br/>
+## **Dependency**
 
 About "underscore", it is a library provided some functional-style methods,
 
@@ -25,13 +27,13 @@ Why do I create these wrappers, you can see chinese blog:
 
 [设计的连续性](https://thzt.github.io/design/2015/03/20/design/)
 
-<br/>
+## **Modularization**
 
 Dealing with each lib, I put all its utilities in one folder.
 
 Most of libs, I create test-xxx.html to show the use-case of them separately.
 
-<br/>
+## **More about jquery plugins**
 
 As you see, there would be so many jqueryplugins in real world project.
 
@@ -45,7 +47,7 @@ or chinese blogs:
 
 [jQuery插件的把玩方式](https://thzt.github.io/design/2015/03/24/jquery-plugin/)
 
-<br/>
+## **More about design**
 
 other related blog about the art of design are as follow:
 
