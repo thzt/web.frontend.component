@@ -35,15 +35,10 @@ As you see, there would be so many jqueryplugins in real world project.
 
 So I create a library to manage them. 
 
-[/library/pluginmanager/pluginmanager.js](https://github.com/thzt/web.frontend.component/tree/master/library/pluginmanager)
+[pluginmanager](https://github.com/thzt/web.frontend.component/tree/master/library/pluginmanager)
 
 **Therefore I can write plugins in an uniform way.**
 
 For more details, you can see [testpluginmanager.html](https://github.com/thzt/web.frontend.component/blob/master/library/pluginmanager/testpluginmanager.html) in its own folder,
 
 or chinese blogs: [jQuery插件的把玩方式](http://thzt.github.io/design/2015/03/24/jquery-plugin/)
-
-
-
-
-
