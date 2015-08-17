@@ -39,7 +39,7 @@ So I create a library to manage them.
 
 **Therefore I can write plugins in an uniform way.**
 
-For more details, you can see "testpluginmanager.html" in its own folder,
+For more details, you can see [testpluginmanager.html](https://github.com/thzt/web.frontend.component/blob/master/library/pluginmanager/testpluginmanager.html) in its own folder,
 
 or chinese blogs: [jQuery插件的把玩方式](http://thzt.github.io/design/2015/03/24/jquery-plugin/)
 
