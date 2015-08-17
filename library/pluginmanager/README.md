@@ -4,37 +4,45 @@ First I imagine its use case.
 
 I think it should be :
 
-**html:**
+html:
 
-	<div id="container"></div>
+```html
+<div id="container"></div>
+```
 
-**js:**
+js:
 
-	$('#container').pluginName('a','b','c');
+```javascript
+$('#container').pluginName('a','b','c');
+```
+
+	
 
 <br/>
 
 Then I can implement this interface.
 
-	(function($){
-		$.fn.extend({
-			pluginName:pluginName
-		});
-		
-		function pluginName(){
-			var 
-				//===$('#container')
-				$selectedElements=this,  
-				
-				//==={'0':'a','1':'b','2':'c','length':'3'}
-				args=arguments;
-				
-			//business logic
+```javascript
+(function($){
+	$.fn.extend({
+		pluginName:pluginName
+	});
+	
+	function pluginName(){
+		var 
+			//===$('#container')
+			$selectedElements=this,  
 			
-			//for chaining operation, $('#container').pluginName1(...).pluginName2(...)
-			return this;
-		}
-	}(jQuery));
+			//==={'0':'a','1':'b','2':'c','length':'3'}
+			args=arguments;
+			
+		//business logic
+		
+		//for chaining operation, $('#container').pluginName1(...).pluginName2(...)
+		return this;
+	}
+}(jQuery));
+```
 
 <br/>
 
@@ -48,28 +56,32 @@ On the other hand, the operations on the plugins, we must deal with it manually.
 
 For example, if we want to support 'init' opertaion, as below,
 
-	$('#container').pluginName('init',value);
+```javascript
+$('#container').pluginName('init',value);
+```
 
 we must write the plugin library as this,
 
-	function pluginName(){
-		var $selectedElements=this,  
-			args=arguments;
-			
-		switch(args[0]){
-		    case 'init':
-				return handleInitMethod.apply(this,arguments);
-				
-			//...
-		}
-	}
-
-	function handleInitMethod(){
-		var $selectedElements=this,  
+```javascript
+function pluginName(){
+	var $selectedElements=this,  
+		args=arguments;
 		
-			//==={'0':'init','1':value,,'length':'2'}
-			args=arguments;
+	switch(args[0]){
+	    case 'init':
+			return handleInitMethod.apply(this,arguments);
+			
+		//...
 	}
+}
+
+function handleInitMethod(){
+	var $selectedElements=this,  
+	
+		//==={'0':'init','1':value,,'length':'2'}
+		args=arguments;
+}
+```
 
 It is hard to maintain, 
 
@@ -89,28 +101,32 @@ used to write plugins.
 
 Let's recreate the use case.
 
-	$('#container').pluginName('init',value);
+```javascript
+$('#container').pluginName('init',value);
+```
 
 <br/>
 
 The implementation,
 
-	(function($){
-		$.pluginManager.extend('pluginManager',{
-			init:init
-		});
+```javascript
+(function($){
+	$.pluginManager.extend('pluginManager',{
+		init:init
+	});
+	
+	function init(){
+		var $selectedElements=this,
 		
-		function init(){
-			var $selectedElements=this,
+			//==={'0':value,'length':'1'}
+			args=arguments; 
+		
+			//business logic
 			
-				//==={'0':value,'length':'1'}
-				args=arguments; 
-			
-				//business logic
-				
-			return this;
-		}
-	}(jQuery));
+		return this;
+	}
+}(jQuery));
+```
 
 It works!
 
@@ -120,7 +136,9 @@ Let's look at the extensibility of the plugin.
 
 If one day we want to use the plugin as this,
 
-	$('#container').pluginName('getValue');
+```javascript
+$('#container').pluginName('getValue');
+```
 
 How to do this.
 
@@ -130,19 +148,21 @@ It is simpler than the original jquery way.
 
 I need only to create a new file.
 
-	(function($){
-		$.pluginManager.extend('pluginManager',{
-			getValue:getValue
-		});
+```javascript
+(function($){
+	$.pluginManager.extend('pluginManager',{
+		getValue:getValue
+	});
+	
+	function getValue(){
+		var $selectedElements=this,
 		
-		function getValue(){
-			var $selectedElements=this,
-			
-				//==={'length':'0'}
-				args=arguments; 
-			
-				//business logic
-		}
-	}(jQuery));
+			//==={'length':'0'}
+			args=arguments; 
+		
+			//business logic
+	}
+}(jQuery));
+```
 
 Cool! isn't it?
