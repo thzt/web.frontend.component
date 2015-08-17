@@ -17,32 +17,23 @@ $('#container').pluginName('a','b','c');
 Then I can implement this interface.
 
 	(function($){
-	
 		$.fn.extend({
-		
 			pluginName:pluginName
-			
 		});
 		
 		function pluginName(){
-		
 			var 
-			
 				//===$('#container')
-				
 				$selectedElements=this,  
 				
 				//==={'0':'a','1':'b','2':'c','length':'3'}
-				
 				args=arguments;
 				
 			//business logic
 			
 			//for chaining operation, $('#container').pluginName1(...).pluginName2(...)
-			
 			return this;
 		}
-	
 	}(jQuery));
 
 <br/>
@@ -62,31 +53,22 @@ $('#container').pluginName('init',value);
 we must write the plugin library as this,
 
 	function pluginName(){
-	
 		var $selectedElements=this,  
-		
 			args=arguments;
 			
 		switch(args[0]){
-		
 		    case 'init':
-			
 				return handleInitMethod.apply(this,arguments);
 				
 			//...
-			
 		}
-		
 	}
 
 	function handleInitMethod(){
-	
 		var $selectedElements=this,  
 		
 			//==={'0':'init','1':value,,'length':'2'}
-			
 			args=arguments;
-			
 	}
 
 It is hard to maintain, 
@@ -114,26 +96,20 @@ $('#container').pluginName('init',value);
 The implementation,
 
 	(function($){
-	
 		$.pluginManager.extend('pluginManager',{
-		
 			init:init
-			
 		});
 		
 		function init(){
-		
 			var $selectedElements=this,
 			
 				//==={'0':value,'length':'1'}
-				
 				args=arguments; 
 			
 				//business logic
 				
 			return this;
 		}
-	
 	}(jQuery));
 
 It works!
