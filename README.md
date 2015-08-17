@@ -1,23 +1,23 @@
 web.frontend.component
 ======================
 
-Here are some common used web-frontend component.
+Here are some commonly used web-frontend components.
 
-In [/library](https://github.com/thzt/web.frontend.component/tree/master/library) directory, there are some pure javascript lib.
+In [/library](https://github.com/thzt/web.frontend.component/tree/master/library) directory, there are some pure javascript libs.
 
 In [/jqueryplugin](https://github.com/thzt/web.frontend.component/tree/master/jqueryplugin) directory, there are some plugins based on jquery.
 
 <br/>
 
-About "underscore", it is a library provided some functional-style method,
+About "underscore", it is a library provided some functional-style methods,
 
-some operation on set would be simplified by using it.
+some operations on set would be simplified by using it.
 
 About "/bootstrap" "/bootstrap-datetimepicker" "/jquerymobile" "/webuploader", 
 
-only a few libs depend on them, I write xxx-wrapper to capsulate them.
+only a few libs depend on them, I write xxx-wrapper to encapsulate them.
 
-such as [modalwrapper](https://github.com/thzt/web.frontend.component/tree/master/jqueryplugin/modalwrapper) capsulated bootstrap modaldialog,
+such as [modalwrapper](https://github.com/thzt/web.frontend.component/tree/master/jqueryplugin/modalwrapper) encapsulated bootstrap modaldialog,
 
 [datepickerwrapper](https://github.com/thzt/web.frontend.component/tree/master/jqueryplugin/datepickerwrapper) capsulated datetimepicker.
 
