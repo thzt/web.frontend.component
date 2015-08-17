@@ -46,9 +46,9 @@ Then I can implement this interface.
 
 ## **Problem**
 
-However, all business logic must be write in one file,
+However, all business logic must be written in one file,
 
-because each time we call $.fn.extend({pluginName:...}) would override the older one.
+because each time when we call $.fn.extend({pluginName:...}) would override the older one.
 
 <br/>
 
