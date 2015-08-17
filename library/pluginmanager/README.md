@@ -16,34 +16,34 @@ $('#container').pluginName('a','b','c');
 
 Then I can implement this interface.
 
-(function($){
-
-	$.fn.extend({
+	(function($){
 	
-		pluginName:pluginName
+		$.fn.extend({
 		
-	});
+			pluginName:pluginName
+			
+		});
+		
+		function pluginName(){
+		
+			var 
+			
+				//===$('#container')
+				
+				$selectedElements=this,  
+				
+				//==={'0':'a','1':'b','2':'c','length':'3'}
+				
+				args=arguments;
+				
+			//business logic
+			
+			//for chaining operation, $('#container').pluginName1(...).pluginName2(...)
+			
+			return this;
+		}
 	
-	function pluginName(){
-	
-		var 
-		
-			//===$('#container')
-			
-			$selectedElements=this,  
-			
-			//==={'0':'a','1':'b','2':'c','length':'3'}
-			
-			args=arguments;
-			
-		//business logic
-		
-		//for chaining operation, $('#container').pluginName1(...).pluginName2(...)
-		
-		return this;
-	}
-
-}(jQuery));
+	}(jQuery));
 
 <br/>
 
@@ -61,33 +61,33 @@ $('#container').pluginName('init',value);
 
 we must write the plugin library as this,
 
-function pluginName(){
-
-	var $selectedElements=this,  
+	function pluginName(){
 	
-		args=arguments;
+		var $selectedElements=this,  
 		
-	switch(args[0]){
-	
-	    case 'init':
-		
-			return handleInitMethod.apply(this,arguments);
+			args=arguments;
 			
-		//...
+		switch(args[0]){
+		
+		    case 'init':
+			
+				return handleInitMethod.apply(this,arguments);
+				
+			//...
+			
+		}
 		
 	}
-	
-}
 
-function handleInitMethod(){
-
-	var $selectedElements=this,  
+	function handleInitMethod(){
 	
-		//==={'0':'init','1':value,,'length':'2'}
+		var $selectedElements=this,  
 		
-		args=arguments;
-		
-}
+			//==={'0':'init','1':value,,'length':'2'}
+			
+			args=arguments;
+			
+	}
 
 It is hard to maintain, 
 
@@ -113,28 +113,28 @@ $('#container').pluginName('init',value);
 
 The implementation,
 
-(function($){
-
-	$.pluginManager.extend('pluginManager',{
+	(function($){
 	
-		init:init
+		$.pluginManager.extend('pluginManager',{
 		
-	});
-	
-	function init(){
-	
-		var $selectedElements=this,
-		
-			//==={'0':value,'length':'1'}
+			init:init
 			
-			args=arguments; 
+		});
 		
-			//business logic
+		function init(){
+		
+			var $selectedElements=this,
 			
-		return this;
-	}
-
-}(jQuery));
+				//==={'0':value,'length':'1'}
+				
+				args=arguments; 
+			
+				//business logic
+				
+			return this;
+		}
+	
+	}(jQuery));
 
 It works!
 
@@ -154,25 +154,19 @@ It is simpler than the original jquery way.
 
 I need only to create a new file.
 
-(function($){
-
-	$.pluginManager.extend('pluginManager',{
-	
-		getValue:getValue
+	(function($){
+		$.pluginManager.extend('pluginManager',{
+			getValue:getValue
+		});
 		
-	});
-	
-	function getValue(){
-	
-		var $selectedElements=this,
-		
-			//==={'length':'0'}
+		function getValue(){
+			var $selectedElements=this,
 			
-			args=arguments; 
-		
-			//business logic
-	}
-	
-}(jQuery));
+				//==={'length':'0'}
+				args=arguments; 
+			
+				//business logic
+		}
+	}(jQuery));
 
 Cool!
