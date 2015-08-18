@@ -49,12 +49,12 @@ We can't set the data to the following html directly.
 <div id="informationPanel">
 	<div>
 		<span>Name:</span>
-		<span><!-- here write the name --></span>
+		<span id="name"><!-- here write the name --></span>
 	</div>
 	<div>
 		<span>Parents:</span>
-		<span><!-- here write parent name --></span>
-		<span><!-- here write parent name --></span>
+		<span id="father"><!-- here write parent name --></span>
+		<span id="mother"><!-- here write parent name --></span>
 	</div>
 </div>
 ```
@@ -66,6 +66,17 @@ $('#informationPanel>div:nth-child(2)>span:nth-child(3)').html(json.parents[1]);
 ```
 
 It's verbose.
+
+Or else, we should set 'id' to every tag, how about 10~50 tags ?
+
+```javascript
+$('#name').html(json.name);
+$('#father').html(json.parents[0]);
+$('#mother').html(json.parents[1]);
+...
+...
+...
+```
 
 ## **lightweight two-way binding library**
 
