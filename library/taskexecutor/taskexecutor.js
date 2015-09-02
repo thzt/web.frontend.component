@@ -37,6 +37,8 @@
                     executor.begin.call(executor, nextValue, task);
                 }, executor.interval);
             });
+
+	    return this;
         },
         pause: function () {
             var executor = this;
@@ -49,11 +51,14 @@
 
             executor.isPause = true;
             executor.timer = null;
+
+	    return this;
         },
         resume: function () {
             var executor = this;
 
             executor.begin.call(executor, executor.value, executor.task);
+	    return this;
         },
         stop: function () {
             var executor = this;
@@ -64,6 +69,8 @@
             executor.timer = null;
             executor.value = null;
             executor.task = null;
+
+	    return this;
         }
     };
 } (this));
