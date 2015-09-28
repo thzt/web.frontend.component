@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+
+    <script src="../../jquery/jquery-1.11.1.js"></script>
+    <script src="../../library/pluginmanager/pluginmanager.js"></script>
+    <script src="../../library/cyclicitem/cyclicitem.js"></script>
+
+    <link rel="stylesheet" href="dynamicmessage.css">
+    <script src="dynamicmessage.js"></script>
+
+    <style>
+	#button1{
+		position:absolute;
+		left:300px;
+	}
+    </style>
+
+</head>
+<body>
+
+    <div id="dynamicMessage">
+        <div>
+            <span>2015/07/08</span>
+            <span>当日累计237次</span>
+        </div>
+        <div>
+            <div></div>
+        </div>
+    </div>
+
+    <input id="button1" name="" type="button" value="setDataList"/>
+
+    <script>
+        $(function(){
+            $('#dynamicMessage')
+				.dynamicMessage('init')
+				.dynamicMessage('setDataList',[
+					{
+						name:'陈先生1',
+						value:'北京',
+						ext:'138xxxxxxxx'
+					},
+					{
+						name:'陈先生2',
+						value:'北京',
+						ext:'138xxxxxxxx'
+					},
+					{
+						name:'陈先生3',
+						value:'北京',
+						ext:'138xxxxxxxx'
+					},
+					{
+						name:'陈先生4',
+						value:'北京',
+						ext:'138xxxxxxxx'
+					},
+					{
+						name:'陈先生5',
+						value:'北京',
+						ext:'138xxxxxxxx'
+					}
+				]);
+
+			$('#button1').click(function(){
+				$('#dynamicMessage')
+					.dynamicMessage('setDataList',[
+						{
+							name:'陈先生66',
+							value:'北京',
+							ext:'138xxxxxxxx'
+						},
+						{
+							name:'陈先生77',
+							value:'北京',
+							ext:'138xxxxxxxx'
+						}
+					]);
+			});
+        });
+
+    </script>
+
+</body>
+</html>
