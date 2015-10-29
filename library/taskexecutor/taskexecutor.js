@@ -53,8 +53,8 @@
 			executor.pauseNext=false;
 
 			if(executor.isWaiting){
-				executor.task.call(executor,executor.nextValue,next.bind(executor));
 				executor.isWaiting=false;
+				executor.task.call(executor,executor.nextValue,next.bind(executor));
 				return this;
 			}
 			
