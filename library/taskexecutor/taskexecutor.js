@@ -1,76 +1,80 @@
 (function (global) {
-    global.taskExecutor = {
-        create: function () {
-            var interval = arguments[0].interval;
+    global.taskExecutor={
+        create: function(){
+            var interval=arguments[0].interval;
             return new TaskExecutor(interval);
         }
     };
 
     function TaskExecutor(interval) {
-        var executor = this;
+        var executor=this;
 
-        executor.interval = interval;
+        executor.interval=interval;
 
-        executor.isPause = null;
-        executor.timer = null;
-        executor.value = null;
-        executor.task = null;
+        executor.timer=null;
+        executor.task=null;	
+        executor.nextValue=null;
+		
+		executor.isWaiting=false;
+		executor.pauseNext=false;
 
         return executor;
     }
 
-    TaskExecutor.prototype = {
-        constructor: TaskExecutor,
-        begin: function (initialValue, task) {
-            var executor = this;
+    TaskExecutor.prototype={
+        constructor:TaskExecutor,
+		
+        begin:function(initialValue,task) {
+            var executor=this;
 
-            executor.isPause = false;
-            task(initialValue, function (nextValue) {
-                executor.value = nextValue;
-                executor.task = task;
+			executor.isWaiting=false;
+			executor.pauseNext=false;
 
-                if (executor.isPause) {
-                    return;
-                }
-
-                executor.timer = setTimeout(function () {
-                    executor.begin.call(executor, nextValue, task);
-                }, executor.interval);
-            });
-
+			executor.task=task;
+			executor.nextValue=initialValue;
+			
+			executor.task.call(executor,executor.nextValue,next.bind(executor));
 			return this;
         },
-        pause: function () {
-            var executor = this;
-
-            if (executor.isPause) {
-                return this;
-            }
-
-            global.clearTimeout(executor.timer);
-
-            executor.isPause = true;
-            executor.timer = null;
-
+        pause:function(){
+            var executor=this;
+			
+			if(executor.isWaiting){
+				global.clearTimeout(executor.timer);
+				return this;
+			}
+			
+			executor.pauseNext=true;
 			return this;
         },
-        resume: function () {
-            var executor = this;
+        resume:function(){
+            var executor=this;
 
-            executor.begin.call(executor, executor.value, executor.task);
-			return this;
-        },
-        stop: function () {
-            var executor = this;
+			executor.pauseNext=false;
 
-            global.clearTimeout(executor.timer);
-
-            executor.isPause = null;
-            executor.timer = null;
-            executor.value = null;
-            executor.task = null;
-
+			if(executor.isWaiting){
+				executor.task.call(executor,executor.nextValue,next.bind(executor));
+				executor.isWaiting=false;
+				return this;
+			}
+			
 			return this;
         }
     };
+
+	function next(nextValue){
+		var executor=this;
+		
+		executor.nextValue=nextValue;
+		executor.isWaiting=true;
+		
+		if(executor.pauseNext){
+			return;
+		}
+
+        executor.timer=setTimeout(function(){
+			executor.isWaiting=false;
+			executor.task.call(executor,executor.nextValue,next.bind(executor));
+        },executor.interval);
+	}
 } (this));

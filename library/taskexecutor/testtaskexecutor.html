@@ -8,12 +8,11 @@
 </head>
 <body>
     <input id="begin" type="button" value="begin" />
-    <input id="pause" type="button" value="pause" />
-    <input id="resume" type="button" value="resume" />
-    <input id="stop" type="button" value="stop" />
+    <input id="pause" type="button" value="pause" disabled />
+    <input id="resume" type="button" value="resume" disabled />
     <script>
         var executor = window.taskExecutor.create({
-            interval: 5000
+            interval: 3000
         });
 
         $('#begin').click(function () {
@@ -22,22 +21,65 @@
 
                 setTimeout(function () {
                     console.log('next task, value: ' + (value + 1));
+					
                     next(value + 1);
                 }, 5000);
             });
+
+			$('#begin').attr('disabled','disabled');
+			$('#pause').removeAttr('disabled');
+			$('#resume').attr('disabled','disabled');
         });
 
         $('#pause').click(function () {
             executor.pause();
+
+			$('#begin').removeAttr('disabled');
+			$('#pause').attr('disabled','disabled');
+			$('#resume').removeAttr('disabled');
         });
 
         $('#resume').click(function () {
             executor.resume();
+
+			$('#begin').attr('disabled','disabled');
+			$('#pause').removeAttr('disabled');
+			$('#resume').attr('disabled','disabled');
         });
 
-        $('#stop').click(function () {
-            executor.stop();
-        });
+	/*
+	   
+	   test case:
+
+	   case 1:
+	   (1) click begin
+	   (2) in 5s, before show "next task, ...", click pause
+	   expect: "next task, ..." would be shown, but "current task, ..." won't be shown again.
+
+	   case 2:
+	   (1) click begin
+	   (2) in 5s, before show "next task, ...", click pause
+	   (3) in 5s, before show "next task, ...", click resume
+	   expect: "next task, ..." would be shown again.
+
+	   case 3:
+	   (1) click begin
+	   (2) in 5s, before show "next task, ...", click pause
+	   (3) after show "next task, ...", click resume
+	   expect: "current task, ..." would be shown.
+
+	   case 4:
+	   (1) click begin
+	   (2) after show "next task, ...", click pause
+	   expect: "current task, ..." won't be shown again.
+
+	   case 5:
+	   (1) click begin
+	   (2) after show "next task, ...", click pause
+	   (3) click resume
+	   expect: "current task, ..." would be shown.
+	   
+	 */
     </script>
 </body>
 </html>
