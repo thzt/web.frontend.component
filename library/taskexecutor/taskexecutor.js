@@ -27,9 +27,6 @@
         begin:function(initialValue,task) {
             var executor=this;
 
-			executor.isWaiting=false;
-			executor.pauseNext=false;
-
 			executor.task=task;
 			executor.nextValue=initialValue;
 			
@@ -47,9 +44,10 @@
 			executor.pauseNext=true;
 			return this;
         },
-        resume:function(){
+        resume:function(value){
             var executor=this;
 
+			value!==undefined&&(executor.nextValue=value);
 			executor.pauseNext=false;
 
 			if(executor.isWaiting){
