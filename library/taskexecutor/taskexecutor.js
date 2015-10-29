@@ -38,13 +38,13 @@
                 }, executor.interval);
             });
 
-	    return this;
+			return this;
         },
         pause: function () {
             var executor = this;
 
             if (executor.isPause) {
-                return;
+                return this;
             }
 
             global.clearTimeout(executor.timer);
@@ -52,13 +52,13 @@
             executor.isPause = true;
             executor.timer = null;
 
-	    return this;
+			return this;
         },
         resume: function () {
             var executor = this;
 
             executor.begin.call(executor, executor.value, executor.task);
-	    return this;
+			return this;
         },
         stop: function () {
             var executor = this;
@@ -70,7 +70,7 @@
             executor.value = null;
             executor.task = null;
 
-	    return this;
+			return this;
         }
     };
 } (this));
