@@ -186,7 +186,7 @@ By the way, I also implement three other interface.
 ```javascript
 executor.pause();
 executor.resume();
-executor.stop();
+executor.resume(5);
 ```
 
 You can have a try.
