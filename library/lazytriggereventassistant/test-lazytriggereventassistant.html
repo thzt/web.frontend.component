@@ -55,8 +55,8 @@
 			$(window).resize(function(){
 				var value=+new Date;
 				
-				assistantForSyncTask.trigger(value);
-				assistantForAsyncTask.trigger(value);
+				assistantForSyncTask.execute(value);
+				assistantForAsyncTask.execute(value);
 			});
 		}());
         </script>

@@ -20,7 +20,7 @@
 	LazyTriggerEventAssistant.prototype={
 		constructor:LazyTriggerEventAssistant,
 
-		trigger:function(value){
+		execute:function(value){
 			var instance=this,
 
 				task=instance.task,
