@@ -61,11 +61,11 @@ $.sendAjax({
 });
 ```
 
-## **Flexibility and extensibility **
+## **Flexibility and extensibility**
 
 I can not assume how a library would be used in the future.
 
-and I also can't assume it would always be a AJAX request underlaying.
+and I also can't assume it would always be a AJAX request library.
 
 So I need a higher-level abstraction.
 
@@ -77,7 +77,7 @@ $.interaction({
 });
 ```
 
-Finally, **$.sendAjaxByExtension** is only an instance(concretion) of the abstraction.
+Finally, the **$.sendAjaxByExtension** is only an instance(concretion) of the abstraction.
 
 ```javascript
 $.sendAjaxByExtension({
