@@ -61,3 +61,5 @@ other related blog about the art of design are as follow:
 
 [抽象的层次](https://thzt.github.io/hierarchy-of-abstraction/)
 
+[消除重复与可复用相距多远](http://thzt.github.io/reuse-oriented-programming/)
+
