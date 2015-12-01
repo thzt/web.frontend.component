@@ -25,7 +25,7 @@ such as [modalwrapper](https://github.com/thzt/web.frontend.component/tree/maste
 
 Why do I create these wrappers, you can see chinese blog: 
 
-[设计的连续性](https://thzt.github.io/design/2015/03/20/design/)
+[设计的连续性](https://thzt.github.io/design/)
 
 ## **Modularization**
 
@@ -45,19 +45,19 @@ For more details, you can see [testpluginmanager.html](https://github.com/thzt/w
 
 or chinese blogs: 
 
-[jQuery插件的把玩方式](https://thzt.github.io/design/2015/03/24/jquery-plugin/)
+[jQuery插件的把玩方式](https://thzt.github.io/jquery-plugin/)
 
 ## **More about design**
 
 other related blog about the art of design are as follow:
 
-[封装的内涵](https://thzt.github.io/experience/2015/01/29/encapsulation/)
+[封装的内涵](https://thzt.github.io/encapsulation/)
 
-[设计的正交性](https://thzt.github.io/design/2015/02/07/design-for-orthogonality/)
+[设计的正交性](https://thzt.github.io/design-for-orthogonality/)
 
-[你有多少时间用来创造](https://thzt.github.io/experience/2015/03/06/creativity/)
+[你有多少时间用来创造](https://thzt.github.io/creativity/)
 
-[可替换的设计策略](https://thzt.github.io/design/2015/03/31/choice/)
+[可替换的设计策略](https://thzt.github.io/choice/)
 
-[抽象的层次](https://thzt.github.io/experience/2015/08/11/hierarchy-of-abstraction/)
+[抽象的层次](https://thzt.github.io/hierarchy-of-abstraction/)
 
