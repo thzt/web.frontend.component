@@ -12,15 +12,9 @@
 	}
 	
 	function InstanceCreation(selector){
-		var instance=this,
-			elements=select(selector);
-			
-		[].forEach.call(elements,function(v,i){
-			instance[i]=v;
-		});
-		
-		instance.length=elements.length;		
-		return this;
+		var instance=this;
+
+		return jQuery.select.call(instance,selector);
 	}
 	
 	function extend(material){
@@ -36,21 +30,4 @@
 		
 		return this;
 	};
-	
-	function select(selector){
-		switch(true){
-			
-			//use case: $('input')
-			case typeof selector==='string':
-				return global.document.querySelectorAll(selector);
-			
-			//use case: $([object NodeList])
-			case selector.length!=null:
-				return selector;
-				
-			//use case: $([object HTMLInputElement])
-			case selector.length==null:
-				return [selector];			
-		}
-	}
 }(window));
