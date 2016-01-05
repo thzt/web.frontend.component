@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8"/>
+        <title>Document</title>
+
+        <script src="tmpl.js"></script>
+    </head>
+    <body>
+
+        <script id="tmpl1" type="text/html">
+			a<% value %>b
+		</script>
+
+        <script>
+		(function(){
+			var data={
+				value:1
+			};
+			var source=document.querySelector('#tmpl1').innerHTML;
+			var target=window.tmpl(source,data);
+
+			alert(target);
+		}());
+        </script>
+    </body>
+</html>
