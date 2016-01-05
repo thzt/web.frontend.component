@@ -1,0 +1,17 @@
+.thzt_horizentalmenu{
+	width:100%;
+	background:#031196;
+	padding:0 20px;
+}
+
+.thzt_horizentalmenu>table{
+	border-collapse:collapse;
+}
+.thzt_horizentalmenu>table>tbody>tr>td{
+	padding:10px 20px;
+	color:white;
+}
+
+.thzt_horizentalmenu_active{
+	background: #3385ff;
+}

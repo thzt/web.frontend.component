@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8"/>
+        <title>Document</title>
+
+        <script src="../../jquery/jquery-1.11.1.js"></script>
+
+        <script src="../../library/condition/condition.js"></script>
+		<script src="../../library/simplepluginmanager/simplepluginmanager.js"></script>
+
+        <link href="horizentalmenu.css" rel="stylesheet"/>
+        <script src="horizentalmenu.js"></script>
+
+        <style>
+		body{
+			margin:0;
+			padding:0;
+		}
+        </style>
+    </head>
+    <body>
+
+        <div id="horizentalMenu" class="thzt_horizentalmenu">
+            <table>
+                <tr>
+                    <td class="thzt_horizentalmenu_active" data-value="a">
+                        主页
+					</td>
+                    <td data-value="b">
+                        材料
+					</td>
+                    <td data-value="c">
+                        账单
+					</td>
+                </tr>
+            </table>
+		</div>
+
+        <script>
+		$(function(){
+			var item=$('#horizentalMenu').horizentalMenu('getSelectedItem');
+			console.log(JSON.stringify(item));
+
+			setTimeout(function(){
+				$('#horizentalMenu').horizentalMenu('selectItemByIndex',1);
+			},1000);
+
+			setTimeout(function(){
+				$('#horizentalMenu').horizentalMenu('selectItemByValue','c');
+			},2000);
+		});
+        </script>
+    </body>
+</html>
