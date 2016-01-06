@@ -9,13 +9,15 @@
     <body>
 
         <script id="tmpl1" type="text/html">
-			a<% value %>b
+			a<% items[0].value %>b
 		</script>
 
         <script>
 		(function(){
 			var data={
-				value:1
+				items:[{
+					value:1
+				}]
 			};
 			var source=document.querySelector('#tmpl1').innerHTML;
 			var target=window.tmpl(source,data);
