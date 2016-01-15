@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8"/>
+        <title>Document</title>
+
+        <script src="../../jquery/jquery-1.11.1.js"></script>
+		
+        <script src="../../library/pluginmanager/pluginmanager.js"></script>
+		
+        <script src="../../jqueryplugin/bindtemplate/bindtemplate_get.js"></script>
+        <script src="../../jqueryplugin/bindtemplate/bindtemplate_set.js"></script>
+        <script src="bindtemplate_config.js"></script>
+
+        <link href="evidencetree.css" rel="stylesheet"/>
+        <script src="evidencetree.js"></script>
+    </head>
+    <body>
+
+		<table class="evidencetree" id="evidenceTree">
+			<thead>
+				<tr>
+					<td>编号</td>
+					<td>页数</td>
+					<td>名称</td>
+					<td>分组</td>
+					<td>
+						<input type="button" value="添加组" data-operation="addGroup" />
+					</td>
+				</tr>
+			</thead>
+
+			<!-- group1 -->
+			<tbody>
+				<tr>
+					<td data-model="[0].groupName" colspan="4">1</td>
+					<td>
+						<input type="button" value="添加项" data-operation="addItem" />
+						<input type="button" value="删除组" data-operation="deleteGroup" />
+					</td>
+				</tr>
+
+				<!-- item1 -->
+				<tr data-item-header>
+					<td data-model="[0].groups[0].evidenceItems[0].number">2</td>
+					<td data-model="[0].groups[0].evidenceItems[0].index">3</td>
+					<td data-model="[0].groups[0].evidenceItems[0].evidence">4</td>
+					<td data-model="[0].groups[0].evidenceName" rowspan="3">5</td>
+					<td rowspan="3">
+						<input type="button" value="编辑项" data-operation="editItem" />
+						<input type="button" value="删除项" data-operation="deleteItem" />
+					</td>
+				</tr>
+				<tr>
+					<td data-model="[0].groups[0].evidenceItems[1].number">6</td>
+					<td data-model="[0].groups[0].evidenceItems[1].index">7</td>
+					<td data-model="[0].groups[0].evidenceItems[1].evidence">8</td>
+				</tr>
+				<tr>
+					<td data-model="[0].groups[0].evidenceItems[2].number">9</td>
+					<td data-model="[0].groups[0].evidenceItems[2].index">10</td>
+					<td data-model="[0].groups[0].evidenceItems[2].evidence">11</td>
+				</tr>
+				
+			</tbody>
+
+			<!-- group2 -->
+			<tbody>
+				<tr>
+					<td data-model="[1].groupName"  colspan="4">12</td>
+					<td>
+						<input type="button" value="添加项" data-operation="addItem" />
+						<input type="button" value="删除组" data-operation="deleteGroup" />
+					</td>
+				</tr>
+
+				<!-- item1 -->
+				<tr data-item-header>
+					<td data-model="[1].groups[0].evidenceItems[0].number">13</td>
+					<td data-model="[1].groups[0].evidenceItems[0].index">14</td>
+					<td data-model="[1].groups[0].evidenceItems[0].evidence">15</td>
+					<td data-model="[1].groups[0].evidenceName" rowspan="2">16</td>
+					<td rowspan="2">
+						<input type="button" value="编辑项" data-operation="editItem" />
+						<input type="button" value="删除项" data-operation="deleteItem" />
+					</td>
+				</tr>
+				<tr>
+					<td data-model="[1].groups[0].evidenceItems[1].number">17</td>
+					<td data-model="[1].groups[0].evidenceItems[1].index">18</td>
+					<td data-model="[1].groups[0].evidenceItems[1].evidence">19</td>
+				</tr>
+
+				<!-- item2 -->
+				<tr data-item-header>
+					<td data-model="[1].groups[1].evidenceItems[0].number">20</td>
+					<td data-model="[1].groups[1].evidenceItems[0].index">21</td>
+					<td data-model="[1].groups[1].evidenceItems[0].evidence">22</td>
+					<td data-model="[1].groups[1].evidenceName" rowspan="3">23</td>
+					<td rowspan="3">
+						<input type="button" value="编辑项" data-operation="editItem" />
+						<input type="button" value="删除项" data-operation="deleteItem" />
+					</td>
+				</tr>
+				<tr>
+					<td data-model="[1].groups[1].evidenceItems[1].number">24</td>
+					<td data-model="[1].groups[1].evidenceItems[1].index">25</td>
+					<td data-model="[1].groups[1].evidenceItems[1].evidence">26</td>
+				</tr>
+				<tr>
+					<td data-model="[1].groups[1].evidenceItems[2].number">27</td>
+					<td data-model="[1].groups[1].evidenceItems[2].index">28</td>
+					<td data-model="[1].groups[1].evidenceItems[2].evidence">29</td>
+				</tr>
+				
+			</tbody> 
+		</table>
+
+        <input id="getData" type="button" value="getData"/>
+
+        <script>
+		$(function(){
+			$('#evidenceTree').evidenceTree('bindEvent');
+
+			$('#getData').click(function(){
+				var json=$('#evidenceTree').bindTemplate('getData');
+				alert(JSON.stringify(json,null,4));
+			});
+		});
+        </script>
+    </body>
+</html>

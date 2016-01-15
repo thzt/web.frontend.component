@@ -1,0 +1,17 @@
+.evidencetree{
+	border-collapse:collapse;
+	width:100%;
+}
+.evidencetree>thead>tr>td,.evidencetree>tbody>tr>td{
+	border:1px solid;
+	padding:5px;
+}
+.evidencetree>thead>tr>td{
+	font-weight:bold;
+}
+.evidencetree>thead>tr>td:last-child{
+	width:200px;
+}
+.evidencetree>thead>tr>td:first-child,.evidencetree>thead>tr>td:nth-child(2) {
+	width:60px;
+}
