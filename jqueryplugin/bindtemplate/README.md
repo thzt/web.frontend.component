@@ -115,6 +115,13 @@ I select the way AngularJS does.
 ```
 
 ```javascript
+var json={
+	name: 'Jhon',
+	parents: ['Tom','Jerry']
+}
+```
+
+```javascript
 $('#informationPanel').bindTemplate('setData',{
 	data:json
 })
