@@ -3,12 +3,23 @@
 	global.yieldContinuation=yieldContinuation;
 
 	function yieldContinuation(generator){
+		var iterator=generator();
 
-		var iterator=generator(),
-			yieldFunc=iterator.next().value,
-			continuation=iterator.next.bind(iterator);
+		recursiveCore.call(iterator);
+	}
 
-		yieldFunc(continuation);
+	function recursiveCore(feedback){
+		var iterator=this,
+			result=iterator.next(feedback);
+
+		if(result.done){
+			return;
+		}
+
+		var yieldFunc=result.value;
+		yieldFunc(function(v){
+			recursiveCore.call(iterator,v);
+		});
 	}
 	
 }(window));

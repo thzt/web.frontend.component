@@ -12,13 +12,21 @@
 		(function(global){
 
 			global.yieldContinuation(function*(){
-				var v=yield function(continuation){
+				var v1=yield function(continuation){
 					setTimeout(function(){
-						continuation('Hello world');
+						continuation('Hello');
 					},1500);
 				};
 
-				console.warn(v);
+				console.warn(v1);
+
+				var v2=yield function(continuation){
+					setTimeout(function(){
+						continuation('World');
+					},1500);
+				};
+
+				console.warn(v2);
 			});
 			
 		}(window));

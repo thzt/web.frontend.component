@@ -5,10 +5,10 @@
 	function yieldPromise(generator){
 		var iterator=generator();
 
-		recusiveCore.call(iterator);
+		recursiveCore.call(iterator);
 	}
 
-	function recusiveCore(feedback){
+	function recursiveCore(feedback){
 		var iterator=this,
 			result=iterator.next(feedback);
 
@@ -18,7 +18,7 @@
 
 		var promise=result.value;
 		Promise.resolve(promise).then(function(v){
-			recusiveCore.call(iterator,v);
+			recursiveCore.call(iterator,v);
 		});
 	}
 	
