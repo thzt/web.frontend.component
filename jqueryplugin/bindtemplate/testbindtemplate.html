@@ -1,152 +1,45 @@
 <!doctype html>
 <html>
-<head>
-    <meta charset="utf-8">
-    <title>test bind template</title>
-    <script src="../../jquery/jquery-1.11.1.js" type="text/javascript"></script>
-    <script src="../../library/pluginmanager/pluginmanager.js" type="text/javascript"></script>
-    <script src="bindtemplate_set.js" type="text/javascript"></script>
-    <script src="bindtemplate_get.js" type="text/javascript"></script>
-    <script src="bindtemplate_config.js" type="text/javascript"></script>
-    <script>
-        $(function () {
-            var json1 = [
-                    {
-                        A: 1,
-                        B: [
-                            2,
-                            3
-                        ]
-                    },
-                    [
-                        4,
-                        5
-                    ]
-                ],
-                json2 = {
-                    E: 6,
-                    F: [
-                        {
-                            G: 7
-                        },
-                        {
-                            H: [
-                                8
-                            ],
-                            I: 9
-                        }
-                    ]
-                },
-                json3 = {
-                    J: [
-                        { K: 10 },
-                        11
-                    ]
+	<head>
+		<meta charset="utf-8">
+		<title>test bind template</title>
+		
+		<script src="../../jquery/jquery-1.11.1.js" type="text/javascript"></script>
+		
+		<script src="../../library/pluginmanager/pluginmanager.js" type="text/javascript"></script>
+		
+		<script src="bindtemplate_get.js" type="text/javascript"></script>
+		<script src="bindtemplate_set.js" type="text/javascript"></script>
+		<script src="bindtemplate_config.js" type="text/javascript"></script>
 
-                },
-                json4 = [
-                    ['a', 'b'],
-                    ['c', 'd']
-                ];
+	</head>
+	<body>
 
-            console.log('begin set');
+        <div id="informationPanel">
+			<div>
+				<span>Name:</span>
+				<span data-model="name"><!-- here write the name --></span>
+			</div>
+			<div>
+				<span>Parents:</span>
+				<span data-model="parents[0]"><!-- here write parent name --></span>
+				<span data-model="parents[1]"><!-- here write parent name --></span>
+			</div>
+		</div>
 
-            $('#div1,#div2,#div3,#table1')
-                .bindTemplate('setData', {
-                    attr: 'data-model-1',
-                    data: json1
-                }).bindTemplate('setData', {
-                    attr: 'data-model-2',
-                    data: json2
-                }).bindTemplate('setData', {
-                    attr: 'data-model-3',
-                    data: json3,
-                    set: function (value) {
-                        var $field = this;
+        <script>
+		(function(){
+			var source={
+				name: 'Jhon',
+				parents: ['Tom','Jerry']
+			}
+			$('#informationPanel').bindTemplate('setData',{
+				data:source
+			});
 
-                        $field.html(JSON.stringify(value));
-                    }
-                })
-                .bindTemplate('setData', {
-                    data: json4
-                });
-
-            console.log('\nbegin get');
-
-            var pageData1 = $('#div1,#div2,#div3').bindTemplate('getData', {
-                attr: 'data-model-1'
-            }),
-                pageData2 = $('#div1,#div2,#div3').bindTemplate('getData', {
-                    attr: 'data-model-2'
-                }),
-                pageData3 = $('#div1,#div2,#div3').bindTemplate('getData', {
-                    attr: 'data-model-3',
-                    get: function () {
-                        return [
-                            { K: 12 },
-                            13
-                        ];
-                    }
-                }),
-                pageData4 = $('#div1,#div2,#div3,#table1').bindTemplate('getData');
-
-            alert(JSON.stringify(pageData1, null, 10));
-            alert(JSON.stringify(pageData2, null, 10));
-            alert(JSON.stringify(pageData3, null, 10));
-            alert(JSON.stringify(pageData4, null, 10));
-        });
-    </script>
-</head>
-<body>
-    <div id="div1">
-        <div>
-            <table>
-                <tr>
-                    <td>
-                        <input data-model-2="F[1].H[0]" type="text" />
-                    </td>
-                    <td>
-                        <input data-model-1="[0].B[0]" type="text" />
-                    </td>
-                </tr>
-            </table>
-            <div data-model-1="[1][0]">
-                <select data-model-1="[0].A">
-                    <option value="0">0</option>
-                    <option value="1">1</option>
-                </select>
-            </div>
-            <input data-model-2="F[1].I" type="text" />
-        </div>
-    </div>
-    <div id="div2" data-model-1="[0].B[1]">
-        <input data-model-2="E" type="text" />
-        <ul>
-            <li><span data-model-2="F[0].G"></span></li>
-            <li><span data-model-1="[1][1]"></span></li>
-        </ul>
-    </div>
-    <div id="div3">
-        <p data-model-3="J">
-        </p>
-    </div>
-    <table id="table1">
-        <tr>
-            <td>
-                <span data-model="[0][0]"></span>
-            </td>
-            <td>
-                <span data-model="[0][1]"></span>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <span data-model="[1][0]"></span>
-            </td>
-            <td>
-                <span data-model="[1][1]"></span>
-            </td>
-        </tr>
-    </table>
-</body>
+			var result=$('#informationPanel').bindTemplate('getData');
+			alert(JSON.stringify(result,null,4));
+		}());
+        </script>
+	</body>
 </html>

@@ -6,9 +6,35 @@
 
 (function ($) {
     $.pluginManager.filter('bindTemplate', {
-        setData: filterSetData,
-        getData: filterGetData
+		getData: filterGetData,
+        setData: filterSetData
+        
     });
+
+    function filterGetData() {
+        var $selector = this,
+
+            attr = arguments[0] && arguments[0].attr,
+            get = arguments[0] && arguments[0].get;
+
+        return [{
+            attr: attr || 'data-model',
+            get: get || function () {
+                var $item = this;
+
+                switch (true) {
+                    case $item.is(':text,:password,textarea,select'):
+                        return $item.val();
+
+                    case $item.is(':checkbox,:radio'):
+                        return $item.is(':checked');
+
+                    default:
+                        return $item.html();
+                }
+            }
+        }];
+    }
 
     function filterSetData() {
         var $selector = this,
@@ -24,7 +50,7 @@
                 var $item = this;
                 
                 switch (true) {
-                    case $item.is(':text,textarea,select'):
+                    case $item.is(':text,:password,textarea,select'):
                         $item.val(value);
                         break;
 
@@ -32,51 +58,9 @@
                         $item.attr('checked', 'checked');
                         break;
 
-                    case $item.is('span'):
-                        $item.html(value);
-                        break;
-
-                    case $item.is('div'):
-                    case $item.is('tr'):
-                    case $item.is('td'):
-                        $item.attr('data-value', value);
-                        break;
-
                     default:
+					    $item.html(value);
                         break;
-                }
-            }
-        }];
-    }
-
-    function filterGetData() {
-        var $selector = this,
-
-            attr = arguments[0] && arguments[0].attr,
-            get = arguments[0] && arguments[0].get;
-
-        return [{
-            attr: attr || 'data-model',
-            get: get || function () {
-                var $item = this;
-
-                switch (true) {
-                    case $item.is(':text,textarea,select'):
-                        return $item.val();
-
-                    case $item.is(':checkbox,:radio'):
-                        return $item.is(':checked');
-
-                    case $item.is('span'):
-                        return $item.html().trim();
-
-                    case $item.is('div'):
-                    case $item.is('tr'):
-                    case $item.is('td'):
-                        return $item.attr('data-value');
-
-                    default:
-                        return null;
                 }
             }
         }];
