@@ -8,7 +8,6 @@
     $.pluginManager.filter('bindTemplate', {
 		getData: filterGetData,
         setData: filterSetData
-        
     });
 
     function filterGetData() {
@@ -20,18 +19,23 @@
         return [{
             attr: attr || 'data-model',
             get: get || function () {
-                var $item = this;
+                var $item = this,
+					caseList=$().bindTemplate('getCaseList'),
+					result;
 
-                switch (true) {
-                    case $item.is(':text,:password,textarea,select'):
-                        return $item.val();
+				caseList.every(function(v){
+					var predicator=v.predicator,
+						getter=v.getter;
 
-                    case $item.is(':checkbox,:radio'):
-                        return $item.is(':checked');
+					if(predicator.call($item)){
+						result=getter.call($item);
+						return false;
+					}
 
-                    default:
-                        return $item.html();
-                }
+					return true;
+				});
+
+				return result;
             }
         }];
     }
@@ -47,21 +51,20 @@
             attr: attr || 'data-model',
             data: data,
             set: set || function (value) {
-                var $item = this;
-                
-                switch (true) {
-                    case $item.is(':text,:password,textarea,select'):
-                        $item.val(value);
-                        break;
+                var $item = this,
+					caseList=$().bindTemplate('getCaseList');
+				
+				caseList.every(function(v){
+					var predicator=v.predicator,
+						setter=v.setter;
 
-                    case $item.is(':checkbox,:radio'):
-                        $item.attr('checked', 'checked');
-                        break;
+					if(predicator.call($item,value)){
+						setter.call($item,value);
+						return false;
+					}
 
-                    default:
-					    $item.html(value);
-                        break;
-                }
+					return true;
+				});
             }
         }];
     }
