@@ -1,9 +1,4 @@
 //use
-//$.fn.add
-//$.fn.find
-//$.fn.filter
-//$.fn.attr
-//$.fn.each
 
 (function ($) {
     $.pluginManager.extend('bindTemplate', {
@@ -15,7 +10,7 @@
 
     function addCase(handleCase){
 		var $container=$(this);
-
+		
 		caseList.push(handleCase);
 		return this;
 	}

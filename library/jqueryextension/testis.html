@@ -1,28 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>test html</title>
-	
-	<script src="../jquerycore/jquerycore.js"></script>
-	
-	<script src="each.js"></script>
-	<script src="find.js"></script>
-	<script src="is.js"></script>
-</head>
-<body>
-	
-	<div id="div1" class="test" data-model="1"></div>
-	<input id="text1" type="text">
-	
-	<script>
+	<head>
+		<meta charset="UTF-8">
+		<title>test is</title>
+		
+		<script src="../jquerycore/jquerycore.js"></script>
+		<script src="../jquerycore/jquerycore_config.js"></script>
+		
+		<script src="each.js"></script>
+		<script src="find.js"></script>
+		<script src="is.js"></script>
+	</head>
+	<body>
+		
+		<div id="div1" class="test" data-model="1"></div>
+		<input id="text1" type="text">
+		
+		<script>
 		(function($){
 			
 			alert($('#div1').is('[data-model=2],.test'));
 			alert($('#text1').is('input[type=text]'));
 			
 		}(jQuery));
-	</script>
-	
-</body>
+		</script>
+		
+	</body>
 </html>

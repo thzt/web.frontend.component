@@ -1,8 +1,4 @@
-//use:
-//$.fn.val
-//$.fn.html
-//$.fn.attr
-//$.fn.is
+//use
 
 (function ($) {
     $.pluginManager.filter('bindTemplate', {
@@ -53,7 +49,7 @@
             set: set || function (value) {
                 var $item = this,
 					caseList=$().bindTemplate('getCaseList');
-				
+
 				caseList.every(function(v){
 					var predicator=v.predicator,
 						setter=v.setter;

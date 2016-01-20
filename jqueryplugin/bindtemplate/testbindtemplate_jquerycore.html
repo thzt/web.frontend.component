@@ -5,6 +5,8 @@
 	<title>test bindTemplate with jQueryCore</title>
 	
 	<script src="../../library/jquerycore/jquerycore.js"></script>
+	<script src="../../library/jquerycore/jquerycore_config.js"></script>
+	
 	<script src="../../library/jqueryextension/find.js"></script>
 	<script src="../../library/jqueryextension/add.js"></script>
 	<script src="../../library/jqueryextension/attr.js"></script>
@@ -16,67 +18,40 @@
 	<script src="../../library/condition/condition.js"></script>
 	<script src="../../library/simplepluginmanager/simplepluginmanager.js"></script>
 	
-	<script src="bindtemplate_set.js"></script>
-	<script src="bindtemplate_get.js"></script>
-	<script src="bindtemplate_config.js"></script>
+	<script src="bindtemplate_get.js" type="text/javascript"></script>
+	<script src="bindtemplate_set.js" type="text/javascript"></script>
+	<script src="bindtemplate_case.js" type="text/javascript"></script>
+	<script src="bindtemplate_config.js" type="text/javascript"></script>
+	<script src="bindtemplate_case_extension.js" type="text/javascript"></script>
 </head>
 <body>
 	
-	<div id="div1">
-		<input type="text" data-model="a" value="1">
-		<input type="text" data-model="b[0]" value="2">
-		<input type="text" data-model="b[1]" value="3">
-		<input type="checkbox" data-model="c">
-		
-		<table>
-			<tr>
-				<td><span data-model="d[0][0]">1</span></td>
-				<td><span data-model="d[0][1]">2</span></td>
-				<td><span data-model="d[0][2]">3</span></td>
-				<td><span data-model="d[0][3]">4</span></td>
-			</tr>
-			<tr>
-				<td><span data-model="d[1][0]">5</span></td>
-				<td><span data-model="d[1][1]">6</span></td>
-				<td><span data-model="d[1][2]">7</span></td>
-				<td><span data-model="d[1][3]">8</span></td>
-			</tr>
-			<tr>
-				<td><span data-model="d[2][0]">9</span></td>
-				<td><span data-model="d[2][1]">10</span></td>
-				<td><span data-model="d[2][2]">11</span></td>
-				<td><span data-model="d[2][3]">12</span></td>
-			</tr>
-		</table>
+	<div id="informationPanel">
+		<div>
+			<span>Name:</span>
+            <span data-model="name"></span>
+		</div>
+		<div>
+			<span>Parents:</span>
+            <input data-model="parents[0]" type="text" />
+            <input data-model="parents[1]" type="text" />
+		</div>
 	</div>
-	
-	<script>
-		(function($){
-			
-			//get data
-			var data=$('#div1').bindTemplate('getData');			
-			console.log(JSON.stringify(data,null,4));
-			
-			//set data
-			var json={
-				a:4,
-				b:[5,6],
-				c:true,
-				d:[
-					['a','b','c','d'],
-					['e','f','g','h'],
-					['i','j','k','l'],
-					['m','n','o','p']
-				]
-			};
-			
-			setTimeout(function(){
-				$('#div1').bindTemplate('setData',{
-					data:json
-				});
-			},2000);
-			
-		}(jQuery));
-	</script>
+
+    <script>
+	(function(){
+		var source={
+			name: 'Jhon',
+			parents: ['Tom','Jerry']
+		}
+		
+		$('#informationPanel').bindTemplate('setData',{
+			data:source
+		});
+
+		var result=$('#informationPanel').bindTemplate('getData');
+		alert(JSON.stringify(result,null,4));
+	}());
+    </script>
 </body>
 </html>

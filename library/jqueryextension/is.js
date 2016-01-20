@@ -14,7 +14,7 @@
 			
 		[].every.call(selectors,function(item){
 			var $result=$elements.filter(item);
-			
+
 			if($result.length!==0){
 				isValid=true;
 				return false;

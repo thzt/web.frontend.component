@@ -1,8 +1,13 @@
+//use
+//$.fn.val
+//$.fn.html
+//$.fn.is
+
 (function(){
 	$().bindTemplate('addCase',{
 		predicator:function(value){
 			var $item=this;
-
+			
 			return $item.is(':text,:password,textarea,select');
 		},
 		getter:function(){

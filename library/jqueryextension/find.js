@@ -224,6 +224,9 @@
 			
 			case name==='checked':
 				return $elements.filter('[checked]');
+
+		    case name==='password':
+			    return $elements.filter('input[type=password]');
 			
 			default:
 				return $elements;

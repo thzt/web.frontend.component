@@ -1,7 +1,7 @@
 (function(global){
 	
 	//export
-	global.jQuery=jQuery;
+	global.jQuery=global.$=jQuery;
 	
 	//private region	
 	jQuery.prototype=InstanceCreation.prototype;
