@@ -2,15 +2,23 @@
 
 (function ($) {
     $.pluginManager.extend('bindTemplate', {
-        addCase:addCase,
+        addHeadCase:addHeadCase,
+		addTailCase:addTailCase,
 		getCaseList:getCaseList
     });
 
 	var caseList=[];
 
-    function addCase(handleCase){
+    function addHeadCase(handleCase){
 		var $container=$(this);
 		
+		caseList.unshift(handleCase);
+		return this;
+	}
+
+	function addTailCase(handleCase){
+		var $container=$(this);
+
 		caseList.push(handleCase);
 		return this;
 	}

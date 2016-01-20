@@ -48,8 +48,8 @@
 
     function createObject(dotPropertiesAndValues) {
         var obj = isNumber(dotPropertiesAndValues[0].dotProperty.split('.')[0])
-            ? []
-            : {};
+				? []
+				: {};
 
         [].forEach.call(dotPropertiesAndValues, function (v) {
             var dotProperty = v.dotProperty,

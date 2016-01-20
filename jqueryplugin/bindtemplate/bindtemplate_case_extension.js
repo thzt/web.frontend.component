@@ -4,7 +4,25 @@
 //$.fn.is
 
 (function(){
-	$().bindTemplate('addCase',{
+	$().bindTemplate('addTailCase',{
+		predicator:function(value){
+			var $item=this;
+
+			return true;
+		},
+		getter:function(){
+			var $item=this;
+
+			return $item.html();
+		},
+		setter:function(value){
+			var $item=this;
+
+			$item.html(value);
+		}
+	});
+	
+	$().bindTemplate('addHeadCase',{
 		predicator:function(value){
 			var $item=this;
 			
@@ -20,9 +38,7 @@
 
 			$item.val(value);
 		}
-	});
-
-	$().bindTemplate('addCase',{
+	}).bindTemplate('addHeadCase',{
 		predicator:function(value){
 			var $item=this;
 
@@ -39,24 +55,6 @@
 			value
 				?$item.attr('checked','checked')
 				:$item.removeAttr('checked');
-		}
-	});
-
-	$().bindTemplate('addCase',{
-		predicator:function(value){
-			var $item=this;
-
-			return true;
-		},
-		getter:function(){
-			var $item=this;
-
-			return $item.html();
-		},
-		setter:function(value){
-			var $item=this;
-
-			$item.html(value);
 		}
 	});
 }());
