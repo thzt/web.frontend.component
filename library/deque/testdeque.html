@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8"/>
+        <title>Document</title>
+
+        <script src="deque.js"></script>
+    </head>
+    <body>
+
+        <script>
+		(function(){
+			var deque=new Deque();
+
+			deque.addFirst(1);
+			deque.addFirst(2);
+			deque.addFirst(3);
+
+			deque.addLast(10);
+			deque.addLast(11);
+			deque.addLast(12);
+
+			var front=deque.removeFirst();
+			console.log(front);
+			
+			var back=deque.removeLast();
+			console.log(back);
+
+			var result=deque.reduce(function(memo,val,index){
+				val%2==0&&memo.push(val);
+				return memo;
+			},[]);
+			console.log(result);
+
+			deque.enumerate(function(val,index){
+				console.warn(val,index);
+				if(val%5==0){
+					return false;
+				}
+			});
+		}());
+        </script>
+    </body>
+</html>
