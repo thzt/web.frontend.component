@@ -1,6 +1,7 @@
 //use
+//window.Deque
 
-(function ($) {
+(function ($,global) {
     $.pluginManager.extend('bindTemplate', {
         addHeadCase:addHeadCase,
 		addTailCase:addTailCase,
@@ -8,7 +9,7 @@
     });
 
 	//here deque is shared by each $().bindTemplate('addHeadCase')/$().bindTemplate('addTailCase')$().bindTemplate('getDeque')
-	var deque=new Deque();
+	var deque=new global.Deque();
 
     function addHeadCase(handleCase){
 		deque.addFirst(handleCase);
@@ -23,4 +24,4 @@
 	function enumerateCase(fn){
 		return deque.enumerate(fn);
 	}
-} (jQuery));
+} (jQuery,window));

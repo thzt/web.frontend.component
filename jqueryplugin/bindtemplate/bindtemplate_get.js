@@ -3,88 +3,46 @@
 //$.fn.add
 //$.fn.filter
 //$.fn.attr
+//window.viewModelTool
 
-(function ($) {
-    $.pluginManager.extend('bindTemplate', {
-        getData: getData
+(function($,global){
+    $.pluginManager.extend('bindTemplate',{
+        getData:getData
     });
 
-    function getData() {
-        var $containers = this,
+	var viewModelTool=global.viewModelTool;
 
-            attr = arguments[0].attr,
-            get = arguments[0].get,
+    function getData(){
+        var $containers=this,
 
-            selector = '[{0}]'.replace('{0}', attr),
-            $fields = $containers.find(selector).add($containers.filter(selector));
+            attr=arguments[0].attr,
+            get=arguments[0].get,
 
-        var dotPropertiesAndValues = [].reduce.call($fields, function (m, v) {
-            var $field = $(v),
+            selector='[{0}]'.replace('{0}',attr),
+            $fields=$containers.find(selector).add($containers.filter(selector)),
 
-                bracketProperty = $field.attr(attr),
-                dotProperty = bracketProperty.replace(/\[(\d+)\]/g, '.$1').replace(/^([.])/, ''),
-                attribute = '{0}="{1}"'.replace('{0}', attr).replace('{1}', bracketProperty),
+			propValueMaps=[].reduce.call($fields,function(m,v){
+				var $field=$(v),
 
-                value = get.call($field, attribute);
+					prop=$field.attr(attr),
+					attribute='{0}="{1}"'.replace('{0}',attr).replace('{1}',prop),
 
-            if (value === undefined) {
-                return m;
-            }
+					value=get.call($field,attribute);
 
-            m.push({
-                dotProperty: dotProperty,
-                value: value
-            });
+				//if 'return;' or 'return undefined;' then ignore this item.
+				if(value===undefined){
+					return m;
+				}
 
-            return m;
-        }, []);
+				m.push({
+					prop:prop,
+					value:value
+				});
 
-        if (dotPropertiesAndValues.length === 0) {
-            return null;
-        }
+				return m;
+			},[]);
 
-        return createObject(dotPropertiesAndValues);
+		return viewModelTool.getViewModel(propValueMaps);
     }
-
-    function createObject(dotPropertiesAndValues) {
-        var obj = isNumber(dotPropertiesAndValues[0].dotProperty.split('.')[0])
-				? []
-				: {};
-
-        [].forEach.call(dotPropertiesAndValues, function (v) {
-            var dotProperty = v.dotProperty,
-                value = v.value,
-                propertyList = dotProperty.split('.'),
-
-                current = obj;
-
-            [].forEach.call(propertyList, function (v, i) {
-
-                if (i === propertyList.length - 1) {
-                    current[v] = value;
-                    return;
-                }
-
-                if (current[v] != null) {
-                    current = current[v];
-                    return;
-                }
-
-                if (isNumber(propertyList[i + 1])) {
-                    current[v] = [];
-                    current = current[v];
-                    return;
-                }
-
-                current[v] = {};
-                current = current[v];
-            }, {});
-        });
-
-        return obj;
-    }
-
-    function isNumber(v) {
-        return +v + '' === v;
-    }
-} (jQuery));
+	
+}(jQuery,window));

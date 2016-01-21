@@ -4,40 +4,37 @@
 //$.fn.filter
 //$.fn.attr
 //$.fn.each
+//window.viewModelTool
 
-(function ($) {
-    $.pluginManager.extend('bindTemplate', {
-        setData: setData
+(function($,global){
+    $.pluginManager.extend('bindTemplate',{
+        setData:setData
     });
 
-    function setData() {
-        var $containers = this,
+	var viewModelTool=global.viewModelTool;
 
-            attr = arguments[0].attr,
-            data = arguments[0].data,
-            set = arguments[0].set,
+    function setData(){
+        var $containers=this,
 
-            selector = '[{0}]'.replace('{0}', attr),
-            $fields = $containers.find(selector).add($containers.filter(selector));
+            attr=arguments[0].attr,
+            data=arguments[0].data,
+            set=arguments[0].set,
 
-        $fields.each(function () {
-            var $field = $(this),
-                bracketProperty = $field.attr(attr),
-                dotProperty = bracketProperty.replace(/\[(\d+)\]/g, '.$1').replace(/^([.])/, ''),
-                value = getDotPropertyValue.call(data, dotProperty),
-                attribute = '{0}="{1}"'.replace('{0}', attr).replace('{1}', bracketProperty);
+            selector='[{0}]'.replace('{0}',attr),
+            $fields=$containers.find(selector).add($containers.filter(selector));
 
-            set.call($field, value, attribute);
+        $fields.each(function(){
+            var $field=$(this),
+				
+                prop=$field.attr(attr),
+                value=viewModelTool.getValueFromPath(data,prop),
+				
+                attribute='{0}="{1}"'.replace('{0}',attr).replace('{1}',prop);
+
+            set.call($field,value,attribute);
         });
 
         return this;
     }
-
-    function getDotPropertyValue(dotProperty) {
-        var obj = this;
-
-        return [].reduce.call(dotProperty.split('.'), function (m, v) {
-            return m[v];
-        }, obj);
-    }
-} (jQuery));
+	
+}(jQuery,window));

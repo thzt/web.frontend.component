@@ -41,27 +41,19 @@
     }
 
 	function getDotPropValueMaps(propValueMaps){
-		return propValueMaps
-			.filter(function(item){
-				var prop=item.prop,
-					value=item.value;
+		return propValueMaps.map(function(item){
+			var prop=item.prop,
+				value=item.value,
 
-				//ignore this item
-				return value!==undefined;
-			})
-			.map(function(item){
-				var prop=item.prop,
-					value=item.value,
-
-					//convert bracket property to dot property
-					//[1].a[2].b -> 1.a.2.b
-					dotProp=convertBracketToDot(prop);
-				
-				return {
-					dotProp:dotProp,
-					value:value
-				};
-			});
+				//convert bracket property to dot property
+				//[1].a[2].b -> 1.a.2.b
+				dotProp=convertBracketToDot(prop);
+			
+			return {
+				dotProp:dotProp,
+				value:value
+			};
+		});
 	}
 
 	function createObject(dotPropValueMaps) {
