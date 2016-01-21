@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8"/>
+        <title>Document</title>
+
+        <script src="viewmodeltool.js"></script>
+    </head>
+    <body>
+
+        <script>
+		(function(){
+			var viewModelTool=window.viewModelTool;
+
+			var users=[{
+				name:'Jhon',
+				parents:['Tom','Jerry']
+			}];
+
+			var value=viewModelTool.getValueFromPath(users,'[0].parents[1]');
+			console.log(value);
+
+			var data=viewModelTool.getViewModel([
+				{
+					prop:'[0].name',
+					value:'Jhon'
+				},{
+					prop:'[0].parents[0]',
+					value:'Tom'
+				},{
+					prop:'[0].parents[1]',
+					value:'Jerry'
+				}
+			]);
+			
+			console.log(JSON.stringify(data,null,4));
+		}());
+        </script>
+    </body>
+</html>
