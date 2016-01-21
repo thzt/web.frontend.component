@@ -4,28 +4,23 @@
     $.pluginManager.extend('bindTemplate', {
         addHeadCase:addHeadCase,
 		addTailCase:addTailCase,
-		getCaseList:getCaseList
+		enumerateCase:enumerateCase
     });
 
-	var caseList=[];
+	//here deque is shared by each $().bindTemplate('addHeadCase')/$().bindTemplate('addTailCase')$().bindTemplate('getDeque')
+	var deque=new Deque();
 
     function addHeadCase(handleCase){
-		var $container=$(this);
-		
-		caseList.unshift(handleCase);
+		deque.addFirst(handleCase);
 		return this;
 	}
 
 	function addTailCase(handleCase){
-		var $container=$(this);
-
-		caseList.push(handleCase);
+		deque.addLast(handleCase);
 		return this;
 	}
 
-	function getCaseList(){
-		var $container=$(this);
-
-		return caseList;
+	function enumerateCase(fn){
+		return deque.enumerate(fn);
 	}
 } (jQuery));

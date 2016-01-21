@@ -16,19 +16,16 @@
             attr: attr || 'data-model',
             get: get || function () {
                 var $item = this,
-					caseList=$().bindTemplate('getCaseList'),
-					result;
+					args=arguments;
 
-				caseList.every(function(v){
-					var predicator=v.predicator,
-						getter=v.getter;
+				$().bindTemplate('enumerateCase',function(val,index){
+					var predicator=val.predicator,
+						getter=val.getter;
 
 					if(predicator.call($item)){
-						result=getter.call($item);
+						result=getter.apply($item,args);
 						return false;
 					}
-
-					return true;
 				});
 
 				return result;
@@ -48,19 +45,19 @@
             data: data,
             set: set || function (value) {
                 var $item = this,
-					caseList=$().bindTemplate('getCaseList');
+					args=arguments;
 
-				caseList.every(function(v){
-					var predicator=v.predicator,
-						setter=v.setter;
+				$().bindTemplate('enumerateCase',function(val,index){
+					var predicator=val.predicator,
+						setter=val.setter;
 
-					if(predicator.call($item,value)){
-						setter.call($item,value);
+					if(predicator.call($item)){
+						setter.apply($item,args);
 						return false;
 					}
-
-					return true;
 				});
+
+				return this;
             }
         }];
     }

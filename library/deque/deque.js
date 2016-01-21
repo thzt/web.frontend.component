@@ -53,14 +53,15 @@
 		},
 		enumerate:function(fn){
 			var instance=this,
-				cache=instance.cache;
+				cache=instance.cache,
+				isBreak=cache.some(function(val,index){
 
-			cache.some(function(val,index){
+					//let fn this->val
+					var result=fn.apply(val,arguments);
+					return result===false;
+				});
 
-				//let fn this->val
-				var result=fn.apply(val,arguments);
-				return result===false;
-			});
+			return !isBreak;
 		}
 	};
 	
