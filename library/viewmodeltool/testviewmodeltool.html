@@ -17,10 +17,10 @@
 				parents:['Tom','Jerry']
 			}];
 
-			var value=viewModelTool.getValueFromPath(users,'[0].parents[1]');
+			var value=viewModelTool.focus.call(users,'[0].parents[1]');
 			alert(value);
 
-			var data=viewModelTool.getViewModel([
+			var data=viewModelTool.collect([
 				{
 					prop:'[0].name',
 					value:'Jhon'

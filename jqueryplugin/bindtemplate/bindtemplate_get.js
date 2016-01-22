@@ -42,7 +42,7 @@
 				return m;
 			},[]);
 
-		return viewModelTool.getViewModel(propValueMaps);
+		return viewModelTool.collect(propValueMaps);
     }
 	
 }(jQuery,window));

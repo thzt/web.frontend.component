@@ -1,20 +1,21 @@
 (function(global){
 	global.viewModelTool={
-		getValueFromPath:getValueFromPath,
-		getViewModel:getViewModel
+		focus:focus,
+		collect:collect
 		
 	};
 
 	//pubilc 
 
-	function getValueFromPath(obj,prop){
-		var dotProp=convertBracketToDot(prop),
+	function focus(prop){
+		var obj=this,
+			dotProp=convertBracketToDot(prop),
 			value=getDotPropValue.call(obj,dotProp);
 
 		return value;
 	}
 	
-	function getViewModel(propValueMaps){
+	function collect(propValueMaps){
 
 		//propValueMaps: [{prop:'[1].a[2].b',value:3}, ...]		
 		var dotPropValueMaps=getDotPropValueMaps(propValueMaps);

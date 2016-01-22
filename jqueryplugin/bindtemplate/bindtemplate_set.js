@@ -27,7 +27,7 @@
             var $field=$(this),
 				
                 prop=$field.attr(attr),
-                value=viewModelTool.getValueFromPath(data,prop),
+                value=viewModelTool.focus.call(data,prop),
 				
                 attribute='{0}="{1}"'.replace('{0}',attr).replace('{1}',prop);
 
