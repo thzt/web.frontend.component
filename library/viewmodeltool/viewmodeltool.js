@@ -5,7 +5,7 @@
 		
 	};
 
-	//pubilc 
+	//pubilc
 
 	function focus(prop){
 		var obj=this,
@@ -16,29 +16,27 @@
 	}
 	
 	function collect(propValueMaps){
-
-		//propValueMaps: [{prop:'[1].a[2].b',value:3}, ...]		
-		var dotPropValueMaps=getDotPropValueMaps(propValueMaps);
-
-        if (dotPropValueMaps.length === 0) {
+        if(propValueMaps.length===0){
             return null;
         }
 
+		//propValueMaps: [{prop:'[1].a[2].b',value:3}, ...]		
+		var dotPropValueMaps=getDotPropValueMaps(propValueMaps);
         return createObject(dotPropValueMaps);
 	}
 
 	//private 
 	
 	function convertBracketToDot(prop){
-		return prop.replace(/\[(\d+)\]/g, '.$1').replace(/^([.])/, '');
+		return prop.replace(/\[(\d+)\]/g,'.$1').replace(/^([.])/,'');
 	}
 
     function getDotPropValue(dotProperty) {
-        var obj = this;
+        var obj=this;
 
-        return [].reduce.call(dotProperty.split('.'), function (m, v) {
+        return [].reduce.call(dotProperty.split('.'),function(m,v){
             return m[v];
-        }, obj);
+        },obj);
     }
 
 	function getDotPropValueMaps(propValueMaps){
@@ -50,7 +48,7 @@
 				//[1].a[2].b -> 1.a.2.b
 				dotProp=convertBracketToDot(prop);
 			
-			return {
+			return{
 				dotProp:dotProp,
 				value:value
 			};
@@ -58,44 +56,43 @@
 	}
 
 	function createObject(dotPropValueMaps) {
-        var obj = isNumber(dotPropValueMaps[0].dotProp.split('.')[0])
-				? []
-				: {};
+        var obj=isNumber(dotPropValueMaps[0].dotProp.split('.')[0])
+				?[]
+				:{};
 
-        [].forEach.call(dotPropValueMaps, function (item) {
-            var dotProp = item.dotProp,
-                value = item.value,
-                propList = dotProp.split('.'),
+        [].forEach.call(dotPropValueMaps,function(item){
+            var dotProp=item.dotProp,
+                value=item.value,
+                propList=dotProp.split('.'),
 
-                current = obj;
+                current=obj;
 
-            [].forEach.call(propList, function (prop, index) {
-
-                if (index === propList.length - 1) {
-                    current[prop] = value;
+            [].forEach.call(propList,function(prop,index){
+                if(index===propList.length-1){
+                    current[prop]=value;
                     return;
                 }
 
-                if (current[prop] != null) {
-                    current = current[prop];
+                if(current[prop]!=null){
+                    current=current[prop];
                     return;
                 }
 
-                if (isNumber(propList[index + 1])) {
-                    current[prop] = [];
-                    current = current[prop];
+                if(isNumber(propList[index + 1])){
+                    current[prop]=[];
+                    current=current[prop];
                     return;
                 }
 
-                current[prop] = {};
-                current = current[prop];
-            }, {});
+                current[prop]={};
+                current=current[prop];
+            },{});
         });
 
         return obj;
     }
 
-    function isNumber(v) {
-        return +v + '' === v;
+    function isNumber(v){
+        return +v+''===v;
     }
 }(window));
