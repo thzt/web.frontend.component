@@ -2,7 +2,6 @@
 	global.viewModelTool={
 		focus:focus,
 		collect:collect
-		
 	};
 
 	//pubilc
@@ -48,7 +47,7 @@
 				//[1].a[2].b -> 1.a.2.b
 				dotProp=convertBracketToDot(prop);
 			
-			return{
+			return {
 				dotProp:dotProp,
 				value:value
 			};
@@ -78,7 +77,7 @@
                     return;
                 }
 
-                if(isNumber(propList[index + 1])){
+                if(isNumber(propList[index+1])){
                     current[prop]=[];
                     current=current[prop];
                     return;
