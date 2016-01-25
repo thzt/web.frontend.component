@@ -91,4 +91,4 @@ data===[{
 
 The "viewModelTool.collect" will collect an object from the mappings.
 
-As to whether use this bool to handle DOM or in the MVVM way, as you want.
+As to whether or not this tool would be used to handle DOM or in the MVVM way, as you want.
