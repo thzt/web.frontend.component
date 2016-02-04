@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8"/>
+        <title>Document</title>
+
+        <script src="asyncall.js"></script>
+    </head>
+    <body>
+        <script>
+		(function(){
+			var task1=function(success){
+				setTimeout(function(){
+					console.log('in task1');
+					success();
+				},Math.random()*1000);
+			},
+				task2=function(success){
+					setTimeout(function(){
+						console.log('in task2');
+						success();
+					},Math.random()*1000);
+				},
+				task3=function(success){
+					setTimeout(function(){
+						console.log('in task3');
+						success();
+					},Math.random()*1000);
+				};
+
+			window.asyncAll([task1,task2,task3],function(){
+				console.log('all task complete');
+			});
+			
+		}());
+        </script>
+    </body>
+</html>
