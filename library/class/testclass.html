@@ -5,47 +5,6 @@
         <title>Class</title>
     </head>
     <body>
-		
-		<script src="class.js"></script>
-        <script>
-		(function(){
-			var Class=window.Class;
-
-			var B=Class.create({
-				v2:2,
-				v3:4
-			});
-
-			var S=B.extend({
-				v1:1,
-				v3:3
-			});
-
-			var N=S.extend({
-				v5:5
-			});
-
-			var s=new S;
-			console.assert(s.v1===1);
-			console.assert(s.v2===2);
-			console.assert(s.v3===3);
-
-			var b=new B;
-			console.assert(b.v1===undefined);
-			console.assert(b.v2===2);
-			console.assert(b.v3===4);
-
-			var n=new N;
-			console.assert(n.v1===1);
-			console.assert(n.v2===2);
-			console.assert(n.v3===3);
-			console.assert(n.v5===5);
-			
-		}());
-        </script>
-
-
-		
 		<script src="connectprototype.js"></script>
         <script>
 		(function(){
@@ -100,6 +59,82 @@
 			console.assert(instance2.v1===undefined);
 			console.assert(instance2.v2===2);
 			console.assert(instance2.v3===4);
+			
+		}());
+        </script>
+
+		<script src="classcreate.js"></script>
+        <script>
+		(function(){
+			var Class=window.ClassCreate;
+
+			var B=Class.create({
+				v2:2,
+				v3:4
+			});
+
+			var S=B.extend({
+				v1:1,
+				v3:3
+			});
+
+			var N=S.extend({
+				v5:5
+			});
+
+			var s=new S;
+			console.assert(s.v1===1);
+			console.assert(s.v2===2);
+			console.assert(s.v3===3);
+
+			var b=new B;
+			console.assert(b.v1===undefined);
+			console.assert(b.v2===2);
+			console.assert(b.v3===4);
+
+			var n=new N;
+			console.assert(n.v1===1);
+			console.assert(n.v2===2);
+			console.assert(n.v3===3);
+			console.assert(n.v5===5);
+			
+		}());
+        </script>
+		
+		<script src="class.js"></script>
+        <script>
+		(function(){
+			var Class=window.Class;
+
+			var B=Class.extend({
+				v2:2,
+				v3:4
+			});
+
+			var S=B.extend({
+				v1:1,
+				v3:3
+			});
+
+			var N=S.extend({
+				v5:5
+			});
+
+			var s=new S;
+			console.assert(s.v1===1);
+			console.assert(s.v2===2);
+			console.assert(s.v3===3);
+
+			var b=new B;
+			console.assert(b.v1===undefined);
+			console.assert(b.v2===2);
+			console.assert(b.v3===4);
+
+			var n=new N;
+			console.assert(n.v1===1);
+			console.assert(n.v2===2);
+			console.assert(n.v3===3);
+			console.assert(n.v5===5);
 			
 		}());
         </script>
