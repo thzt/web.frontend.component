@@ -1,19 +1,18 @@
 (function(global){
+	'use strict';
 
-	global.Class={
-		extend:extend
-	};
+	Class.extend=extend;
+	global.Class=Class;
+
+	//private
+
+	function Class(){}
 
 	function extend(proto){
 		var Super=this,
-			Sub;
-
-		Super.prototype!=null
-			&&(proto=Object.assign(Object.create(Super.prototype),proto));
+			Sub=createConstructor(Object.assign(Object.create(Super.prototype),proto));
 		
-		Sub=createConstructor(proto);
 		Sub.extend=extend;
-		
 		return Sub;
 	}
 
@@ -25,5 +24,5 @@
 
 		return C;
 	}
-
+	
 }(window));
