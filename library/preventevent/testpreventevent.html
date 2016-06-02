@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8"/>
+        <title>Document</title>
+
+        <script src="preventevent.js"></script>
+    </head>
+    <body>
+        <input id="button1" type="button" value="click" />
+
+        <script>
+		(function(){
+			var preventEvent=window.preventEvent;
+			
+			var button=document.getElementById('button1');
+			button.addEventListener('click',preventEvent({
+				lock:function(){
+					var button=this;
+					button.setAttribute('disabled',true);
+				},
+				release:function(){
+					var button=this;
+					button.removeAttribute('disabled');
+				},
+				event:function(release){
+					var button=this;
+
+					console.log('clicked: '+ +new Date);
+					
+					setTimeout(function(){
+						release();
+					},2000);
+				}
+			}),false);
+		}());
+        </script>
+    </body>
+</html>
