@@ -5,6 +5,11 @@
         <title>Document</title>
 
         <script src="preventevent.js"></script>
+        <style>
+		.disabled{
+			color:gray;
+		}
+        </style>
     </head>
     <body>
         <input id="button1" type="button" value="click" />
@@ -17,11 +22,11 @@
 			button.addEventListener('click',preventEvent({
 				lock:function(){
 					var button=this;
-					button.setAttribute('disabled',true);
+					button.setAttribute('class','disabled');
 				},
 				release:function(){
 					var button=this;
-					button.removeAttribute('disabled');
+					button.removeAttribute('class');
 				},
 				event:function(release){
 					var button=this;

@@ -5,13 +5,24 @@
 	function preventEvent(opt){
 		var lock=opt.lock,
 			release=opt.release,
-			event=opt.event;
+			event=opt.event,
+
+			isLocked=false;
 
 		return function(){
 			var context=this;
+
+			if(isLocked){
+				return;
+			}
 			
 			lock.call(context);
-			event.call(context,release.bind(context));
+			isLocked=true;
+			
+			event.call(context,function(){
+				release.call(context);
+				isLocked=false;
+			});
 		};
 	}
 	
