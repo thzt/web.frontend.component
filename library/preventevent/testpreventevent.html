@@ -1,37 +1,41 @@
 <!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8"/>
-        <title>Document</title>
 
-        <script src="preventevent.js"></script>
-        <style>
-		.disabled{
-			color:gray;
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+
+	<script src="preventevent.js"></script>
+	<style>
+		.disabled {
+			color: gray;
 		}
-        </style>
-    </head>
-    <body>
-        <input id="button1" type="button" value="click" />
+	</style>
+</head>
 
-        <script>
+<body>
+	<input id="button1" type="button" value="click" />
+
+	<script>
 		(function(){
 			var preventEvent=window.preventEvent;
 			
 			var button=document.getElementById('button1');
 			button.addEventListener('click',preventEvent({
-				lock:function(){
+				lock:function(e){
 					var button=this;
+					console.log('Lock: ','e='+e);
 					button.setAttribute('class','disabled');
 				},
-				release:function(){
+				release:function(e){
 					var button=this;
+					console.log('Release: ','e='+e);
 					button.removeAttribute('class');
 				},
-				event:function(release){
+				event:function(release,e){
 					var button=this;
 
-					console.log('clicked: '+ +new Date);
+					console.log('clicked: '+ +new Date,'e='+e);
 					
 					setTimeout(function(){
 						release();
@@ -39,6 +43,7 @@
 				}
 			}),false);
 		}());
-        </script>
-    </body>
+	</script>
+</body>
+
 </html>
