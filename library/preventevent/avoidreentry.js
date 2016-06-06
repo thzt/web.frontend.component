@@ -1,8 +1,7 @@
 (function (global) {
+	global.avoidReentry = avoidReentry;
 
-	global.preventEvent = preventEvent;
-
-	function preventEvent(opt) {
+	function avoidReentry(opt) {
 		var lock = opt.lock,
 			release = opt.release,
 			event = opt.event,
@@ -30,3 +29,4 @@
 	}
 
 } (window));
+

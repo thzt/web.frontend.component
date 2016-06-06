@@ -5,7 +5,7 @@
 	<meta charset="UTF-8" />
 	<title>Document</title>
 
-	<script src="preventevent.js"></script>
+	<script src="avoidreentry.js"></script>
 	<style>
 		.disabled {
 			color: gray;
@@ -18,10 +18,10 @@
 
 	<script>
 		(function(){
-			var preventEvent=window.preventEvent;
+			var avoidReentry=window.avoidReentry;
 			
 			var button=document.getElementById('button1');
-			button.addEventListener('click',preventEvent({
+			button.addEventListener('click',avoidReentry({
 				lock:function(e){
 					var button=this;
 					console.log('Lock: ','e='+e);
