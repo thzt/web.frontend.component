@@ -19,12 +19,14 @@
 			lock.apply(context, args);
 			isLocked = true;
 
-			var eventArgs = [].slice.call(args, 0);
-			eventArgs.unshift(function () {
+			var releaseLock = function () {
 				release.apply(context, args);
 				isLocked = false;
-			});
-			event.apply(context, eventArgs);
+			};
+			
+			// currying with 'bind', pass 'releaseLock' as the additional parameter.
+			// only IE >= 9 supported.
+			event.bind(context, releaseLock).apply(null, args);
 		};
 	}
 
