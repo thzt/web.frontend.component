@@ -11,26 +11,26 @@
         var dagDriver=new window.DagDriver();
 
         dagDriver.edge({
-            from:1,
-            to:2,
+            from:'vertex1',
+            to:'vertex2',
             action:function(){
-                alert(12);
+                alert('vertex1 -> vertex2');
             }
         }).edge({
-            from:1,
-            to:3,
+            from:'vertex1',
+            to:'vertex3',
             action:function(){
-                alert(13);
+                alert('vertex1 -> vertex3');
             }
         }).edge({
-            from:2,
-            to:3,
+            from:'vertex2',
+            to:'vertex3',
             action:function(){
-                alert(23);
+                alert('vertex2 -> vertex3');
             }
         });
 
-        dagDriver.drive(1).drive(1,2);
+        dagDriver.drive('vertex1').drive('vertex2','vertex3');
     </script>
 </body>
 </html>
