@@ -8272,9 +8272,8 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var array = [7, 8, -1, 9];
-
-	_traverse2.default.call(array, {
+	var array = [7, 8, -1, 9],
+	    isCompleted = _traverse2.default.call(array, {
 	    walker: _walker2.default.stopWhenErrorWalker,
 	    callback: function callback(item) {
 	        console.log(item);
@@ -8284,6 +8283,8 @@
 	        }
 	    }
 	});
+
+	console.log(isCompleted);
 
 /***/ },
 /* 300 */
@@ -8307,7 +8308,7 @@
 	        var iterResult = iter.next(nextValue);
 
 	        if (iterResult.done) {
-	            break;
+	            return iterResult.value;
 	        }
 
 	        nextValue = callback(iterResult.value);
@@ -8355,17 +8356,17 @@
 	        }, sequentialWalker, this);
 	    }),
 	    stopWhenErrorWalker: regeneratorRuntime.mark(function stopWhenErrorWalker() {
-	        var array, i, result;
+	        var array, isCompleted, i, result;
 	        return regeneratorRuntime.wrap(function stopWhenErrorWalker$(_context2) {
 	            while (1) {
 	                switch (_context2.prev = _context2.next) {
 	                    case 0:
-	                        array = this;
+	                        array = this, isCompleted = true;
 	                        i = 0;
 
 	                    case 2:
 	                        if (!(i < array.length)) {
-	                            _context2.next = 11;
+	                            _context2.next = 12;
 	                            break;
 	                        }
 
@@ -8376,18 +8377,22 @@
 	                        result = _context2.sent;
 
 	                        if (!(result === false)) {
-	                            _context2.next = 8;
+	                            _context2.next = 9;
 	                            break;
 	                        }
 
-	                        return _context2.abrupt("break", 11);
+	                        isCompleted = false;
+	                        return _context2.abrupt("break", 12);
 
-	                    case 8:
+	                    case 9:
 	                        i++;
 	                        _context2.next = 2;
 	                        break;
 
-	                    case 11:
+	                    case 12:
+	                        return _context2.abrupt("return", isCompleted);
+
+	                    case 13:
 	                    case "end":
 	                        return _context2.stop();
 	                }

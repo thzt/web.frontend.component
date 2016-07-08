@@ -8,15 +8,19 @@ let walker = {
     },
 
     *stopWhenErrorWalker() {
-        let array = this;
+        let array = this,
+            isCompleted = true;
 
         for (let i = 0; i < array.length; i++) {
             let result = yield array[i];
-            
+
             if (result === false) {
+                isCompleted = false;
                 break;
             }
         }
+
+        return isCompleted;
     }
 };
 
