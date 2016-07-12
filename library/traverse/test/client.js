@@ -1,6 +1,6 @@
 import 'babel-polyfill';
-import traverse from './traverse';
-import walker from './walker';
+import traverse from '../src/traverse';
+import walker from '../src/walker';
 
 let array = [7, 8, -1, 9],
 
