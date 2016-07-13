@@ -8262,24 +8262,19 @@
 
 	__webpack_require__(1);
 
-	var _listcomprehension = __webpack_require__(300);
+	var _cartesianproduct = __webpack_require__(300);
 
-	var _listcomprehension2 = _interopRequireDefault(_listcomprehension);
+	var _cartesianproduct2 = _interopRequireDefault(_cartesianproduct);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+	var set1 = [1, 2],
+	    set2 = ['+', '-'],
+	    set3 = [8, 9],
+	    sets = [set1, set2, set3];
 
-	var xs1 = [1, 2],
-	    xs2 = ['+', '-'],
-	    xs3 = [8, 9],
-	    params = [xs1, xs2, xs3];
-
-	console.log(JSON.stringify(params));
-
-	console.log(JSON.stringify(_listcomprehension2.default.call(params, function (item, items) {
-	    return [item].concat(_toConsumableArray(items));
-	})));
+	console.log(JSON.stringify(sets));
+	console.log(JSON.stringify((0, _cartesianproduct2.default)(sets)));
 
 /***/ },
 /* 300 */
@@ -8290,33 +8285,36 @@
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
-	exports.default = listComprehension;
-	function listComprehension(fn) {
-	    var array = this;
-	    return recursiveCore.call(array, fn);
-	}
+	exports.default = cartesianProduct;
 
-	function recursiveCore(fn) {
-	    var array = this,
-	        head = array.shift();
+	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
-	    if (array.length === 0) {
-	        return [].map.call(head, function (item) {
+	function cartesianProduct(sets) {
+	    var head = sets.shift();
+	    if (sets.length === 0) {
+	        return map(function (item) {
 	            return [item];
-	        });
+	        }, head);
 	    }
 
-	    var result = recursiveCore.call(array, fn);
-	    return flatMap.call(head, function (item) {
-	        return flatMap.call(result, function (items) {
-	            return [fn(item, items)];
-	        });
-	    });
+	    var tailProduct = cartesianProduct(sets);
+	    return flatMap(function (item) {
+	        return flatMap(function (items) {
+	            return [[item].concat(_toConsumableArray(items))];
+	        }, tailProduct);
+	    }, head);
 	}
 
-	function flatMap(fn) {
-	    var array = this;
-	    return [].concat.apply([], [].map.call(array, fn));
+	function concat(array) {
+	    return [].concat.apply([], array);
+	}
+
+	function map(fn, array) {
+	    return [].map.call(array, fn);
+	}
+
+	function flatMap(fn, array) {
+	    return concat(map(fn, array));
 	}
 
 /***/ }
