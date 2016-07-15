@@ -1,11 +1,11 @@
-class Extender { }
-Object.assign(Extender.prototype, {
-    extend(material) {
-        let repository = this;
+export default class Extender { }
 
-        Object.assign(repository, material);
-        return this;
-    }
-});
+function extend(material) {
+    let repository = this;
 
-export default Extender;
+    Object.assign(repository, material);
+    return this;
+}
+
+Object.assign(Extender, { extend });
+Object.assign(Extender.prototype, { extend });

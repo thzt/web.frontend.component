@@ -8274,26 +8274,80 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var Client = function (_Extender) {
-	    _inherits(Client, _Extender);
+	// base class
 
-	    function Client() {
-	        _classCallCheck(this, Client);
+	var Base = function (_Extender) {
+	    _inherits(Base, _Extender);
 
-	        return _possibleConstructorReturn(this, Object.getPrototypeOf(Client).apply(this, arguments));
+	    function Base() {
+	        _classCallCheck(this, Base);
+
+	        return _possibleConstructorReturn(this, Object.getPrototypeOf(Base).apply(this, arguments));
 	    }
 
-	    return Client;
+	    return Base;
 	}(_extender2.default);
 
-	var client = new Client();
-	client.extend({
-	    instanceMethod: function instanceMethod() {
-	        console.log('in the instanceMethod');
+	console.assert(!Base.hasOwnProperty('extend'));
+
+	Base.extend({
+	    staticMethodBase: function staticMethodBase() {
+	        console.log('in the staticMethodBase');
 	    }
 	});
 
-	client.instanceMethod();
+	var base = new Base();
+
+	console.assert(!base.hasOwnProperty('extend'));
+
+	base.extend({
+	    instanceMethodBase: function instanceMethodBase() {
+	        console.log('in the instanceMethodBase');
+	    }
+	});
+
+	Base.staticMethodBase();
+	base.instanceMethodBase();
+
+	// sub class
+
+	var Sub = function (_Base) {
+	    _inherits(Sub, _Base);
+
+	    function Sub() {
+	        _classCallCheck(this, Sub);
+
+	        return _possibleConstructorReturn(this, Object.getPrototypeOf(Sub).apply(this, arguments));
+	    }
+
+	    return Sub;
+	}(Base);
+
+	Sub.prototype = base;
+
+	console.assert(!Sub.hasOwnProperty('extend'));
+
+	Sub.extend({
+	    staticMethodSub: function staticMethodSub() {
+	        console.log('in the staticMethodSub');
+	    }
+	});
+
+	var sub = new Sub();
+
+	console.assert(!sub.hasOwnProperty('extend'));
+
+	sub.extend({
+	    instanceMethodSub: function instanceMethodSub() {
+	        console.log('in the instanceMethodSub');
+	    }
+	});
+
+	Sub.staticMethodSub();
+	sub.instanceMethodSub();
+
+	Sub.staticMethodBase();
+	sub.instanceMethodBase();
 
 /***/ },
 /* 300 */
@@ -8311,16 +8365,18 @@
 	    _classCallCheck(this, Extender);
 	};
 
-	Object.assign(Extender.prototype, {
-	    extend: function extend(material) {
-	        var repository = this;
-
-	        Object.assign(repository, material);
-	        return this;
-	    }
-	});
-
 	exports.default = Extender;
+
+
+	function extend(material) {
+	    var repository = this;
+
+	    Object.assign(repository, material);
+	    return this;
+	}
+
+	Object.assign(Extender, { extend: extend });
+	Object.assign(Extender.prototype, { extend: extend });
 
 /***/ }
 /******/ ]);
