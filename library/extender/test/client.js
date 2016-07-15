@@ -6,7 +6,6 @@ import Extender from '../src/extender';
 class Base extends Extender { }
 
 console.assert(!Base.hasOwnProperty('extend'));
-
 Base.extend({
     staticMethodBase() {
         console.log('in the staticMethodBase');
@@ -16,7 +15,6 @@ Base.extend({
 let base = new Base;
 
 console.assert(!base.hasOwnProperty('extend'));
-
 base.extend({
     instanceMethodBase() {
         console.log('in the instanceMethodBase');
@@ -28,11 +26,17 @@ base.instanceMethodBase();
 
 // sub class
 
-class Sub extends Base { }
+class Sub extends Base {
+    constructor() {
+        super();
+        this.constructor = Sub;
+    }
+}
 Sub.prototype = base;
+console.assert(base.constructor === Base);
+console.assert((new Sub).constructor === Sub);
 
 console.assert(!Sub.hasOwnProperty('extend'));
-
 Sub.extend({
     staticMethodSub() {
         console.log('in the staticMethodSub');
@@ -42,7 +46,6 @@ Sub.extend({
 let sub = new Sub;
 
 console.assert(!sub.hasOwnProperty('extend'));
-
 sub.extend({
     instanceMethodSub() {
         console.log('in the instanceMethodSub');

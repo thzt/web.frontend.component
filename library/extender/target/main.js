@@ -8289,7 +8289,6 @@
 	}(_extender2.default);
 
 	console.assert(!Base.hasOwnProperty('extend'));
-
 	Base.extend({
 	    staticMethodBase: function staticMethodBase() {
 	        console.log('in the staticMethodBase');
@@ -8299,7 +8298,6 @@
 	var base = new Base();
 
 	console.assert(!base.hasOwnProperty('extend'));
-
 	base.extend({
 	    instanceMethodBase: function instanceMethodBase() {
 	        console.log('in the instanceMethodBase');
@@ -8317,16 +8315,20 @@
 	    function Sub() {
 	        _classCallCheck(this, Sub);
 
-	        return _possibleConstructorReturn(this, Object.getPrototypeOf(Sub).apply(this, arguments));
+	        var _this2 = _possibleConstructorReturn(this, Object.getPrototypeOf(Sub).call(this));
+
+	        _this2.constructor = Sub;
+	        return _this2;
 	    }
 
 	    return Sub;
 	}(Base);
 
 	Sub.prototype = base;
+	console.assert(base.constructor === Base);
+	console.assert(new Sub().constructor === Sub);
 
 	console.assert(!Sub.hasOwnProperty('extend'));
-
 	Sub.extend({
 	    staticMethodSub: function staticMethodSub() {
 	        console.log('in the staticMethodSub');
@@ -8336,7 +8338,6 @@
 	var sub = new Sub();
 
 	console.assert(!sub.hasOwnProperty('extend'));
-
 	sub.extend({
 	    instanceMethodSub: function instanceMethodSub() {
 	        console.log('in the instanceMethodSub');
