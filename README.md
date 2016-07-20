@@ -9,6 +9,8 @@ In [/library](https://github.com/thzt/web.frontend.component/tree/master/library
 
 In [/jqueryplugin](https://github.com/thzt/web.frontend.component/tree/master/jqueryplugin) directory, there are some plugins based on jquery.
 
+![](http://upload-images.jianshu.io/upload_images/1023733-4d12dfbb1c370347.png)
+
 ## **Dependency**
 
 About "underscore", it is a library provided some functional-style methods,
@@ -60,4 +62,3 @@ other related blog about the art of design are as follow:
 [抽象的层次](https://thzt.github.io/blog/2015/08/11/hierarchy-of-abstraction/)
 
 [消除重复与可复用相距多远](https://thzt.github.io/blog/2015/09/11/reuse-oriented-programming//)
-
