@@ -9,7 +9,7 @@ In [/library](https://github.com/thzt/web.frontend.component/tree/master/library
 
 In [/jqueryplugin](https://github.com/thzt/web.frontend.component/tree/master/jqueryplugin) directory, there are some plugins based on jquery.
 
-![](http://upload-images.jianshu.io/upload_images/1023733-4d12dfbb1c370347.png)
+![](http://upload-images.jianshu.io/upload_images/1023733-41617c36f4b2cbd3.png)
 
 ## **Dependency**
 
