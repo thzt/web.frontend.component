@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+
+    <script src="frp.js"></script>
+</head>
+
+<body>
+    <script>
+        (function(){
+            let cso=window.createStreamOperator;
+
+            let stream1=cont=>{
+                let i=0;
+                while(++i){
+                    if(i>10){
+                        break;
+                    }
+                    cont(i);
+                }
+            };
+
+            let map=cso((val,fn,cont)=>cont(fn(val)));
+            let filter=cso((val,fn,cont)=>{
+                if(!fn(val)){
+                    return;
+                }
+                cont(val);
+            });
+
+            let stream2=filter(stream1,x=>x%2!=0)
+            let stream3=map(stream2,x=>x*x);
+
+            stream3(x=>console.log(x));
+        }());
+    </script>
+
+</body>
+
+</html>
