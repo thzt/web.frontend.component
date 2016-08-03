@@ -1,3 +1,3 @@
 (function (global) {
-    global.createStreamOperator = handler => (stream, fn) => cont => stream(val => handler(val, fn, cont));
+    global.createStreamOperator = handler => (fn, ...streams) => cont => streams.forEach(stream => stream(val => handler(val, fn, cont)));
 } (window));

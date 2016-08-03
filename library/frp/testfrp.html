@@ -30,11 +30,13 @@
                 }
                 cont(val);
             });
+            let merge=cso((val,fn,cont)=>cont(val));
 
-            let stream2=filter(stream1,x=>x%2!=0)
-            let stream3=map(stream2,x=>x*x);
+            let stream2=filter(x=>x%2!=0,stream1);
+            let stream3=map(x=>x*x,stream1);
+            let stream4=merge(()=>{},stream2,stream3);
 
-            stream3(x=>console.log(x));
+            stream4(x=>console.log(x));
         }());
     </script>
 
