@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+
+    <script src="../src/actioncreator.js"></script>
+    <script src="../src/reducer.js"></script>
+    <script src="../src/createstore.js"></script>
+    <script src="../src/applymiddleware.js"></script>
+</head>
+<body>
+    
+    <script>
+        const initialState = 1
+        const middleware = ({ getState, dispatch }) => next => action => next(action)
+        const createStoreWithMiddleware = applyMiddleware(middleware)(createStore)
+        const store = createStoreWithMiddleware(reducer, initialState)
+        const action = actionCreator(initialState)
+        const listener = (state, action) => {
+            console.assert(state === 1)
+            console.assert(action.type === 'ADD1')
+        }
+        store.subscribe(listener)
+        store.dispatch(action)
+        console.assert(store.getState() === 2)
+    </script>
+</body>
+</html>

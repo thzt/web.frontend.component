@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    
+    <script src="../src/actioncreator.js"></script>
+    <script src="../src/reducer.js"></script>
+    <script src="../src/createstore.js"></script>
+</head>
+<body>
+    
+    <script>
+        const initialState = 1
+        const store = createStore(reducer, initialState)
+        console.assert(store.getState() === 1)
+
+        const action = actionCreator(initialState)
+        const listener = (state, action) => {
+            console.assert(state === 1)
+            console.assert(action.type === 'ADD1')
+        }
+        store.subscribe(listener)
+        store.dispatch(action)
+        console.assert(store.getState() === 2)
+    </script>
+
+</body>
+</html>

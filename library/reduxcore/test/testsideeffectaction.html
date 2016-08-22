@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+
+    <script src="../src/actioncreator.js"></script>
+    <script src="../src/reducer.js"></script>
+    <script src="../src/createstore.js"></script>
+    <script src="../src/bindactioncreator.js"></script>
+</head>
+<body>
+    
+    <script>
+        const initialState = 1
+        const store = createStore(reducer, initialState)
+        const sideEffectAction = bindActionCreator(actionCreator, store.dispatch)
+        sideEffectAction(initialState)
+        console.assert(store.getState() === 2)
+    </script>
+</body>
+</html>
