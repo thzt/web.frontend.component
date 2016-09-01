@@ -1,97 +1,78 @@
-(function(global){
-	global.viewModelTool={
-		focus:focus,
-		collect:collect
-	};
+(function (global) {
 
-	//pubilc
+    // prop: [1].a[2].b
+    function focus(prop) {
+        let obj = this,
+            dotProp = convertBracketToDot(prop),
+            value = getDotPropValue(obj, dotProp);
 
-	function focus(prop){
-		var obj=this,
-			dotProp=convertBracketToDot(prop),
-			value=getDotPropValue.call(obj,dotProp);
+        return value;
+    }
 
-		return value;
-	}
-	
-	function collect(propValueMaps){
-        if(propValueMaps.length===0){
+    //convert bracket property to dot property
+    //[1].a[2].b -> 1.a.2.b
+    const convertBracketToDot = prop => prop.replace(/\[(\d+)\]/g, '.$1').replace(/^([.])/, '');
+
+    const getDotPropValue = (obj, dotProperty) => dotProperty.split('.').reduce((memo, val) => memo[val], obj);
+
+    // ---- ---- ---- ----
+
+    // propValueMaps: [{prop,value}]
+    const collect = propValueMaps => {
+        if (propValueMaps.length === 0) {
             return null;
         }
 
-		//propValueMaps: [{prop:'[1].a[2].b',value:3}, ...]		
-		var dotPropValueMaps=getDotPropValueMaps(propValueMaps);
+        //propValueMaps: [{prop:'[1].a[2].b',value:3}, ...]		
+        let dotPropValueMaps = getDotPropValueMaps(propValueMaps);
         return createObject(dotPropValueMaps);
-	}
-
-	//private 
-	
-	function convertBracketToDot(prop){
-		return prop.replace(/\[(\d+)\]/g,'.$1').replace(/^([.])/,'');
-	}
-
-    function getDotPropValue(dotProperty) {
-        var obj=this;
-
-        return [].reduce.call(dotProperty.split('.'),function(m,v){
-            return m[v];
-        },obj);
     }
 
-	function getDotPropValueMaps(propValueMaps){
-		return propValueMaps.map(function(item){
-			var prop=item.prop,
-				value=item.value,
+    const getDotPropValueMaps = propValueMaps => propValueMaps.map(({prop, value}) => ({
+        dotProp: convertBracketToDot(prop),
+        value: value
+    }));
 
-				//convert bracket property to dot property
-				//[1].a[2].b -> 1.a.2.b
-				dotProp=convertBracketToDot(prop);
-			
-			return {
-				dotProp:dotProp,
-				value:value
-			};
-		});
-	}
+    const createObject = dotPropValueMaps => {
+        let obj = isNumber(dotPropValueMaps[0].dotProp.split('.')[0])
+            ? []
+            : {};
 
-	function createObject(dotPropValueMaps) {
-        var obj=isNumber(dotPropValueMaps[0].dotProp.split('.')[0])
-				?[]
-				:{};
+        dotPropValueMaps.forEach(({dotProp, value}) => {
+            let propList = dotProp.split('.'),
+                current = obj;
 
-        [].forEach.call(dotPropValueMaps,function(item){
-            var dotProp=item.dotProp,
-                value=item.value,
-                propList=dotProp.split('.'),
-
-                current=obj;
-
-            [].forEach.call(propList,function(prop,index){
-                if(index===propList.length-1){
-                    current[prop]=value;
+            propList.forEach((prop, index) => {
+                if (index === propList.length - 1) {
+                    current[prop] = value;
                     return;
                 }
 
-                if(current[prop]!=null){
-                    current=current[prop];
+                if (current[prop] != null) {
+                    current = current[prop];
                     return;
                 }
 
-                if(isNumber(propList[index+1])){
-                    current[prop]=[];
-                    current=current[prop];
+                if (isNumber(propList[index + 1])) {
+                    current[prop] = [];
+                    current = current[prop];
                     return;
                 }
 
-                current[prop]={};
-                current=current[prop];
-            },{});
+                current[prop] = {};
+                current = current[prop];
+            }, {});
         });
 
         return obj;
     }
 
-    function isNumber(v){
-        return +v+''===v;
-    }
-}(window));
+    const isNumber = v => +v + '' === v;
+
+    // ---- ---- ---- ----
+
+    global.viewModelTool = {
+        focus: focus,
+        collect: collect
+    };
+} (window));
