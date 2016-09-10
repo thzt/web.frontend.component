@@ -13,7 +13,10 @@
     //[1].a[2].b -> 1.a.2.b
     const convertBracketToDot = prop => prop.replace(/\[(\d+)\]/g, '.$1').replace(/^([.])/, '');
 
-    const getDotPropValue = (obj, dotProperty) => dotProperty.split('.').reduce((memo, val) => memo[val], obj);
+    const getDotPropValue = (obj, dotProperty) => dotProperty.split('.').reduce(
+        (memo, val) => memo == null ? null : memo[val],
+        obj
+    );
 
     // ---- ---- ---- ----
 
