@@ -1,5 +1,5 @@
 import 'babel-polyfill';
-import catesianProduct from '../src/cartesianproduct';
+import cartesianProduct from '../src/cartesianproduct';
 
 let set1 = [1, 2],
     set2 = ['+', '-'],
@@ -7,4 +7,4 @@ let set1 = [1, 2],
     sets = [set1, set2, set3];
 
 console.log(JSON.stringify(sets));
-console.log(JSON.stringify(catesianProduct(sets)));
+console.log(JSON.stringify(cartesianProduct(sets)));
