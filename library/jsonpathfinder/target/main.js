@@ -53,7 +53,7 @@
 
 	'use strict';
 
-	var _jsonPathFinder = __webpack_require__(5);
+	var _jsonPathFinder = __webpack_require__(2);
 
 	var _jsonPathFinder2 = _interopRequireDefault(_jsonPathFinder);
 
@@ -81,11 +81,15 @@
 	console.log(JSON.stringify(_jsonPathFinder2.default.find.call(data3, '[*]'), null, 4));
 	console.log(JSON.stringify(_jsonPathFinder2.default.find.call(data3, '.*'), null, 4));
 
+	var data4 = { a: null };
+	console.log(JSON.stringify(_jsonPathFinder2.default.find.call(data4, 'a'), null, 4));
+	console.log(JSON.stringify(_jsonPathFinder2.default.find.call(data4, 'b'), null, 4));
+
+	var data = [{ a: '2016-07-09:', b: '2016-07-08' }, { a: '2016-07-09', b: '2016-07-08:' }, { c: 1 }];
+	console.log(JSON.stringify(_jsonPathFinder2.default.find.call(data, '[*].a'), null, 4));
+
 /***/ },
-/* 2 */,
-/* 3 */,
-/* 4 */,
-/* 5 */
+/* 2 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -94,15 +98,15 @@
 	    value: true
 	});
 
-	var _handleProp = __webpack_require__(6);
+	var _handleProp = __webpack_require__(3);
 
 	var _handleProp2 = _interopRequireDefault(_handleProp);
 
-	var _handleWildcard = __webpack_require__(8);
+	var _handleWildcard = __webpack_require__(5);
 
 	var _handleWildcard2 = _interopRequireDefault(_handleWildcard);
 
-	var _convertBracketToDot = __webpack_require__(9);
+	var _convertBracketToDot = __webpack_require__(7);
 
 	var _convertBracketToDot2 = _interopRequireDefault(_convertBracketToDot);
 
@@ -138,7 +142,7 @@
 	exports.default = jsonPathFinder;
 
 /***/ },
-/* 6 */
+/* 3 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -147,7 +151,7 @@
 	    value: true
 	});
 
-	var _createPath = __webpack_require__(7);
+	var _createPath = __webpack_require__(4);
 
 	var _createPath2 = _interopRequireDefault(_createPath);
 
@@ -159,7 +163,7 @@
 	    current.forEach(function (item) {
 	        var path = (0, _createPath2.default)(item.path, prop);
 
-	        if (item.value == null || !item.value.hasOwnProperty(prop)) {
+	        if (item.value == null || !item.value.hasOwnProperty(prop) || item.value[prop] == null) {
 	            result.push({
 	                path: path,
 	                found: false
@@ -180,7 +184,7 @@
 	exports.default = handleProp;
 
 /***/ },
-/* 7 */
+/* 4 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -219,7 +223,7 @@
 	exports.default = createPath;
 
 /***/ },
-/* 8 */
+/* 5 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -228,11 +232,11 @@
 	    value: true
 	});
 
-	var _createPath = __webpack_require__(7);
+	var _createPath = __webpack_require__(4);
 
 	var _createPath2 = _interopRequireDefault(_createPath);
 
-	var _isArray = __webpack_require__(10);
+	var _isArray = __webpack_require__(6);
 
 	var _isArray2 = _interopRequireDefault(_isArray);
 
@@ -298,7 +302,22 @@
 	exports.default = handleWildcard;
 
 /***/ },
-/* 9 */
+/* 6 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var isArray = function isArray(x) {
+	  return Object.prototype.toString.call(x) === '[object Array]';
+	};
+
+	exports.default = isArray;
+
+/***/ },
+/* 7 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -312,21 +331,6 @@
 	};
 
 	exports.default = convertBracketToDot;
-
-/***/ },
-/* 10 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	var isArray = function isArray(x) {
-	  return Object.prototype.toString.call(x) === '[object Array]';
-	};
-
-	exports.default = isArray;
 
 /***/ }
 /******/ ]);

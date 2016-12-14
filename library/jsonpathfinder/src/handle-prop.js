@@ -6,7 +6,10 @@ const handleProp = (current, prop) => {
     current.forEach(item => {
         let path = createPath(item.path, prop);
 
-        if (item.value == null || !item.value.hasOwnProperty(prop)) {
+        if (item.value == null
+            || !item.value.hasOwnProperty(prop)
+            || item.value[prop] == null
+        ) {
             result.push({
                 path,
                 found: false
