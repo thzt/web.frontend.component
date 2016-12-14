@@ -8273,61 +8273,75 @@
 
 	'use strict';
 
-	__webpack_require__(1);
+	var _deepcopy = __webpack_require__(300);
 
-	var _cartesianproduct = __webpack_require__(300);
-
-	var _cartesianproduct2 = _interopRequireDefault(_cartesianproduct);
+	var _deepcopy2 = _interopRequireDefault(_deepcopy);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var set1 = [1, 2],
-	    set2 = ['+', '-'],
-	    set3 = [8, 9],
-	    sets = [set1, set2, set3];
-
-	console.log(JSON.stringify(sets));
-	console.log(JSON.stringify((0, _cartesianproduct2.default)(sets)));
+	console.log(JSON.stringify((0, _deepcopy2.default)(1), null, 4));
+	console.log(JSON.stringify((0, _deepcopy2.default)('2'), null, 4));
+	console.log(JSON.stringify((0, _deepcopy2.default)(new Number(1)), null, 4));
+	console.log(JSON.stringify((0, _deepcopy2.default)(new String('2')), null, 4));
+	console.log(JSON.stringify((0, _deepcopy2.default)([]), null, 4));
+	console.log(JSON.stringify((0, _deepcopy2.default)({}), null, 4));
+	console.log(JSON.stringify((0, _deepcopy2.default)(null), null, 4));
+	console.log(JSON.stringify((0, _deepcopy2.default)(NaN), null, 4));
+	console.log(JSON.stringify((0, _deepcopy2.default)([1, {
+	  a: function a() {},
+	  b: function b() {}, c: 2, d: [3], e: { f: 4 } }]), null, 4));
+	console.log(JSON.stringify((0, _deepcopy2.default)({
+	  a: function a() {},
+	  b: function b() {}, c: 2, d: [3], e: { f: 4 } }), null, 4));
 
 /***/ },
 /* 300 */
 /***/ function(module, exports) {
 
-	"use strict";
+	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
-
-	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-
-	var concat = function concat(array) {
-	    return [].concat.apply([], array);
-	};
-	var map = function map(fn, array) {
-	    return [].map.call(array, fn);
-	};
-	var flatMap = function flatMap(fn, array) {
-	    return concat(map(fn, array));
+	var isType = function isType(x, type) {
+	    return Object.prototype.toString.call(x) === '[object ' + type + ']';
 	};
 
-	var cartesianProduct = function cartesianProduct(sets) {
-	    var head = sets.shift();
-	    if (sets.length === 0) {
-	        return map(function (item) {
-	            return [item];
-	        }, head);
+	var deepCopy = function deepCopy(source) {
+	    if (isType(source, 'Array')) {
+	        return deepCopyArray(source);
 	    }
 
-	    var tailProduct = cartesianProduct(sets);
-	    return flatMap(function (item) {
-	        return flatMap(function (items) {
-	            return [[item].concat(_toConsumableArray(items))];
-	        }, tailProduct);
-	    }, head);
+	    if (isType(source, 'Object')) {
+	        return deepCopyObject(source);
+	    }
+
+	    if (isType(source, 'String')) {
+	        return source.toString();
+	    }
+
+	    if (isType(source, 'Number')) {
+	        return +source;
+	    }
+
+	    return null;
 	};
 
-	exports.default = cartesianProduct;
+	var deepCopyArray = function deepCopyArray(array) {
+	    return array.reduce(function (memo, element) {
+	        memo.push(deepCopy(element));
+	        return memo;
+	    }, []);
+	};
+
+	var deepCopyObject = function deepCopyObject(object) {
+	    return Object.keys(object).reduce(function (memo, key) {
+	        memo[key] = deepCopy(object[key]);
+	        return memo;
+	    }, {});
+	};
+
+	exports.default = deepCopy;
 
 /***/ }
 /******/ ]);

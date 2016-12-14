@@ -1,4 +1,8 @@
-export default function cartesianProduct(sets) {
+const concat = array => [].concat.apply([], array);
+const map = (fn, array) => [].map.call(array, fn);
+const flatMap = (fn, array) => concat(map(fn, array));
+
+const cartesianProduct = sets => {
     let head = sets.shift();
     if (sets.length === 0) {
         return map(
@@ -15,16 +19,6 @@ export default function cartesianProduct(sets) {
         ),
         head
     );
-}
+};
 
-function concat(array) {
-    return [].concat.apply([], array);
-}
-
-function map(fn, array) {
-    return [].map.call(array, fn);
-}
-
-function flatMap(fn, array) {
-    return concat(map(fn, array));
-}
+export default cartesianProduct;

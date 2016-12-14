@@ -89,23 +89,23 @@
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
-	exports.default = fnCreator;
 
 	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
-	function fnCreator(_ref) {
+	var fnCreator = function fnCreator(_ref) {
 	    var params = _ref.params;
 	    var body = _ref.body;
 	    var _ref$identifiers = _ref.identifiers;
 	    var identifiers = _ref$identifiers === undefined ? [] : _ref$identifiers;
 	    var _ref$values = _ref.values;
 	    var values = _ref$values === undefined ? [] : _ref$values;
-
 	    return function () {
 	        var fn = Function.apply(null, [].concat(_toConsumableArray(params), _toConsumableArray(identifiers), [body]));
 	        return fn.apply(this, [].concat(Array.prototype.slice.call(arguments), _toConsumableArray(values)));
 	    };
-	}
+	};
+
+	exports.default = fnCreator;
 
 /***/ }
 /******/ ]);

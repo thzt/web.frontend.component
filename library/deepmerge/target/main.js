@@ -8273,61 +8273,116 @@
 
 	'use strict';
 
-	__webpack_require__(1);
+	var _deepmerge = __webpack_require__(300);
 
-	var _cartesianproduct = __webpack_require__(300);
-
-	var _cartesianproduct2 = _interopRequireDefault(_cartesianproduct);
+	var _deepmerge2 = _interopRequireDefault(_deepmerge);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var set1 = [1, 2],
-	    set2 = ['+', '-'],
-	    set3 = [8, 9],
-	    sets = [set1, set2, set3];
+	var target = [{ a: 1, b: 2 }, ['333', { c: 4, d: 5 }, [6]]];
 
-	console.log(JSON.stringify(sets));
-	console.log(JSON.stringify((0, _cartesianproduct2.default)(sets)));
+	var source = {
+	    0: { a: 7, b: null },
+	    1: [[8, 9], null, 10, [11]]
+	};
+
+	var result = (0, _deepmerge2.default)(target, source);
+	console.warn(JSON.stringify(result, null, 4));
 
 /***/ },
 /* 300 */
 /***/ function(module, exports) {
 
-	"use strict";
+	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
+	/*
+	    (target,source):(null,_)|(_,null) = _
 
-	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+	    (target,source):(string,string) = source
+	    (target,source):(string,array) = source
+	    (target,source):(string,object) = source
 
-	var concat = function concat(array) {
-	    return [].concat.apply([], array);
-	};
-	var map = function map(fn, array) {
-	    return [].map.call(array, fn);
-	};
-	var flatMap = function flatMap(fn, array) {
-	    return concat(map(fn, array));
-	};
+	    (target,source):(array,string) = target
+	    (target,source):(array,array) = mergeArray
+	    (target,source):(array,object) = mergeObject
 
-	var cartesianProduct = function cartesianProduct(sets) {
-	    var head = sets.shift();
-	    if (sets.length === 0) {
-	        return map(function (item) {
-	            return [item];
-	        }, head);
+	    (target,source):(object,string) = target
+	    (target,source):(object,array) = mergeObject
+	    (target,source):(object,object) = mergeObject
+	*/
+
+	var deepMerge = function deepMerge(target, source) {
+	    if (target == null || source == null) {
+	        return mergeNull(target, source);
 	    }
 
-	    var tailProduct = cartesianProduct(sets);
-	    return flatMap(function (item) {
-	        return flatMap(function (items) {
-	            return [[item].concat(_toConsumableArray(items))];
-	        }, tailProduct);
-	    }, head);
+	    if (isType(target, 'String')) {
+	        return source;
+	    }
+
+	    if (isType(source, 'String')) {
+	        return target;
+	    }
+
+	    if (isType(target, 'Array') && isType(source, 'Array')) {
+	        return mergeArray(target, source);
+	    }
+
+	    return mergeObject(target, source);
 	};
 
-	exports.default = cartesianProduct;
+	var isType = function isType(x, type) {
+	    return Object.prototype.toString.call(x) === '[object ' + type + ']';
+	};
+
+	var mergeArray = function mergeArray(target, source) {
+	    var result = [],
+	        length = Math.max(target.length, source.length);
+
+	    for (var i = 0; i < length; i++) {
+	        var mergedElement = deepMerge(target[i], source[i]);
+	        result[i] = mergedElement;
+	    }
+
+	    return result;
+	};
+
+	var mergeObject = function mergeObject(target, source) {
+	    var result = {},
+	        unionKeys = union(Object.keys(target), Object.keys(source));
+
+	    unionKeys.forEach(function (key) {
+	        var mergedElement = deepMerge(target[key], source[key]);
+	        result[key] = mergedElement;
+	    });
+
+	    return result;
+	};
+
+	var mergeNull = function mergeNull(target, source) {
+	    return source == null ? target : source;
+	};
+
+	var union = function union(array1, array2) {
+	    var hashtable = {};
+	    array1.forEach(function (ele) {
+	        return hashtable[ele] = true;
+	    });
+	    array2.forEach(function (ele) {
+	        if (hashtable[ele]) {
+	            return;
+	        }
+
+	        hashtable[ele] = true;
+	    });
+
+	    return Object.keys(hashtable);
+	};
+
+	exports.default = deepMerge;
 
 /***/ }
 /******/ ]);
