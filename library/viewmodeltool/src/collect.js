@@ -1,4 +1,4 @@
-import isNumber from '../util/isnumber';
+import isInteger from '../util/isinteger';
 import convertBracketToDot from '../util/convertbrackettodot';
 
 // propValueMaps: [{prop,value}]
@@ -21,7 +21,7 @@ const getDotPropValueMaps = propValueMaps => propValueMaps.map(({prop, value}) =
 const createObject = dotPropValueMaps => {
     let headMap = dotPropValueMaps[0],
         headProp = headMap.dotProp.split('.')[0],
-        collecting = isNumber(headProp) ? [] : {};
+        collecting = isInteger(headProp) ? [] : {};
 
     dotPropValueMaps.forEach(({dotProp, value}) => {
         let propList = dotProp.split('.'),
@@ -38,7 +38,7 @@ const createObject = dotPropValueMaps => {
                 return;
             }
 
-            if (isNumber(propList[index + 1])) {
+            if (isInteger(propList[index + 1])) {
                 current[prop] = [];
                 current = current[prop];
                 return;

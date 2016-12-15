@@ -161,9 +161,9 @@
 	    value: true
 	});
 
-	var _isnumber = __webpack_require__(6);
+	var _isinteger = __webpack_require__(6);
 
-	var _isnumber2 = _interopRequireDefault(_isnumber);
+	var _isinteger2 = _interopRequireDefault(_isinteger);
 
 	var _convertbrackettodot = __webpack_require__(4);
 
@@ -197,7 +197,7 @@
 	var createObject = function createObject(dotPropValueMaps) {
 	    var headMap = dotPropValueMaps[0],
 	        headProp = headMap.dotProp.split('.')[0],
-	        collecting = (0, _isnumber2.default)(headProp) ? [] : {};
+	        collecting = (0, _isinteger2.default)(headProp) ? [] : {};
 
 	    dotPropValueMaps.forEach(function (_ref2) {
 	        var dotProp = _ref2.dotProp;
@@ -217,7 +217,7 @@
 	                return;
 	            }
 
-	            if ((0, _isnumber2.default)(propList[index + 1])) {
+	            if ((0, _isinteger2.default)(propList[index + 1])) {
 	                current[prop] = [];
 	                current = current[prop];
 	                return;
@@ -237,16 +237,17 @@
 /* 6 */
 /***/ function(module, exports) {
 
-	'use strict';
+	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	var isNumber = function isNumber(x) {
-	  return Object.prototype.toString.call(x) === '[object Number]';
+	var regexp = /^\d+$/;
+	var isInteger = function isInteger(str) {
+	  return regexp.test(str);
 	};
 
-	exports.default = isNumber;
+	exports.default = isInteger;
 
 /***/ }
 /******/ ]);
