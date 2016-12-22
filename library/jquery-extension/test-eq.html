@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>test eq</title>
+	
+	<script src="../jquery-core/index.js"></script>
+	<script src="../jquery-core/config.js"></script>
+	
+	<script src="eq.js"></script>
+</head>
+<body>
+	
+	<div class="test">1</div>
+	<div class="test">2</div>
+	
+	<script>
+		(function($){
+		
+			console.log($('.test').eq(1));
+			
+		}(jQuery));
+	</script>
+	
+</body>
+</html>

@@ -1,0 +1,21 @@
+<script src="./index.js"></script>
+
+<script>
+	(function(){
+		var callFromTail=window.callFromTail;
+		
+		callFromTail.extend({
+			fn1:function(){
+				alert(1);
+			},
+			fn2:function(){
+				alert(2);
+			},
+			fn3:function(){
+				alert(3);
+			}
+		});
+		
+		callFromTail.fn1().fn2().fn3();
+	}());
+</script>

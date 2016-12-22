@@ -1,8 +1,8 @@
 module.exports = {
-    entry: ['babel-polyfill', './test/client.js'],
+    entry: ['babel-polyfill', './test/index.js'],
     output: {
-        path: './target/',
-        filename: 'main.js'
+        path: './dist/',
+        filename: 'index.js'
     },
     module: {
         loaders: [{

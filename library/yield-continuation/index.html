@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8"/>
+        <title>Document</title>
+
+        <script src="./index.js"></script>
+    </head>
+    <body>
+
+        <script>
+		(function(global){
+
+			global.yieldContinuation(function*(){
+				var v1=yield function(continuation){
+					setTimeout(function(){
+						continuation('Hello');
+					},1500);
+				};
+
+				console.warn(v1);
+
+				var v2=yield function(continuation){
+					setTimeout(function(){
+						continuation('World');
+					},1500);
+				};
+
+				console.warn(v2);
+			});
+			
+		}(window));
+        </script>
+    </body>
+</html>

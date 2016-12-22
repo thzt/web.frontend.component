@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>test html</title>
+	
+	<script src="../jquery-core/index.js"></script>
+	<script src="../jquery-core/config.js"></script>
+	
+	<script src="each.js"></script>
+	<script src="html.js"></script>
+</head>
+<body>
+	
+	<div id="div1"></div>
+	
+	<script>
+		(function($){
+			
+			$('#div1').html(123);
+			alert($('#div1').html());
+			
+		}(jQuery));
+	</script>
+	
+</body>
+</html>

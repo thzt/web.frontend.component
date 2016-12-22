@@ -1,8 +1,12 @@
 module.exports = {
-    entry: ['./test/client.js'],
+    entry: {
+        index: './index.js',
+        test: './test/index.js'
+    },
     output: {
-        path: './target/',
-        filename: 'main.js'
+        path: './dist/',
+        filename: '[name].js',
+        libraryTarget: 'umd'
     },
     module: {
         loaders: [{

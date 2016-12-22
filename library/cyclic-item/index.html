@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8"/>
+        <title>test cyclic item</title>
+
+        <script src="./index.js"></script>
+    </head>
+    <body>
+
+        <script>
+		(function(){
+			var dataList=[1,2,3,4];
+
+			var cyclicItem=new CyclicItem(dataList);
+
+			console.log(JSON.stringify(cyclicItem.getItem(1)));
+			console.log(JSON.stringify(cyclicItem.getItem(2)));
+			console.log(JSON.stringify(cyclicItem.getItem(3)));
+			console.log(JSON.stringify(cyclicItem.getItem(4)));
+			console.log(JSON.stringify(cyclicItem.getItem(5)));
+			console.log(JSON.stringify(cyclicItem.getItem(6)));
+			console.log(JSON.stringify(cyclicItem.getItem(7)));
+			console.log(JSON.stringify(cyclicItem.getItem(8)));
+			console.log(JSON.stringify(cyclicItem.getItem(9)));
+		}());		
+        </script>		
+    </body>
+</html>

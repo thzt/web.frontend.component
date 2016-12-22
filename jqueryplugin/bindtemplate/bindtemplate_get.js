@@ -5,44 +5,44 @@
 //$.fn.attr
 //window.viewModelTool
 
-(function($,global){
-    $.pluginManager.extend('bindTemplate',{
-        getData:getData
-    });
+(function ($, global) {
+	$.pluginManager.extend('bindTemplate', {
+		getData: getData
+	});
 
-	var viewModelTool=global.viewModelTool;
+	var viewModelTool = global.viewModelTool;
 
-    function getData(){
-        var $containers=this,
+	function getData() {
+		var $containers = this,
 
-            attr=arguments[0].attr,
-            get=arguments[0].get,
+			attr = arguments[0].attr,
+			get = arguments[0].get,
 
-            selector='[{0}]'.replace('{0}',attr),
-            $fields=$containers.find(selector).add($containers.filter(selector)),
+			selector = '[{0}]'.replace('{0}', attr),
+			$fields = $containers.find(selector).add($containers.filter(selector)),
 
-			propValueMaps=[].reduce.call($fields,function(m,v){
-				var $field=$(v),
+			propValueMaps = [].reduce.call($fields, function (m, v) {
+				var $field = $(v),
 
-					prop=$field.attr(attr),
-					attribute='{0}="{1}"'.replace('{0}',attr).replace('{1}',prop),
+					prop = $field.attr(attr),
+					attribute = '{0}="{1}"'.replace('{0}', attr).replace('{1}', prop),
 
-					value=get.call($field,attribute);
+					value = get.call($field, attribute);
 
 				//if 'return;' or 'return undefined;' then ignore this item.
-				if(value===undefined){
+				if (value === undefined) {
 					return m;
 				}
 
 				m.push({
-					prop:prop,
-					value:value
+					prop: prop,
+					value: value
 				});
 
 				return m;
-			},[]);
+			}, []);
 
 		return viewModelTool.collect(propValueMaps);
-    }
-	
-}(jQuery,window));
+	}
+
+} (jQuery, window));
