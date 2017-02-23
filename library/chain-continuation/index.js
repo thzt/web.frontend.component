@@ -9,19 +9,17 @@ const recursiveCore = (funcs, params, shouldBreak, accumulation, cont) => {
     const func = funcs.shift();
     const param = params.shift();
 
-    func(param, (...args) => {
-        accumulation.push(args);
+    func(param, (...results) => {
+        accumulation.push(results);
 
-        if (shouldBreak(...args)) {
+        if (shouldBreak(...results)) {
             cont(...accumulation);
             return;
         }
 
         recursiveCore(funcs, params, shouldBreak, accumulation, cont);
     });
-};
-
-export default chainContinuation;
+}
 
 // const f1 = (option, cont) => {
 //     console.log(option);    //1
