@@ -67,6 +67,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+	// other es6 module can use `import viewModelTool from '...'`
 	exports.default = _index2.default;
 
 	// this will import to window.viewModelTool
