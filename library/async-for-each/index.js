@@ -15,4 +15,14 @@ function asyncForEach(opt) {
     next();
 }
 
-export default asyncForEach;
+const asyncForEach2 = (values, callback, success) => {
+    if (values.length === 0) {
+        success();
+        return;
+    }
+
+    const value = values.shift();
+    callback(value, () => asyncForEach2(values, callback, success));
+};
+
+export { asyncForEach, asyncForEach2 };
