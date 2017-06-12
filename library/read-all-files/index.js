@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const asyncForEach = require('async-for-each');
+const asyncForEach = require('./async-for-each');
 
 const getAllFiles = (dir, callback) => {
     const allFiles = [];
