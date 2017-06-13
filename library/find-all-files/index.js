@@ -3,7 +3,7 @@ const path = require('path');
 
 const asyncForEach = require('./async-for-each');
 
-const getAllFiles = (dir, callback) => {
+const findAllFiles = (dir, callback) => {
     const allFiles = [];
 
     fs.readdir(dir, (_, files) => {
@@ -24,7 +24,7 @@ const getAllFiles = (dir, callback) => {
                     return;
                 }
 
-                getAllFiles(absolutePath, (_, subFiles) => {
+                findAllFiles(absolutePath, (_, subFiles) => {
                     subFiles.forEach(file => allFiles.push(file));
                     next();
                 });
@@ -35,4 +35,4 @@ const getAllFiles = (dir, callback) => {
     });
 };
 
-module.exports = getAllFiles;
+module.exports = findAllFiles;
