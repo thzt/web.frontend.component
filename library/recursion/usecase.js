@@ -1,7 +1,7 @@
-import asyncRecursive from './index';
+import recursion from './index';
 
 // 1. use it directly
-asyncRecursive(1, (x, next) => {
+recursion(1, (x, next) => {
     if (x > 9) {
         return;
     }
@@ -16,7 +16,7 @@ asyncRecursive(1, (x, next) => {
 const asyncForEach = function ({ callback, done }) {
     const array = this;
 
-    return asyncRecursive(0, (index, next) => {
+    return recursion(0, (index, next) => {
         if (index === array.length) {
             done();
             return;
@@ -41,7 +41,7 @@ asyncForEach.call([1, 2, 3], {
 });
 
 // 3. use it to create asyncForEach2 function
-const asyncForEach2 = (array, callback, done) => asyncRecursive(0, (index, next) => {
+const asyncForEach2 = (array, callback, done) => recursion(0, (index, next) => {
     if (index === array.length) {
         done();
         return;
