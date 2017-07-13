@@ -27,7 +27,7 @@ such as [modalwrapper](https://github.com/thzt/web.frontend.component/tree/maste
 
 Why do I create these wrappers, you can see chinese blog: 
 
-[设计的连续性](https://thzt.github.io/blog/2015/03/20/design/)
+[设计的连续性](https://thzt.github.io/2015/03/20/design/)
 
 ## **Modularization**
 
@@ -47,18 +47,18 @@ For more details, you can see [testpluginmanager.html](https://github.com/thzt/w
 
 or chinese blogs: 
 
-[jQuery插件的把玩方式](https://thzt.github.io/blog/2015/03/24/jquery-plugin/)
+[jQuery插件的把玩方式](https://thzt.github.io/2015/03/24/jquery-plugin/)
 
 ## **More about design**
 
 other related blog about the art of design are as follow:
 
-[封装的内涵](https://thzt.github.io/blog/2015/01/29/encapsulation/)
+[封装的内涵](https://thzt.github.io/2015/01/29/encapsulation/)
 
-[设计的正交性](https://thzt.github.io/blog/2015/02/07/design-for-orthogonality/)
+[设计的正交性](https://thzt.github.io/2015/02/07/design-for-orthogonality/)
 
-[可替换的设计策略](https://thzt.github.io/blog/2015/03/31/choice/)
+[可替换的设计策略](https://thzt.github.io/2015/03/31/choice/)
 
-[抽象的层次](https://thzt.github.io/blog/2015/08/11/hierarchy-of-abstraction/)
+[抽象的层次](https://thzt.github.io/2015/08/11/hierarchy-of-abstraction/)
 
-[消除重复与可复用相距多远](https://thzt.github.io/blog/2015/09/11/reuse-oriented-programming//)
+[消除重复与可复用相距多远](https://thzt.github.io/2015/09/11/reuse-oriented-programming//)
