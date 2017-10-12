@@ -1,6 +1,6 @@
 // run a generator
-const run = (gen, val) => {
-    const iter = gen(val);
+const run = function (gen, val) {
+    const iter = gen.call(this, val);
 
     let current;
     while (true) {

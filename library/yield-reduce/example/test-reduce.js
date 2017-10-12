@@ -1,5 +1,5 @@
-import reduce from './src/reduce';
-import run from './src/run';
+import reduce from '../src/reduce';
+import run from '../src/run';
 
 // another generator
 const id = function* (v) {
@@ -7,10 +7,13 @@ const id = function* (v) {
 };
 
 // run the example
-const reduceResult = run(function* () {
+const reduceResult = run.call(7, function* () {
+    console.assert(this === 7);
 
     // yield* reduce
-    const r = yield* reduce([1, 2, 3], function* (memo, val) {
+    const r = yield* reduce.call(5, [1, 2, 3], function* (memo, val) {
+        console.assert(this === 5);
+
         // yield another generator
         const x = yield* id(val);
 
@@ -23,4 +26,4 @@ const reduceResult = run(function* () {
 });
 
 console.warn(`reduce result: ${reduceResult}`);
-console.assert(reduceResult == 6);
+console.assert(reduceResult === 6);

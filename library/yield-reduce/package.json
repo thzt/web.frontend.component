@@ -1,0 +1,25 @@
+{
+  "name": "yield-reduce",
+  "version": "1.0.0",
+  "description": "yield* reduce(arr, function*(memo,val){ }, init)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thzt/yield-reduce.git"
+  },
+  "author": "thzt",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/thzt/yield-reduce/issues"
+  },
+  "homepage": "https://github.com/thzt/yield-reduce#readme",
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1"
+  }
+}
