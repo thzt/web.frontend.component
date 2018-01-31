@@ -15,33 +15,29 @@
 
     <script>
         (() => {
-            window.mockAjax = async v => {
+            let count = 0;
+
+            // 模拟ajax请求，以随机时间返回一个比之前大一的自然数
+            window.mockAjax = async () => {
                 console.warn('send ajax');
-                await new Promise((res, rej) => setTimeout(res, Math.random() * 3000));
+                await new Promise((res, rej) => setTimeout(() => res(++count), Math.random() * 3000));
                 console.warn('ajax return');
-                return v;
+                return count;
             };
         })();
 
         (() => {
             const executor = new window.PromiseExecutor;
 
-            let count = 0;
             document.querySelector('#button1').addEventListener('click', () => {
-                count++;
 
-                // 把闭包中的count作为参数传递，避免执行时读取的是闭包中最后的count值
-                executor.add(
-                    (i =>
-                        // execute.add一个lazy promise
-                        () => window.mockAjax(i)
-                    )(count)
-                );
+                // 添加一个lazy promise
+                executor.add(() => window.mockAjax());
             });
 
             // 注册回调，该回调会按lazy promise的加入顺序，逐个获取它们resolved的值
-            executor.each(i => {
-                console.log(i);
+            executor.each(v => {
+                console.log(v);
             });
         })();
     </script>
