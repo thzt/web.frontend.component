@@ -9,7 +9,7 @@
     获取按lazy promise加入顺序而resolved的值，其中v分别为每个promise resolved的值。
 */
 
-class PromiseExecutor {
+const PromiseExecutor = class {
     constructor() {
         // lazy promise队列
         this._queue = [];
@@ -27,11 +27,11 @@ class PromiseExecutor {
     add(lazyPromise) {
         this._queue.push(lazyPromise);
 
-        if (this.isBusy) {
+        if (this._isBusy) {
             return;
         }
 
-        this.isBusy = true;
+        this._isBusy = true;
 
         // execute是一个async函数，执行后立即返回，返回一个promise
         // 因此，add可以在execute内的promise resolved之前再次执行
@@ -41,14 +41,14 @@ class PromiseExecutor {
     async execute() {
 
         // 按队列中的任务顺序来依次执行
-        while (this.queue.length !== 0) {
-            const head = this.queue.shift();
+        while (this._queue.length !== 0) {
+            const head = this._queue.shift();
             const value = await head();
-            this._callback(value);
+            this._callback && this._callback(value);
         }
 
         // 执行完之后，解锁
-        this.isBusy = false;
+        this._isBusy = false;
     };
 }
 

@@ -14,28 +14,30 @@
     <input id="button1" type="button" value="add">
 
     <script>
-        const { PromiseExecutor } = window;
-        const executor = new PromiseExecutor;
+        (() => {
+            const { PromiseExecutor } = window;
+            const executor = new PromiseExecutor;
 
-        let count = 0;
-        document.querySelector('#button1').addEventListener('click', () => {
-            count++;
+            let count = 0;
+            document.querySelector('#button1').addEventListener('click', () => {
+                count++;
 
-            // 把闭包中的count作为参数传递，避免执行时读取的是闭包中最后的count值
-            executor.add(
-                (i =>
-                // execute.add一个lazy promise
-                    () =>
-                        new Promise((res, rej) =>
-                            setTimeout(() => res(i), 500))
-                )(count)
-            );
-        });
+                // 把闭包中的count作为参数传递，避免执行时读取的是闭包中最后的count值
+                executor.add(
+                    (i =>
+                        // execute.add一个lazy promise
+                        () =>
+                            new Promise((res, rej) =>
+                                setTimeout(() => res(i), 500))
+                    )(count)
+                );
+            });
 
-        // 注册回调，该回调会按lazy promise的加入顺序，逐个获取它们resolved的值
-        executor.each(i => {
-            console.log(i);
-        });
+            // 注册回调，该回调会按lazy promise的加入顺序，逐个获取它们resolved的值
+            executor.each(i => {
+                console.log(i);
+            });
+        })();
     </script>
 </body>
 
