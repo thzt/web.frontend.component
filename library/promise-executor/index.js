@@ -14,7 +14,7 @@ const PromiseExecutor = class {
         // lazy promise队列
         this._queue = [];
 
-        // 一个变量锁，用来控制当前是否要执行队列中的lazy promise
+        // 一个变量锁，如果当前有正在执行的lazy promise，就等待
         this._isBusy = false;
     }
 

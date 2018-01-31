@@ -15,8 +15,16 @@
 
     <script>
         (() => {
-            const { PromiseExecutor } = window;
-            const executor = new PromiseExecutor;
+            window.mockAjax = async v => {
+                console.warn('send ajax');
+                await new Promise((res, rej) => setTimeout(res, Math.random() * 3000));
+                console.warn('ajax return');
+                return v;
+            };
+        })();
+
+        (() => {
+            const executor = new window.PromiseExecutor;
 
             let count = 0;
             document.querySelector('#button1').addEventListener('click', () => {
@@ -26,9 +34,7 @@
                 executor.add(
                     (i =>
                         // execute.add一个lazy promise
-                        () =>
-                            new Promise((res, rej) =>
-                                setTimeout(() => res(i), 500))
+                        () => window.mockAjax(i)
                     )(count)
                 );
             });
