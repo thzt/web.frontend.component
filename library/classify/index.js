@@ -4,6 +4,11 @@
 const classify = (array, fn) => array.reduce((memo, val, index) => {
     const key = fn(val, index);
 
+    // 如果key是null或undefined，就忽略该项
+    if (key == null) {
+        return memo;
+    }
+
     if (memo.has(key)) {
         const valueStore = memo.get(key);
         valueStore.push(val);
