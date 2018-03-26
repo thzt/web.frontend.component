@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <script src="../clean-merge/index.js"></script>
+    <script src="./index.js"></script>
+</head>
+
+<body>
+    <script>
+        (
+            () => {
+                const { cleanMerge, AsyncUpdater } = window;
+
+                const asyncUpdater = new AsyncUpdater({
+                    initialState: {
+                        a: 1,
+                    },
+                    mergeStrategy: cleanMerge,
+                });
+
+                // 1. 异步更新
+                asyncUpdater.isAsyncUpdate = true;
+
+                asyncUpdater.setState({
+                    a: 2,
+                });
+                console.assert(asyncUpdater.state.a === 1);
+
+                asyncUpdater.setState({
+                    a: 3,
+                });
+                console.assert(asyncUpdater.state.a === 1);
+
+                asyncUpdater.update();
+                console.assert(asyncUpdater.state.a === 3);
+
+                // 2. 同步更新
+                asyncUpdater.isAsyncUpdate = false;
+
+                asyncUpdater.setState({
+                    a: 2,
+                });
+                console.assert(asyncUpdater.state.a === 2);
+
+                asyncUpdater.setState({
+                    a: 1,
+                });
+                console.assert(asyncUpdater.state.a === 1);
+
+                asyncUpdater.update();
+                console.assert(asyncUpdater.state.a === 1);
+
+                // 3. 不支持setter
+                try {
+                    asyncUpdater.state = 1;
+                } catch (err) {
+                    console.log(err);
+                }
+
+                // 4. state嵌套，cleanMerge
+                const initialState = {
+                    x: [{
+                        y: 1,
+                        z: [2],
+                        v: { a: 1 }
+                    }],
+                }
+
+                const asyncUpdater2 = new AsyncUpdater({
+                    initialState,
+                    mergeStrategy: cleanMerge,
+                });
+                asyncUpdater2.isAsyncUpdate = false;
+
+                const nextState = {
+                    x: [{
+                        y: null,
+                        z: [3, 4],
+                        u: { a: 2 },
+                    }, 3],
+                };
+                asyncUpdater2.setState(nextState);
+                console.log(JSON.stringify(asyncUpdater2.state, null, 4));
+                // {
+                //     "x": [
+                //         {
+                //             "y": null,
+                //             "z": [
+                //                 3,
+                //                 4
+                //             ],
+                //             "v": {
+                //                 "a": 1
+                //             },
+                //             "u": {
+                //                 "a": 2
+                //             }
+                //         },
+                //         3
+                //     ]
+                // }
+
+                // 结果中不包含原始数据的引用
+                initialState.x[0].v.a = 3;
+                console.log(JSON.stringify(asyncUpdater2.state, null, 4));
+
+                // 结果中不包含原始数据的引用
+                nextState.x[0].u.a = 3;
+                console.log(JSON.stringify(asyncUpdater2.state, null, 4));
+            }
+        )();            
+    </script>
+</body>
+
+</html>
