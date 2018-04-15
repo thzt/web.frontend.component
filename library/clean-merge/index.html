@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <script src="./index.js"></script>
+</head>
+
+<body>
+
+    <script>
+        (() => {
+            const { cleanMerge } = window;
+
+            const x = {
+                a: 1,
+                b: { u: 2 },
+            };
+
+            const y = {
+                a: 3,
+                c: { v: 4 },
+            };
+
+            // 把y merge到x上
+            const r = cleanMerge(x, y);
+            console.log(JSON.stringify(r, null, 4));
+            // {
+            //     "a": 3,
+            //     "b": {
+            //         "u": 2
+            //     },
+            //     "c": {
+            //         "v": 4
+            //     }
+            // }
+
+            console.assert(r.a === 3);
+            console.assert(r.b.u === 2);
+            console.assert(r.c.v === 4);
+
+            x.b.u = 5;
+            y.c.v = 5;
+            console.assert(r.a === 3);
+            console.assert(r.b.u === 2);
+            console.assert(r.c.v === 4);
+        })();
+    </script>
+
+</body>
+
+</html>
