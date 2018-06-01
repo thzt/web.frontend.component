@@ -1,4 +1,4 @@
-// it's only an `id` funtion，id = (...x) => [...x];
+// it's only an `id` function，id = (...x) => [...x];
 const lazy = (strs,...exprs) =>[strs,...exprs];
 
 // use case 
