@@ -3,7 +3,7 @@ const asyncToCb = asyncFn => (...args) => {
     asyncFn(...args).then(cb);
 };
 
-const cbToAsync = cbFn => async (...args) => await new Promise((res, rej) => cbFn(...args, res));
+const cbToAsync = cbFn => async (...args) => new Promise((res, rej) => cbFn(...args, res));
 
 // - - -
 
