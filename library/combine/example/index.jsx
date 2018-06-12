@@ -30,6 +30,12 @@ class Page extends Component {
         this.setState({
             triggerValidation: false,
         });
+
+        if (!isPass) {
+            return;
+        }
+
+        // 这里就可以发送ajax请求了，将value发送出去
     };
 
     onClick = () => {
