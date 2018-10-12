@@ -44,7 +44,7 @@ class Dependency {
   }
 
   toJSON() {
-    const json = Array.from(this._cache.keys()).reduce((memo, parentKey) => {
+    return Array.from(this._cache.keys()).reduce((memo, parentKey) => {
       const childKeyValueMap = this._cache.get(parentKey);
 
       memo[parentKey] = Array.from(childKeyValueMap.keys()).reduce((childMemo, childKey) => {
@@ -54,8 +54,6 @@ class Dependency {
 
       return memo;
     }, {});
-
-    return JSON.stringify(json, null, 4);
   }
 
   * walk({ parent, parent: { key: parentKey } }) {
