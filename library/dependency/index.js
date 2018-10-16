@@ -1,3 +1,9 @@
+const {
+  RelationExistError,
+  ParentCannotFoundError,
+  RelationCannotFoundError,
+} = require('./error');
+
 class Dependency {
   constructor() {
     this._cache = new Map;
@@ -23,7 +29,7 @@ class Dependency {
 
     // 如果已存在相同的父子级依赖，则报错
     if (this._hasDependency(parentKey, childKey)) {
-      throw new Error(`已存在父子依赖关系\nparent: ${parentKey}\nchild: ${childKey}`);
+      throw new RelationExistError(parentKey, childKey);
     }
 
     // 为已存在的父级添加一个子依赖
@@ -32,12 +38,12 @@ class Dependency {
 
   getChildValue({ parent: { key: parentKey }, child: { key: childKey } }) {
     if (!this._hasParent(parentKey)) {
-      throw new Error(`没有相应的父级节点\nparent: ${parentKey}`);
+      throw new ParentCannotFoundError(childKey);
     }
 
     const childKeyValueMap = this._cache.get(parentKey);
     if (!childKeyValueMap.has(childKey)) {
-      throw new Error(`没有相应的父子依赖关系\nparent: ${parentKey}\nchild: ${childKey}`);
+      throw new RelationCannotFoundError(parentKey, childKey);
     }
 
     return childKeyValueMap.get(childKey);
@@ -56,9 +62,9 @@ class Dependency {
     }, {});
   }
 
-  * walk({ parent, parent: { key: parentKey } }) {
+  * walk({ parent: { key: parentKey } }) {
     if (!this._hasParent(parentKey)) {
-      throw new Error(`没有相应的父级节点\nparent: ${parentKey}`);
+      throw new ParentCannotFoundError;
     }
 
     const childKeyValueMap = this._cache.get(parentKey);
