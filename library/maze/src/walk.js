@@ -1,6 +1,7 @@
+// 递归走迷宫
 const walk = ({ maze, road, current, check, explore }) => {
 
-  // maze road current -> [{maze,road,current}]
+  // {maze,road,current} -> [{maze,road,current}]
   const explores = explore({ maze, road, current });
   if (explores.length === 0) {
     return {
