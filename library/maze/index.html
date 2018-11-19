@@ -2,44 +2,51 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <link rel="stylesheet" href="./src/index.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="./src/index.css">
 </head>
 
 <body>
-    <div id="container"></div>
-    <script src="./dist/index.js"></script>
+  <div id="container"></div>
+  <script src="./dist/index.js"></script>
 
-    <script>
-        (() => {
-            const { createMaze, blink, findRoad } = window;
+  <script>
+    (() => {
+      const { createMaze, blink, findRoad } = window;
 
-            const maze = [
-                '11*10',
-                '11110',
-                '11111',
-                '10111',
-                '11101',
-            ];
+      /*
+        1: 未占用
+        0: 不可达
+        *: 入口
+        #: 已走过
+      */
+      const maze = [
+        '11100',
+        '11111',
+        '01111',
+        '1111*',
+        '01111',
+      ];
 
-            // 初始化渲染
-            const container = document.querySelector('#container');
-            createMaze(container, maze);
+      // 初始化渲染
+      const container = document.querySelector('#container');
+      createMaze(container, maze);
 
-            // 计算路径
-            const { isSuccess, road } = findRoad(maze);
+      // 计算路径
+      const { isSuccess, road } = findRoad(maze);
 
-            // 渲染路径
-            if (!isSuccess) {
-                console.log('无法找到路径');
-            } else {
-                blink(container, road);
-            }
-        })();
-    </script>
+      // 渲染路径
+      if (!isSuccess) {
+        console.log('无法找到路径');
+        return;
+      }
+
+      blink(container, road);
+    })();
+  </script>
 </body>
 
 </html>
