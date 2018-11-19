@@ -4,17 +4,17 @@
   *: 起点
   1: 未占用
 */
-const buildHtml = maze => maze.map(line => `
+const _buildHtml = maze => maze.map(line => `
   <div>
     ${line.split('').map(y => `<span data-state="${y}"></span>`).join('')}
   </div>
 `).join('');
 
 // 页面上显示
-const createMaze = (container, maze) => (container.innerHTML = buildHtml(maze));
+const createMaze = (container, maze) => (container.innerHTML = _buildHtml(maze));
 
 // 按road逐个闪烁
-const recursiveBlink = (container, road, i) => {
+const _recursiveBlink = (container, road, i) => {
   if (road.length === 0) {
     return;
   }
@@ -26,13 +26,13 @@ const recursiveBlink = (container, road, i) => {
   cell.innerHTML = i;
   setTimeout(() => {
     cell.removeAttribute('style');
-    recursiveBlink(container, road, ++i);
+    _recursiveBlink(container, road, ++i);
   }, 100);
 };
 
-const blink = (container, maze) => recursiveBlink(container, maze, 0);
+const blink = (container, maze) => _recursiveBlink(container, maze, 0);
 
-export {
+module.exports = {
   createMaze,
   blink,
 };
