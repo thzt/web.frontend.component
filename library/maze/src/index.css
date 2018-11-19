@@ -1,0 +1,21 @@
+#container div span {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  margin: 2px;
+  text-align: center;
+  line-height: 30px;
+  vertical-align: middle;
+}
+
+[data-state="1"]{
+  background: gray;
+}
+
+[data-state="*"]{
+  background: green;
+}
+
+[data-state="0"]{
+  background: white;
+}
