@@ -5,14 +5,10 @@ const range = (min, max) => cont => {
         cont(i);
     }
 };
-
 const map = (r, fn) => cont => r(i => cont(fn(i)));
 const reverse = r => cont => {
     let f = () => 0;
-    r(i => f = (f => () => {
-        cont(i);
-        f();
-    })(f));
+    r(i => (g=> f = () => g(cont(i)))(f));
     f();
 };
 const foreach = (r, cont) => r(cont);
@@ -35,3 +31,12 @@ foreach(numbers, console.log);
    4
    1
 */
+
+// const reverse = r => cont => {
+//     let f = () => 0;
+//     r(i => f = (f => () => {
+//         cont(i);
+//         f();
+//     })(f));
+//     f();
+// };
