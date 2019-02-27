@@ -8,7 +8,7 @@ const range = (min, max) => cont => {
 const map = (r, fn) => cont => r(i => cont(fn(i)));
 const reverse = r => cont => {
     let f = () => 0;
-    r(i => (g=> f = () => g(cont(i)))(f));
+    r(i => (g => f = () => g(cont(i)))(f));
     f();
 };
 const foreach = (r, cont) => r(cont);

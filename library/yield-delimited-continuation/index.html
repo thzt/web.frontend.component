@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+
+  <script src="./index.js"></script>
+</head>
+
+<body>
+  <script>
+    (() => {
+      const result = window.yieldDelimitedContinuation(function* (reset) {
+        const a1 = yield 1;
+        const a2 = yield reset(function* (shift) {
+          const b1 = yield 2;
+          const b2 = yield function* () {
+            const c1 = yield 3;
+            const c2 = yield shift(function* () {
+              const u = yield 4;
+              const v = yield 5;
+
+              // 4 + 5
+              // 直接return到reset的位置 a2 = 9，然后从a2处开始执行
+              return u + v;
+            });
+            const c3 = yield 6;
+            return c1 + c2 + c3;
+          };
+          const b3 = yield 7;
+          return b1 + b2 + b3;
+        });
+        const a3 = yield 8;
+
+        // 1 + 9 + 8
+        return a1 + a2 + a3;
+      });
+
+      console.log(result);  // 18    
+    })();
+  </script>
+</body>
+
+</html>
