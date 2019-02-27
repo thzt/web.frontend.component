@@ -39,7 +39,42 @@
         return a1 + a2 + a3;
       });
 
-      console.log(result);  // 18    
+      console.log(result);  // 18
+    })();
+
+    (() => {
+      const r2 = window.yieldDelimitedContinuation(function* (reset) {
+        const a1 = yield 1;
+        const a2 = yield reset(function* (shift) {
+          const b1 = yield 2;
+          const b2 = yield function* () {
+            const c1 = yield 3;
+            const c2 = yield function* () {
+              const d1 = yield 4;
+              const d2 = yield shift(function* () {
+                const u = yield 5;
+                const v = yield 6;
+
+                // 5 + 6
+                // 直接return到reset的位置 a2 = 11，然后从a2处开始执行
+                return u + v;
+              });
+              const d3 = yield 7;
+              return d1 + d2 + d3;
+            };
+            const c3 = yield 8;
+            return c1 + c2 + c3;
+          };
+          const b3 = yield 9;
+          return b1 + b2 + b3;
+        });
+        const a3 = yield 10;
+
+        // 1 + 11 + 10
+        return a1 + a2 + a3;
+      });
+
+      console.log(r2);  // 22
     })();
   </script>
 </body>
