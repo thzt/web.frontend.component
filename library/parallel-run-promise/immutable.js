@@ -1,16 +1,40 @@
-const sequence = async runningPromises => {
-  // 为每一个promise加上它在runningPromises中的索引i
-  const promises = runningPromises.map(async (runningPromise, i) => [await runningPromise, i]);
+/*
+  思路：
+    程序开始时，启动n个promise
 
-  // 找出率先完成的那个promise
-  const [result, i] = await Promise.race(promises);
+    随后找出这n个promise中，第一个执行完的promise，拿到结果
+    接着再启动一个新的promise，加入执行中
 
-  // 去掉位置i的promise
-  const otherRunningPromises = runningPromises.slice(0, i).concat(runningPromises.slice(i + 1));
+    重复以上操作，每执行完一个promise，就加入一个新的promise
+    直到执行完
+*/
+// size: 最大并发数
+const parallel = async (lazyPromises, size) => {
+  // 把序号和以后resolve的值组合起来，便于之后按lazyPromises的顺序展示结果
+  const indexedLazyPromises = lazyPromises.map((lazyPromise, index) => async () => {
+    const promise = lazyPromise();
+    const result = await promise;
+    return [result, index];
+  });
 
-  // result: 率先完成的promise的结果
-  // otherRunningPromises: 其余的正在运行的promise
-  return [result, otherRunningPromises];
+  const preparePromises = indexedLazyPromises.slice(0, size);
+  const runningPromises = preparePromises.map(lazyPromise => lazyPromise());
+  const results = await run(indexedLazyPromises, runningPromises, size);
+
+  // 按index进行排序
+  const sortedResults = results.sort(([, xIndex], [, yIndex]) => {
+    if (xIndex < yIndex) {
+      return -1;
+    }
+    if (xIndex > yIndex) {
+      return 1;
+    }
+
+    return 0;
+  });
+
+  // 转换最终结果
+  return sortedResults.map(([result]) => result);
 };
 
 // runningPromises: 正在运行的promise
@@ -42,33 +66,19 @@ const run = async (lazyPromises, runningPromises, index) => {
   return [result, ...results];
 }
 
-// size: 最大并发数
-const parallel = async (lazyPromises, size) => {
-  // 把序号和以后resolve的值组合起来，便于之后按lazyPromises的顺序展示结果
-  const indexedLazyPromises = lazyPromises.map((lazyPromise, index) => async () => {
-    const promise = lazyPromise();
-    const result = await promise;
-    return [result, index];
-  });
+const sequence = async runningPromises => {
+  // 为每一个promise加上它在runningPromises中的索引i
+  const promises = runningPromises.map(async (runningPromise, i) => [await runningPromise, i]);
 
-  const preparePromises = indexedLazyPromises.slice(0, size);
-  const runningPromises = preparePromises.map(lazyPromise => lazyPromise());
-  const results = await run(indexedLazyPromises, runningPromises, size);
+  // 找出率先完成的那个promise
+  const [result, i] = await Promise.race(promises);
 
-  // 按index进行排序
-  const sortedResults = results.sort(([, xIndex], [, yIndex]) => {
-    if (xIndex < yIndex) {
-      return -1;
-    }
-    if (xIndex > yIndex) {
-      return 1;
-    }
+  // 去掉位置i的promise
+  const otherRunningPromises = runningPromises.slice(0, i).concat(runningPromises.slice(i + 1));
 
-    return 0;
-  });
-
-  // 转换最终结果
-  return sortedResults.map(([result]) => result);
+  // result: 率先完成的promise的结果
+  // otherRunningPromises: 其余的正在运行的promise
+  return [result, otherRunningPromises];
 };
 
 module.exports = parallel;
