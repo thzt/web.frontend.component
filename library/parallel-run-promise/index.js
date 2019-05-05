@@ -1,4 +1,4 @@
-const parallelRunPromise = (lazyPromises, n = 3) => {
+const parallelRunPromise = (lazyPromises, n) => {
   const results = [];
   let index = 0;
   let working = 0;
@@ -40,7 +40,7 @@ module.exports = parallelRunPromise;
       () => new Promise((res, rej) => setTimeout(() => res('c'), 2000)),
       () => new Promise((res, rej) => setTimeout(() => res('d'), 5000)),
       () => new Promise((res, rej) => setTimeout(() => res('e'), 4000)),
-    ]);
+    ], 3);
     console.log(results);  // ["a", "b", "c", "d", "e"] 6006.042724609375ms
     console.timeEnd('main');
   };
