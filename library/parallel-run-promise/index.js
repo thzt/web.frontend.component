@@ -32,11 +32,18 @@ const parallelRunPromise = (lazyPromises, n = 3) => {
 module.exports = parallelRunPromise;
 
 /*
-  parallelRunPromise([
-    () => new Promise((res, rej) => setTimeout(() => res(1), 500)),
-    () => new Promise((res, rej) => setTimeout(() => res(2), 300)),
-    () => new Promise((res, rej) => setTimeout(() => res(3), 200)),
-    () => new Promise((res, rej) => setTimeout(() => res(4), 400)),
-    () => new Promise((res, rej) => setTimeout(() => res(5), 100)),
-  ]).then(console.log); // [1,2,3,4,5]
+  const main = async () => {
+    console.time('main');
+    const results = await parallelRunPromise([
+      () => new Promise((res, rej) => setTimeout(() => res('a'), 1000)),
+      () => new Promise((res, rej) => setTimeout(() => res('b'), 3000)),
+      () => new Promise((res, rej) => setTimeout(() => res('c'), 2000)),
+      () => new Promise((res, rej) => setTimeout(() => res('d'), 5000)),
+      () => new Promise((res, rej) => setTimeout(() => res('e'), 4000)),
+    ]);
+    console.log(results);  // ["a", "b", "c", "d", "e"] 6006.042724609375ms
+    console.timeEnd('main');
+  };
+
+  main();
 */
