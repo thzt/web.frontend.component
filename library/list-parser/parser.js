@@ -79,19 +79,14 @@ const parse = (() => {
       nextToken();
       assert(['RightBracket', 'Identifier', 'LeftBracket']);
 
-      if (token.name === 'Identifier') {
-        results.push(token);
-        continue;
+      // 遇到右括号，说明当前层级的 exprs 处理完毕
+      if (token.name === 'RightBracket') {
+        break;
       }
 
-      if (token.name === 'LeftBracket') {
-        const list = parseList();
-        results.push(list);
-        continue;
-      }
-
-      assert(['RightBracket']);
-      break;
+      assert(['Identifier', 'LeftBracket']);
+      const expr = parseExpr();
+      results.push(expr);
     }
 
     return {
