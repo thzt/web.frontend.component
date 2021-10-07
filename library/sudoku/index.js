@@ -265,6 +265,7 @@
       backward(this._state);
     }
 
+    // 恢复到初始状态
     reset() {
       while (true) {
         const backward = this._stack.pop();
