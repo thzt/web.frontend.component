@@ -66,8 +66,8 @@ const main = () => {
       const notSelect = dp[item - 1][capacity];
 
       // 拿
-      // 则选择 0~item 物品的最大价值，等于【缩小背包后】能装入物品的最大价值，加上当前物品的价值
-      const select = dp[item - 1][capacity - w[item]] + v[item];
+      // 则选择 0~item 物品的最大价值，等于当前物品的价值 加上 因此而【缩小背包后的背包】能装入物品的最大价值
+      const select = v[item] + dp[item - 1][capacity - w[item]];
 
       dp[item][capacity] = Math.max(notSelect, select);
     }
