@@ -32,4 +32,5 @@ c = 4
 + https://www.youtube.com/watch?v=6rIn-G79r8c  
 + https://www.jianshu.com/p/a66d5ce49df5  
 + https://augustineaykara.github.io/Knapsack-Calculator/
-
++ https://stackoverflow.com/questions/29853579/do-you-need-to-sort-inputs-for-dynamic-programming-knapsack
++ https://stackoverflow.com/questions/44148051/why-swap-the-item-order-of-the-knapsack-lead-to-the-same-solution
