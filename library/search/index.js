@@ -7,8 +7,8 @@
  */
 export const dfs = (node, getChildren, cb) => {
   const stopSearchChildren = cb(node);
+  // cb 返回真值就停止搜索子树，但仍然会搜索兄弟节点
   if (stopSearchChildren) {
-    // cb 返回真值就停止搜索子树，但仍然会搜索兄弟节点
     return;
   }
 
@@ -25,16 +25,26 @@ export const dfs = (node, getChildren, cb) => {
  */
 export const dfsNonRecursive = (node, getChildren, cb) => {
   let queue = [node];
+  const visitSet = new Set();
 
   while (queue.length !== 0) {
     const head = queue.shift();
 
+    // 避免有环
+    if (visitSet.has(head)) {
+      return;
+    }
+    visitSet.add(head);
+
     const stopSearchChildren = cb(head);
+    // cb 返回真值就停止搜索子树，但仍然会搜索兄弟节点
     if (stopSearchChildren) {
       continue;
     }
 
     const children = getChildren(head);
+    // 放在列头，下次循环从列头取
+    // 保证先遍历完子节点之后，再遍历兄弟节点
     queue = [...children, ...queue];
   };
 };
@@ -61,11 +71,14 @@ export const bfs = (node, getChildren, cb) => {
     visitSet.add(head);
 
     const stopSearchChildren = cb(head);
+    // cb 返回真值就停止搜索子树，但仍然会搜索兄弟节点
     if (stopSearchChildren) {
       continue;
     }
 
     const children = getChildren(head);
+    // 放在列尾，下次循环从列头取
+    // 能保证把所有兄弟节点遍历完之后再开始遍历子节点
     queue.push(...children);
   }
 };
