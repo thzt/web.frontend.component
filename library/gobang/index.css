@@ -1,0 +1,20 @@
+#board tr td {
+  width: 40px;
+  height: 40px;
+
+  background-color: cadetblue;
+}
+
+#board tr td div {
+  width: 30px;
+  height: 30px;
+  border-radius: 30px;
+  margin: 0 auto;
+}
+
+#board tr td div.white {
+  background-color: bisque;
+}
+#board tr td div.black {
+  background-color: black;
+}
